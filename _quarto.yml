@@ -53,12 +53,12 @@ book:
           file: 6.qmd
           
           
-    - part: "<span style='color: #FF8000 !important;'>Kriging </span>"
-      chapters:
-        - text: "<span style='color: #728387 !important;'>Definición</span>"
-          file: 2.qmd
-        - text: "<span style='color: #728387 !important;'>Cokriging</span>"
-          file: 3.qmd 
+    - part: 2.qmd
+      text: "<span style='color: #FF8000 !important;'>Kriging</span>"
+        
+          
+    - part: 3.qmd
+      text: "<span style='color: #FF8000 !important;'>Cokriging</span>"
           
           
     - part: "<span style='color: #FF8000 !important;'>Diseño Óptimo </span>"

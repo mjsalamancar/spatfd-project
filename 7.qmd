@@ -20,7 +20,7 @@ library(cowplot)
 library(sgeostat)
 ```
 
-## Incluyendo Graficos
+## Gráficos
 
 ```{r}
 g1=ggplot(aquifer, aes(Profundidad, Este)) + 

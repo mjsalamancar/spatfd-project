@@ -4,25 +4,59 @@
   display: none;
 }
 
-/* ===== BOTONES DE NAVEGACIÓN VERDE MENTA ===== */
-
+/* Estilo base del contenedor del botón */
 .nav-page {
-  background-color: #cfe9e3;   /* verde menta suave */
-  color: #1f4f47 !important;   /* texto oscuro */
-  border-radius: 22px;
-  padding: 16px 30px;
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: 0.3px;
-  border: 2px solid #8fcfc3;
-  transition: all 0.25s ease;
-  box-shadow: 0 6px 16px rgba(143, 207, 195, 0.45);
+  background-color: #1a2b3c;    /* Azul profundo */
+  border-radius: 30px;
+  padding: 14px 28px;
+  border: 1px solid #111d29;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(26, 43, 60, 0.2);
+  text-decoration: none;
 }
 
-/* hover */
+/* FORZAR COLOR NARANJA EN TODO EL CONTENIDO */
+/* Aplicamos a los enlaces, spans, iconos y textos internos */
+.nav-page a,
+.nav-page span,
+.nav-page i,
+.nav-page div,
+.nav-page.nav-page-previous,
+.nav-page.nav-page-next {
+  color: #FF8000 !important; 
+  text-decoration: none !important;
+}
+
+/* Ajuste específico para el texto principal y flechas */
+.nav-page-text, 
+.bi {
+  color: #FF8000 !important;
+}
+
+/* Hover: mantiene el texto naranja pero aclara el fondo */
 .nav-page:hover {
-  background-color: #a7d8cc;
-  color: #143c35 !important;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 22px rgba(143, 207, 195, 0.65);
+  background-color: #2c4661;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(26, 43, 60, 0.3);
+}
+
+.nav-page:hover * {
+  color: #FF8000 !important; /* Asegura que siga naranja al pasar el mouse */
+}
+
+
+body {
+  /* Creamos una capa blanca semi-transparente sobre la imagen */
+  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.9)), 
+              url('images/1.png');
+  
+  background-attachment: fixed; /* Para que no se mueva al hacer scroll */
+  background-size: cover;      /* Para que cubra toda la pantalla */
+  background-position: center;
+}
+
+/* Esto hace que el área del contenido sea un poco transparente */
+/* para que el fondo se alcance a notar por detrás */
+#quarto-content {
+  background: transparent !important;
 }

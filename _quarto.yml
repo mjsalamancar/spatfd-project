@@ -5,15 +5,68 @@ project:
 book:
   title: "Cuadernos de Estadística Espacial"
   subtitle: "Martha Patricia Bohorquez Castañeda"
+  
+  sidebar:
+    collapse-level: 1
 
   chapters:
-    - part: "<span style='color: #38AFC9 !important;'>Estadística Espacial Funcional</span>"
+    - text: "<span style='color: #FF8000 !important;'>Introducción</span>"
+      file: index.qmd
+    
+    - part: "<span style='color: #FF8000 !important;'>Geoestadística </span>"
+      chapters:
+        - text: "<span style='color: #728387 !important;'>Geoestadística con Sgeostat</span>"
+          file: 7.qmd
+        - text: "<span style='color: #728387 !important;'>Geoestadística Univariada con GeoR </span>"
+          file: 8.qmd
+        - text: "<span style='color: #728387 !important;'>Kriging</span>"
+          file: 9.qmd
+          
+    - part: "<span style='color: #FF8000 !important;'>Modelos de Regresión Espacial</span>"
+      chapters:
+        - text: "<span style='color: #728387 !important;'>Implementación de los Modelos </span>"
+          file: 10.qmd
+         
+          
+    - part: "<span style='color: #FF8000 !important;'>Estadística Espacial Funcional  </span>"
       chapters:
         - text: "<span style='color: #728387 !important;'>Definición</span>"
-          file: index.qmd
+          file: 1.qmd
         - text: "<span style='color: #728387 !important;'>Paquete </span>"
           file: intro.qmd
-
+          
+    - part: "<span style='color: #FF8000 !important;'>Objetos </span>"
+      chapters:
+        - text: "<span style='color: #728387 !important;'>SpatFD</span>"
+          file: 1.qmd
+        - text: "<span style='color: #728387 !important;'>gfdata </span>"
+          file: intro.qmd 
+   
+   
+    - part: "<span style='color: #FF8000 !important;'>Datasets </span>"
+      chapters:
+        - text: "<span style='color: #728387 !important;'>AirQualityBogota</span>"
+          file: 4.qmd
+        - text: "<span style='color: #728387 !important;'>Vowels</span>"
+          file: 5.qmd
+        - text: "<span style='color: #728387 !important;'>CokMexico</span>"
+          file: 6.qmd
+          
+          
+    - part: "<span style='color: #FF8000 !important;'>Kriging </span>"
+      chapters:
+        - text: "<span style='color: #728387 !important;'>Definición</span>"
+          file: 2.qmd
+        - text: "<span style='color: #728387 !important;'>Cokriging</span>"
+          file: 3.qmd 
+          
+          
+    - part: "<span style='color: #FF8000 !important;'>Diseño Óptimo </span>"
+      chapters:
+        - text: "<span style='color: #728387 !important;'>Introducción</span>"
+          file: 2.qmd
+  
+          
 bibliography: references.bib
 
 format:

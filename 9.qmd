@@ -1,0 +1,3 @@
+## Kriging {.unnumbered}
+
+# [Kriging]{style="color:#FF8000;"}

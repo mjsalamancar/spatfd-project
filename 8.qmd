@@ -1,0 +1,157 @@
+## Geoestadística Univariada con `geoR` {.unnumbered}
+
+# [Geoestadística Univariada con `geoR`]{style="color:#FF8000;"}
+
+## Parte descriptiva
+
+### Librerías
+
+Lista de librerías con link a la documentación.
+
+-   fields
+-   geoR
+-   akima Usado para gráficos descriptivos
+
+```{r}
+#| warning: false
+rm(list=ls())
+library(fields)
+```
+
+```{r}
+#| warning: false
+library(geoR)
+```
+
+```{r}
+#| warning: false
+library(akima)
+```
+
+### Lectura de datos
+
+```{r}
+
+aquifer <- read.table("data/aquifer.txt", head = TRUE, dec = ",")
+
+```
+
+Encabezado de datos `aquifer.txt`
+
+```{r}
+head(aquifer)
+```
+
+Summary de los datos `aquifer.txt`
+
+## GEO_Data
+
+### Convertir aquifer a un objeto geodata (GeoR obj)
+
+-   Documentación `as.geodata`
+
+    ```{r}
+
+    aquiferg <- as.geodata(aquifer)
+    summary(aquiferg)
+    ```
+
+## Gráfico de objeto geodata
+
+-   Documentación `plotgeodata`
+
+Gráfico del objeto geodata
+
+```{r}
+plot(aquiferg, qt.col = c("purple",
+                         "pink",
+                         "green",
+                         "yellow"))
+```
+
+Gráfico con el parametro 3d
+
+```{r}
+plot(aquiferg, scatter3d = T)
+```
+
+Gráfico removiendo la tendencia (trend )
+
+```{r}
+plot(aquiferg, trend = "1st")
+```
+
+## Gráficos descriptivos interpolación
+
+-   Documentración Interpolación inderp
+
+-   Documentación persp
+
+-   Documentación drape.plot
+
+```{r}
+
+par(mfrow = c(2, 2),
+    mar = c(3, 3, 1, 1),
+    mgp = c(2, 1, 0))
+# Esta función agrupa los siguientes gráficos en
+# una matrix 2x2
+
+grillas <- interp(aquifer$Este,
+                  aquifer$Norte,
+                  aquifer$Profundidad)
+
+persp(grillas$x,
+      grillas$y,
+      grillas$z,
+      xlab = "Este",
+      ylab = "Norte",
+      zlab = "Nivel freatico",
+      phi = 30,
+      theta = 20,
+      col = "lightblue",
+      expand = .5,
+      ticktype = "detailed")
+
+drape.plot(grillas$x,
+           grillas$y,
+           grillas$z,
+           xlab = "Este",
+           ylab = "Norte",
+           zlab = "z",
+           theta = 45,
+           col = topo.colors(64),
+           expand = .5,
+           ticktype = "detailed")
+
+
+drape.plot(grillas$x,
+           grillas$y,
+           grillas$z,
+           xlab = "Este",
+           ylab = "Norte",
+           zlab = "z",
+           theta = -10,
+           col = topo.colors(64),
+           expand = .5,
+           ticktype = "detailed")
+
+
+drape.plot(grillas$x,
+           grillas$y,
+           grillas$z,
+           xlab = "Este",
+           ylab = "Norte",
+           zlab = "z",
+           theta = 60,
+           col = topo.colors(64),
+           expand = .5,
+           ticktype = "detailed")
+
+```
+
+## Gráficos de contorno
+
+-   Documentación [contour](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/contour)
+
+-   Documentación [filled.contour](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/filled.contour)

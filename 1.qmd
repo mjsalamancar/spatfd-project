@@ -1,6 +1,8 @@
 ## Definición {.unnumbered}
 
+# [Estadística Espacial Funcional ]{style="color:#FF8000;"}
 
+## Definición
 
 La geoestadística funcional es una extensión del marco teórico de la geoestadística tradicional, que permite el análisis y modelado de datos funcionales correlacionados espacialmente, tanto univariados como multivariados. Este enfoque incluye herramientas exploratorias, predicción espacial mediante kriging y cokriging, muestreo óptimo, clasificación supervisada y simulación. A través de este enfoque, se modela la estructura de dependencia espacial entre curvas, lo que permite realizar predicciones en ubicaciones no muestreadas utilizando predictores funcionales que minimizan las varianzas del error de predicción. Además, se ofrece la optimización de la configuración de las ubicaciones de muestreo para mejorar la predicción espacial funcional.
 

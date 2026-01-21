@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
+<link href="./7.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span style="color: #38AFC9 !important;">Estadística Espacial Funcional</span></a></li><li class="breadcrumb-item"><a href="./index.html"><span style="color: #728387 !important;">Definición</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span style="color: #FF8000 !important;">Introducción</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -106,18 +140,70 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Introducción</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><span style="color: #38AFC9 !important;">Estadística Espacial Funcional</span></span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Geoestadística </span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Geoestadística con Sgeostat</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Geoestadística Univariada con GeoR </span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Kriging</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Modelos de Regresión Espacial</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Implementación de los Modelos </span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional </span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">Definición</span></span></a>
   </div>
 </li>
@@ -125,6 +211,98 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">Paquete </span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Objetos </span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">SpatFD</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">gfdata </span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Datasets </span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">AirQualityBogota</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Vowels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">CokMexico</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Kriging </span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Definición</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Cokriging</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Diseño Óptimo </span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Introducción</span></span></a>
   </div>
 </li>
       </ul>
@@ -139,15 +317,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#definición" id="toc-definición" class="nav-link active" data-scroll-target="#definición">Definición</a></li>
-  <li><a href="#datos-funcionales" id="toc-datos-funcionales" class="nav-link" data-scroll-target="#datos-funcionales">Datos Funcionales</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span style="color: #FF8000;">Introducción</span></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span style="color: #38AFC9 !important;">Estadística Espacial Funcional</span></a></li><li class="breadcrumb-item"><a href="./index.html"><span style="color: #728387 !important;">Definición</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Cuadernos de Estadística Espacial</h1>
 <p class="subtitle lead">Martha Patricia Bohorquez Castañeda</p>
@@ -167,24 +344,18 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="definición" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="definición">Definición</h2>
-<p>La geoestadística funcional es una extensión del marco teórico de la geoestadística tradicional, que permite el análisis y modelado de datos funcionales correlacionados espacialmente, tanto univariados como multivariados. Este enfoque incluye herramientas exploratorias, predicción espacial mediante kriging y cokriging, muestreo óptimo, clasificación supervisada y simulación. A través de este enfoque, se modela la estructura de dependencia espacial entre curvas, lo que permite realizar predicciones en ubicaciones no muestreadas utilizando predictores funcionales que minimizan las varianzas del error de predicción. Además, se ofrece la optimización de la configuración de las ubicaciones de muestreo para mejorar la predicción espacial funcional.</p>
-<p>Las herramientas disponibles también permiten la representación gráfica de las curvas predichas en cada ubicación y el mapeo de las superficies en cada punto temporal. La clasificación supervisada integra la correlación espacial, y se extiende a escenarios con medidas funcionales repetidas en cada localización. Finalmente, la simulación de datos funcionales correlacionados espacialmente puede ser tanto condicional como incondicional, y se fundamenta en el supuesto de espacios de Hilbert conjuntos gaussianos.</p>
-</section>
-<section id="datos-funcionales" class="level2">
-<h2 class="anchored" data-anchor-id="datos-funcionales">Datos Funcionales</h2>
-<p>Imaginemos que estamos interesados en estudiar cómo varía la temperatura en diferentes ciudades del mundo durante un año completo. Para hacerlo, en lugar de tomar una sola medida de la temperatura, registramos el promedio mensual de la termperatura durante todo un año.</p>
-<p>En lugar de analizar cada punto de temperatura de manera independiente, podemos ver la temperatura a lo largo del añi como una función continua del tiempo. Esta función nos describe cómo la temperatura cambia en cada instante del día, lo cual permite realizar análisis mucho más precisos.</p>
-<div class="text-center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/a.gif" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption>PZmaps, CC BY-SA 3.0, via Wikimedia Commons</figcaption>
-</figure>
+<section id="introducción" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="introducción"><span style="color: #FF8000;">Introducción</span></h2>
+<p>En los siguientes cuadernos encontrará ejemplos con código sobre estadística espacial escalar y funcional. Para poder correr todos los ejemplos clone el repositorio de la siguiente forma. Debe tener instalado previamente git en su computador.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git clone <span class="sc">--</span>branch gh<span class="sc">-</span>pages  https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>mpbohorquezc<span class="sc">/</span>SpatFD<span class="sc">-</span>Functional<span class="sc">-</span>Geostatistics.git </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Si esta corriendo sobre Ubuntu o Mint es importante tener algunos compiladores previamente instalados para poder instanciar algunas de las librerías. En general con los siguientes comandos podría correr cualquiera de los cuadernos sin problema</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sudo apt<span class="sc">-</span>get install r<span class="sc">-</span>base<span class="sc">-</span>dev</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sudo apt install liblapack<span class="sc">-</span>dev libopenblas<span class="sc">-</span>dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Los datos funcionales son los que en lugar de contemplar cada dato como una observación puntual, se consideran como funciones continuas observadas en un conjunto de puntos. Los datos funcionales permiten capturar mejor la complejidad de fenómenos que además de variar en el espacio, varían en dominios continuos como el tiempo o la altitud, además de facilitar la detección de tendencias o anomalías teniendo en cuenta múltiples dimensiones de variación.</p>
+<p>Si alguna dependencia hace falta algunos repositorios los puede descargar e instalar a manera de archivo .tar.gz o se encuentran simplemente en los repositorios del CRAN.</p>
 
 
 </section>
@@ -611,8 +782,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>Paquete </span>">
-        <span class="nav-page-text"><span style="color: #728387 !important;">Paquete </span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./7.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>Geoestadística con Sgeostat</span>">
+        <span class="nav-page-text"><span style="color: #728387 !important;">Geoestadística con Sgeostat</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

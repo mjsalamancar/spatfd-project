@@ -358,48 +358,24 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalar paquetes si es necesario</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gstat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'gstat' was built under R version 4.4.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'sp' was built under R version 4.4.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'raster' was built under R version 4.4.2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.4.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phylin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'phylin' was built under R version 4.4.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Adjuntando el paquete: 'phylin'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:gstat':
-
-    idw</code></pre>
-</div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gstat)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phylin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generación de datos simulados para los ejemplos</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1029</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">100</span>), <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">100</span>))</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">value =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Combinar 'coords' y 'values' en un solo data frame</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(coords, values)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir 'data' en un objeto espacial</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(data) <span class="ot">&lt;-</span> <span class="er">~</span> x <span class="sc">+</span> y</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(data) <span class="ot">&lt;-</span> <span class="fu">CRS</span>(<span class="st">"+proj=utm +zone=33 +datum=WGS84"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generación de datos simulados para los ejemplos</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1029</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">100</span>), <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">100</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">value =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Combinar 'coords' y 'values' en un solo data frame</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(coords, values)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir 'data' en un objeto espacial</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(data) <span class="ot">&lt;-</span> <span class="er">~</span> x <span class="sc">+</span> y</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(data) <span class="ot">&lt;-</span> <span class="fu">CRS</span>(<span class="st">"+proj=utm +zone=33 +datum=WGS84"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
@@ -425,41 +401,29 @@ p(Z, s_0) = \mu(s_0) + \sum_{i=1}^{n} \lambda_i (Z(s_i) - \mu(s_i)),
 \]</span></p>
 <p>Para implementar el kriging simple en R se puede utilizar la función krig del paquete phylin, que requiere como argumentos los valores observados, las coordenadas de las ubicaciones muestreadas y las ubicaciones a interpolar, el modelo de variograma ajustado y el valor conocido de la media (o NA para usar kriging ordinario). A continuación se muestra un ejemplo con datos simulados:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el variograma experimental</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>vgram <span class="ot">&lt;-</span> <span class="fu">variogram</span>(value <span class="sc">~</span> <span class="dv">1</span>, data)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo de variograma</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">vgm</span>(<span class="at">psill =</span> <span class="dv">1</span>, <span class="at">model =</span> <span class="st">"Sph"</span>, <span class="at">range =</span> <span class="dv">50</span>, <span class="at">nugget =</span> <span class="dv">0</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>vfit <span class="ot">&lt;-</span> <span class="fu">fit.variogram</span>(vgram, model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in fit.variogram(vgram, model): linear model has singular covariance
-matrix</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in fit.variogram(vgram, model): singular model in variogram fit</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in fit.variogram(object, model, fit.sills = fit.sills, fit.ranges =
-fit.ranges, : No convergence after 200 iterations: try different initial
-values?</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el variograma experimental</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vgram <span class="ot">&lt;-</span> <span class="fu">variogram</span>(value <span class="sc">~</span> <span class="dv">1</span>, data)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo de variograma</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">vgm</span>(<span class="at">psill =</span> <span class="dv">1</span>, <span class="at">model =</span> <span class="st">"Sph"</span>, <span class="at">range =</span> <span class="dv">50</span>, <span class="at">nugget =</span> <span class="dv">0</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>vfit <span class="ot">&lt;-</span> <span class="fu">fit.variogram</span>(vgram, model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una cuadrícula de predicción</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>grd <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="at">y =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">5</span>))</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(grd) <span class="ot">&lt;-</span> <span class="er">~</span> x <span class="sc">+</span> y</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gridded</span>(grd) <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(grd) <span class="ot">&lt;-</span> <span class="fu">CRS</span>(<span class="st">"+proj=utm +zone=33 +datum=WGS84"</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Kriging Simple</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>kriged_values <span class="ot">&lt;-</span> <span class="fu">krige</span>(value <span class="sc">~</span> <span class="dv">1</span>, data, grd, <span class="at">model =</span> vfit, <span class="at">nmax =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una cuadrícula de predicción</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>grd <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="at">y =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">5</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(grd) <span class="ot">&lt;-</span> <span class="er">~</span> x <span class="sc">+</span> y</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gridded</span>(grd) <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(grd) <span class="ot">&lt;-</span> <span class="fu">CRS</span>(<span class="st">"+proj=utm +zone=33 +datum=WGS84"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Kriging Simple</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>kriged_values <span class="ot">&lt;-</span> <span class="fu">krige</span>(value <span class="sc">~</span> <span class="dv">1</span>, data, grd, <span class="at">model =</span> vfit, <span class="at">nmax =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[using ordinary kriging]</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(kriged_values[<span class="st">"var1.pred"</span>], <span class="at">main =</span> <span class="st">"Kriging Simple Prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(kriged_values[<span class="st">"var1.pred"</span>], <span class="at">main =</span> <span class="st">"Kriging Simple Prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -506,32 +470,20 @@ m
 <p>Para implementar el kriging ordinario en R, se pueden utilizar las librerías “gstat” o “kriging”. A continuación se muestra un ejemplo usando la librería “gstat”</p>
 <p>Par implementar el kriging ordinario en R, se pueden utilizar las librerias “gstat” o “kriging”. A continuación se muestra un ejemplo usando la librería “gstat”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar modelo de variograma para kriging ordinario</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>vgram <span class="ot">&lt;-</span> <span class="fu">variogram</span>(value <span class="sc">~</span> <span class="dv">1</span>, data)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>vfit <span class="ot">&lt;-</span> <span class="fu">fit.variogram</span>(vgram, model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in fit.variogram(vgram, model): linear model has singular covariance
-matrix</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in fit.variogram(vgram, model): singular model in variogram fit</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in fit.variogram(object, model, fit.sills = fit.sills, fit.ranges =
-fit.ranges, : No convergence after 200 iterations: try different initial
-values?</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar modelo de variograma para kriging ordinario</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vgram <span class="ot">&lt;-</span> <span class="fu">variogram</span>(value <span class="sc">~</span> <span class="dv">1</span>, data)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>vfit <span class="ot">&lt;-</span> <span class="fu">fit.variogram</span>(vgram, model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kriging ordinario</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>kriged_values_ordinary <span class="ot">&lt;-</span> <span class="fu">krige</span>(value <span class="sc">~</span> <span class="dv">1</span>, data, grd, <span class="at">model =</span> vfit, <span class="at">nmax =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kriging ordinario</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>kriged_values_ordinary <span class="ot">&lt;-</span> <span class="fu">krige</span>(value <span class="sc">~</span> <span class="dv">1</span>, data, grd, <span class="at">model =</span> vfit, <span class="at">nmax =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[using ordinary kriging]</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(kriged_values_ordinary[<span class="st">"var1.pred"</span>], <span class="at">main =</span> <span class="st">"Kriging Ordinario Prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(kriged_values_ordinary[<span class="st">"var1.pred"</span>], <span class="at">main =</span> <span class="st">"Kriging Ordinario Prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -560,33 +512,24 @@ p(Z, s_0) = \sum_{i=1}^{n} \lambda_i Z(s_i),
 <p>Para implementar el kriging universal en R, podemos usar el paquete <code>gstat</code> y la función krige. Esta función requiere una formula que defina la variable dependiente como un modelo lineal de las variables independientes, un bjeto espacial con las coordenadas y los datos observados, un objeto espacial con las coordenadas de los puntos a predecir y un modelo de variograma para el error espacial.</p>
 <p>A continuación se muestra un ejemplo de cómo usar krige para realizar kriging universal con dos variables auxiliares: <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Añadir variables auxiliares al conjunto de datos</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>values<span class="sc">$</span>x <span class="ot">&lt;-</span> <span class="fu">coordinates</span>(data)[,<span class="dv">1</span>]</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>values<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">coordinates</span>(data)[,<span class="dv">2</span>]</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar variograma</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>vgram_universal <span class="ot">&lt;-</span> <span class="fu">variogram</span>(value <span class="sc">~</span> x <span class="sc">+</span> y, data)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>vfit_universal <span class="ot">&lt;-</span> <span class="fu">fit.variogram</span>(vgram_universal, <span class="fu">vgm</span>(<span class="at">model =</span> <span class="st">"Sph"</span>, <span class="at">psill =</span> <span class="dv">1</span>, <span class="at">range =</span> <span class="dv">50</span>, <span class="at">nugget =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in fit.variogram(vgram_universal, vgm(model = "Sph", psill = 1, :
-singular model in variogram fit</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in fit.variogram(object, model, fit.sills = fit.sills, fit.ranges =
-fit.ranges, : No convergence after 200 iterations: try different initial
-values?</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Añadir variables auxiliares al conjunto de datos</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>values<span class="sc">$</span>x <span class="ot">&lt;-</span> <span class="fu">coordinates</span>(data)[,<span class="dv">1</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>values<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">coordinates</span>(data)[,<span class="dv">2</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar variograma</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>vgram_universal <span class="ot">&lt;-</span> <span class="fu">variogram</span>(value <span class="sc">~</span> x <span class="sc">+</span> y, data)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>vfit_universal <span class="ot">&lt;-</span> <span class="fu">fit.variogram</span>(vgram_universal, <span class="fu">vgm</span>(<span class="at">model =</span> <span class="st">"Sph"</span>, <span class="at">psill =</span> <span class="dv">1</span>, <span class="at">range =</span> <span class="dv">50</span>, <span class="at">nugget =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kriging Universal</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>kriged_values_universal <span class="ot">&lt;-</span> <span class="fu">krige</span>(value <span class="sc">~</span> x <span class="sc">+</span> y, data, grd, <span class="at">model =</span> vfit_universal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kriging Universal</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>kriged_values_universal <span class="ot">&lt;-</span> <span class="fu">krige</span>(value <span class="sc">~</span> x <span class="sc">+</span> y, data, grd, <span class="at">model =</span> vfit_universal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[using universal kriging]</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(kriged_values_universal[<span class="st">"var1.pred"</span>], <span class="at">main =</span> <span class="st">"Kriging Universal Prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(kriged_values_universal[<span class="st">"var1.pred"</span>], <span class="at">main =</span> <span class="st">"Kriging Universal Prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

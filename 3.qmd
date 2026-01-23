@@ -7,6 +7,7 @@ Kriging es una técnica de interpolación espacial que permite estimar valores d
 Antes de comenzar, asegúrate de tener instalados los siguientes paquetes de R: “gstat”, “sp”, “raster” y “ggplot2”. Si no los tienes, puedes instalarlos mediante el siguiente código:
 
 ```{r}
+#| warning: false
 # Instalar paquetes si es necesario
 
 library(gstat)
@@ -17,6 +18,7 @@ library(phylin)
 ```
 
 ```{r}
+#| warning: false
 # Generación de datos simulados para los ejemplos
 set.seed(1029)
 coords <- data.frame(x = runif(10, 0, 100), y = runif(10, 0, 100))
@@ -64,6 +66,7 @@ $$
 Para implementar el kriging simple en R se puede utilizar la función krig del paquete phylin, que requiere como argumentos los valores observados, las coordenadas de las ubicaciones muestreadas y las ubicaciones a interpolar, el modelo de variograma ajustado y el valor conocido de la media (o NA para usar kriging ordinario). A continuación se muestra un ejemplo con datos simulados:
 
 ```{r}
+#| warning: false
 # Calcular el variograma experimental
 vgram <- variogram(value ~ 1, data)
 
@@ -73,6 +76,7 @@ vfit <- fit.variogram(vgram, model)
 ```
 
 ```{r}
+#| warning: false
 # Crear una cuadrícula de predicción
 grd <- expand.grid(x = seq(0, 100, by = 5), y = seq(0, 100, by = 5))
 coordinates(grd) <- ~ x + y
@@ -84,6 +88,7 @@ kriged_values <- krige(value ~ 1, data, grd, model = vfit, nmax = 5)
 ```
 
 ```{r}
+#| warning: false
 # Visualización
 spplot(kriged_values["var1.pred"], main = "Kriging Simple Prediction")
 ```
@@ -134,6 +139,7 @@ Para implementar el kriging ordinario en R, se pueden utilizar las librerías "g
 Par implementar el kriging ordinario en R, se pueden utilizar las librerias "gstat" o "kriging". A continuación se muestra un ejemplo usando la librería "gstat".
 
 ```{r}
+#| warning: false
 # Ajustar modelo de variograma para kriging ordinario
 vgram <- variogram(value ~ 1, data)
 vfit <- fit.variogram(vgram, model)
@@ -141,6 +147,7 @@ vfit <- fit.variogram(vgram, model)
 ```
 
 ```{r}
+#| warning: false
 # Kriging ordinario
 kriged_values_ordinary <- krige(value ~ 1, data, grd, model = vfit, nmax = 5)
 
@@ -148,6 +155,7 @@ kriged_values_ordinary <- krige(value ~ 1, data, grd, model = vfit, nmax = 5)
 ```
 
 ```{r}
+#| warning: false
 # Visualización
 spplot(kriged_values_ordinary["var1.pred"], main = "Kriging Ordinario Prediction")
 ```
@@ -181,6 +189,7 @@ Para implementar el kriging universal en R, podemos usar el paquete `gstat` y la
 A continuación se muestra un ejemplo de cómo usar krige para realizar kriging universal con dos variables auxiliares: $x$ e $y$
 
 ```{r}
+#| warning: false
 # Añadir variables auxiliares al conjunto de datos
 values$x <- coordinates(data)[,1]
 values$y <- coordinates(data)[,2]
@@ -191,11 +200,13 @@ vfit_universal <- fit.variogram(vgram_universal, vgm(model = "Sph", psill = 1, r
 ```
 
 ```{r}
+#| warning: false
 # Kriging Universal
 kriged_values_universal <- krige(value ~ x + y, data, grd, model = vfit_universal)
 ```
 
 ```{r}
+#| warning: false
 # Visualización
 spplot(kriged_values_universal["var1.pred"], main = "Kriging Universal Prediction")
 ```

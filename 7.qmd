@@ -1,303 +1,72 @@
-## Geoestadística con sgeostat {.unnumbered}
+## Objetos SpatFD {.unnumbered}
 
-# [Geoestadística con sgeostat]{style="color:#FF8000;"}
+# [Objetos SpatFD]{style="color:#FF8000;"}
 
-## Carga de los datos
+El objeto SpatFD crea objetos univariados y multivariados de clase SpatFD a partir de coordenadas espaciales, funciones o series temporales observadas en cada ubicación espacial. El término “series temporales” es genérico, ya que las observaciones pueden estar relacionadas con la frecuencia u otra dimensión espacial, como la profundidad, en lugar del tiempo.
 
-```{r}
-rm(list=ls())
-aquifer=read.table("data/aquifer.txt",head=T,dec=",")
-head(aquifer)
-```
+## **Argumentos**
 
-## Librerias
+-   **data**: Los datos deben ser proporcionados en un data-frame o una matriz donde cada columna corresponde a una ubicación, y las filas son una secuencia de puntos de datos, ordenados según el tiempo, frecuencia, profundidad, etc. También puede ser un objeto `fd` del paquete `fda`.
 
-```{r}
-#| warning: false
-library(scatterplot3d)
-library(ggplot2)
-library(cowplot)
-library(sgeostat)
-```
+-   **coords**: Un data-frame o matriz con coordenadas espaciales (x, y). El número de columnas en `data` debe coincidir con el número de filas en `coords` para cada variable.
 
-## Gráficos
+-   **basis**: Funciones base. Puede ser “Fourier” o “Bsplines” (predeterminado: “Bsplines”).
 
-```{r}
+-   **nbasis**: El número de funciones base.
 
+-   **lambda**: Valor del parámetro de suavizado.
 
-g1 <- ggplot(aquifer, aes(x = Este, y = Profundidad)) +
-  geom_point() +
-  geom_line() +
-  xlab("Este") +
-  ylab("Profundidad")
+-   **nharm**: Número de armónicos o funciones propias reportados en los resultados de Componentes Principales Funcionales.
 
-g2 <- ggplot(aquifer, aes(x = Norte, y = Profundidad)) +
-  geom_point() +
-  geom_line() +
-  xlab("Norte") +
-  ylab("Profundidad")
+-   **name**: Se puede asignar un nuevo nombre a los datos.
 
-g3 <- ggplot(aquifer, aes(x = Este * Norte, y = Profundidad)) +
-  geom_point() +
-  geom_line() +
-  xlab("Interacción este, norte") +
-  ylab("Profundidad")
+-   **add**: Se pueden agregar otras variables para la predicción funcional multivariada espacial (cokriging funcional). No es necesario que todas las variables estén observadas en las mismas ubicaciones espaciales.
 
-plot_grid(g1,g2,g3)
-```
+-   **…**: Argumentos adicionales de `fda` como `create.bspline.basis` o `create.fourier.basis`.
 
+## **Detalles**
 
+Los objetos `SpatFD` almacenan los datos funcionales, sus parámetros, los resultados de análisis de componentes principales funcionales, y las coordenadas espaciales para cada variable. Cada variable tiene su propio conjunto de datos funcionales, data-frame o matriz, y archivo de coordenadas espaciales.
+
+## **Valor**
+
+Para cada variable: Se proporcionan los datos funcionales y los componentes principales funcionales vinculados con las coordenadas espaciales.
+
+## **Notas**
+
+1.  Aunque no hay un límite para el número de variables en el cokriging funcional, la verdadera limitación está en los requisitos para encontrar un modelo de covarianza multivariada válido. Se recomienda aplicar el principio de parsimonia.
+
+2.  Las ubicaciones deben estar en la misma región de interés para que tenga sentido incluirlas en el mismo modelo de predicción. Sin embargo, cada variable puede estar observada en diferentes ubicaciones espaciales y tener un número diferente de observaciones
+
+## **Forma de uso**
 
 ```{r}
-cor(aquifer)
-```
 
-```{r}
-scatterplot3d(aquifer, highlight.3d=TRUE, col.axis="blue",
-col.grid="lightblue", main="Tendencia de Profundidad", pch=20)
+library(SpatFD)
+# Cargar datos
+data(AirQualityBogota)
+
+# Crear un objeto univariado usando 2 nharm
+SFD_PM10 <- SpatFD(PM10, coords = coord[,2:3], basis = "Bsplines", nbasis = 91,
+lambda = 0.00002, nharm = 2)
 ```
 
 ```{r}
-reg1 <- lm(Profundidad ~ Este + Norte, data = aquifer)
-residuales1  <-  residuals(reg1)
-summary(reg1)
+str(SFD_PM10)
 ```
 
-```{r}
-anova(reg1)
-```
+Para cada variable incluida en el objeto `SpatFD`, la función `summary` retorna:
+
+-   **Head of data**: Primeras filas de los datos asociados.
+
+-   **Coordinates**: Coordenadas espaciales correspondientes a cada ubicación.
+
+-   **Eigenvalues**: Valores propios de la descomposición en componentes principales.
+
+-   **Mean coefficients**: Coeficientes medios de la representación funcional.
+
+-   **Proportion of explained variance by each component**: Proporción de varianza explicada por cada componente principal.
 
 ```{r}
-reg2 <- lm(Profundidad ~ Este*Norte, data = aquifer)
-residuales2  <-  residuals(reg2)
-summary(reg2)
-```
-
-```{r}
-anova(reg2)
-```
-
-```{r}
-reg3 <- lm(Profundidad ~ Este*Norte+I(Este^2)*I(Norte^2), data = aquifer)
-residuales3  <-  residuals(reg3)
-summary(reg3)
-```
-
-```{r}
-anova(reg3)
-```
-
-```{r}
-aquifer=data.frame(aquifer,resi=residuales2)
-aquifer_points=point(aquifer, x="Este", y="Norte")
-aquifer_pair=pair(aquifer_points,num.lags=10)
-```
-
-```{r}
-str(aquifer_pair)
-```
-
-```{r}
-aquifer.v<-est.variogram(aquifer_points,aquifer_pair,'resi')
-```
-
-```{r}
-
-g4 <- ggplot(aquifer, aes(x = Este, y = resi)) + 
-  geom_point() + 
-  geom_line() +
-  xlab("Este") + 
-  ylab("residuales2")
-
-g5 <- ggplot(aquifer, aes(x = Norte, y = resi)) + 
-  geom_point() + 
-  geom_line() +
-  xlab("Norte") + 
-  ylab("residuales2")
-
-
-plot_grid(g4, g5)
-```
-
-```{r}
-aquifer_points=point(aquifer, x="Este", y="Norte")
-fit.trend(aquifer_points,at="Profundidad", np=2, plot.it=TRUE)
-```
-
-```{r}
-
-g_resi <- ggplot(aquifer.v, aes(x = Norte, y = resi)) +  
-  geom_point() +  
-  geom_line() +
-  xlab("Norte") +  
-  ylab("residuales2")
-
-g6 <- ggplot(aquifer.v, aes(x = bins, y = classic)) +  
-  geom_point() +  
-  geom_line() +
-  xlab("Rezago espacial, h") +  
-  ylab("Estimador clásico del variograma")
-
-g7 <- ggplot(aquifer.v, aes(x = bins, y = robust)) +  
-  geom_point() +  
-  geom_line() +
-  xlab("Rezago espacial, h") +  
-  ylab("Estimador robusto 1 del variograma")
-
-g8 <- ggplot(aquifer.v, aes(x = bins, y = med)) +  
-  geom_point() +  
-  geom_line() +
-  xlab("Rezago espacial, h") +  
-  ylab("Estimador robusto 2 del variograma")
-
-
-plot_grid(g6, g7, g8, nrow = 1, ncol = 3)
-```
-
-```{r}
-#par(mfrow=c(1,3))
-print(aquifer.v)
-```
-
-```{r}
-plot(aquifer.v$robust)
-```
-
-```{r}
-plot(aquifer.v$med,col='blue')
-points(aquifer.v$robust,col="red")
-```
-
-```{r}
-aquifer.vmodExp<-fit.exponential(aquifer.v,c0=0,ce=40000,ae=20,plot.it=TRUE,iterations=30)
-```
-
-```{r}
-aquifer.vmodGau<-fit.gaussian(aquifer.v,c0=0,cg=50000,ag=50,plot.it=TRUE,iterations=30)
-```
-
-```{r}
-aquifer.vmodWave<-fit.wave(aquifer.v,c0=0,cw=40000,aw=10,plot.it=TRUE,iterations=30,weighted=T)
-```
-
-```{r}
-curve(65000*(1-(14/x)*sin(x/14)),0,300,ylim=c(0,200000))
-points(aquifer.v$bins,aquifer.v$classic,col=3)
-text(aquifer.v$bins,aquifer.v$classic,aquifer.v$n,col=2)
-```
-
-```{r}
-curve(200000*(1-exp(-x/170)),0,300)
-points(aquifer.v$bins,aquifer.v$classic,col=2)
-
-```
-
-```{r}
-curve(65000*(1-(14/x)*sin(x/14)),0,300,ylim=c(0,200000))
-points(aquifer.v$bins,aquifer.v$classic,col=3)
-text(aquifer.v$bins,aquifer.v$classic,aquifer.v$n,col=2)
-```
-
-```{r}
-
-aquifer.vmodExp<-fit.exponential(aquifer.v,c0=0,ce=200000,ae=170,plot.it=TRUE,iterations=30,weighted=T)
-
-```
-
-```{r}
-aquifer.vmodwave<-fit.wave(aquifer.v,c0=4000,cw=30000,aw=15,plot.it=TRUE,iterations=0,weighted=T)
-```
-
-```{r}
-
-aquifer.vmodExp_0<-fit.exponential(aquifer.v,c0=0,ce=200000,ae=170,plot.it=TRUE,iterations=0,weighted=T)
-```
-
-```{r}
-aquifer.vmodwave_0<-fit.wave(aquifer.v,c0=4000,cw=30000,aw=15,plot.it=TRUE,iterations=0,weighted=T)
-```
-
-```{r}
-
-aquifer.spherical<-fit.spherical(aquifer.v,c0=0,cs=35000,as=70,plot.it=TRUE,iterations=0,weighted=T)
-```
-
-```{r}
-ggplot(aquifer.v, aes(bins, classic)) + 
-  geom_point() + 
-  geom_line() +
-  xlab("Rezago espacial, h") + 
-  ylab("Estimador clásico del variograma")+
-  xlim(0, 300) +
-  geom_function(aes(color = "Exponencial"),
-    fun =~4000+150000*(1-exp(-.x/100)) 
-    ) +
-  geom_function(aes(color = "Seno cardinal"),
-    fun =~4000+30000*(1-((15/.x)*sin(.x/15)))             
-    ) + xlab("Rezago espacial") + ylab("Modelos teóricos de  semivariogramas") 
-```
-
-```{r}
-Kriging_aquifer <- point(data.frame(list(x=10,y=80)))
-Kriging_aquifer <- krige(Kriging_aquifer, aquifer_points, 'resi', aquifer.vmodExp_0)
-
-```
-
-```{r}
-Kriging_aquifer
-```
-
-```{r}
-Kriging_aquifer$sigma2hat
-```
-
-```{r}
-Kriging_aquifer <- point(data.frame(list(x=10,y=80)))
-Kriging_aquifer <- krige(Kriging_aquifer, aquifer_points, 'resi', aquifer.vmodwave_0)
-```
-
-```{r}
-Kriging_aquifer
-```
-
-```{r}
-Kriging_aquifer$zhat
-```
-
-```{r}
-Kriging_aquifer$sigma2hat
-```
-
-```{r}
-grid <- list(x=seq(min(aquifer$Este),max(aquifer$Este),by=20),y=seq(min(aquifer$Norte),max(aquifer$Norte),by=10))
-grid$xr <- range(grid$x)
-grid$xs <- grid$xr[2] - grid$xr[1]
-grid$yr <- range(grid$y)
-grid$ys <- grid$yr[2] - grid$yr[1]
-grid$max <- max(grid$xs, grid$ys)
-grid$xy <- data.frame(cbind(c(matrix(grid$x, length(grid$x), length(grid$y))),
-c(matrix(grid$y, length(grid$x), length(grid$y), byrow=TRUE))))
-colnames(grid$xy) <- c("x", "y")
-grid$point <- point(grid$xy)
-grid$krige <- krige(grid$point,aquifer_points,'resi',aquifer.vmodwave_0,maxdist=180,extrap=FALSE)
-```
-
-```{r}
-op <- par(no.readonly = TRUE)
-par(pty="s")
-plot(grid$xy, type="n", xlim=c(grid$xr[1], grid$xr[1]+grid$max),ylim=c(grid$yr[1], grid$yr[1]+grid$max))
-image(grid$x,grid$y,matrix(grid$krige$zhat,length(grid$x),length(grid$y)),add=TRUE)
-contour(grid$x,grid$y,matrix(grid$krige$zhat,length(grid$x),length(grid$y)),add=TRUE)
-```
-
-```{r}
-
-op <- par(no.readonly = TRUE)
-par(pty="s")
-plot(grid$xy, type="n", xlim=c(grid$xr[1], grid$xr[1]+grid$max),ylim=c(grid$yr[1], grid$yr[1]+grid$max))
-image(grid$x,grid$y,matrix(grid$krige$sigma2hat,length(grid$x),length(grid$y)), add=TRUE)
-contour(grid$x,grid$y,matrix(grid$krige$sigma2hat,length(grid$x),length(grid$y)),add=TRUE)
-
-
-
+summary(SFD_PM10)
 ```

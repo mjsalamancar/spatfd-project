@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mex PM10 – Cuadernos de Estadística Espacial</title>
+<title>SpatFD – Cuadernos de Estadística Espacial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -64,7 +30,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./3.html" rel="next">
+<link href="./7.html" rel="next">
 <link href="./5.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -116,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html"><span style="color: #FF8000 !important;">Datasets </span></a></li><li class="breadcrumb-item"><a href="./6.html"><span style="color: #728387 !important;">CokMexico</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5.html"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></a></li><li class="breadcrumb-item"><a href="./6.html"><span style="color: #728387 !important;">Paquete </span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -158,19 +124,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7.html" class="sidebar-item-text sidebar-link">
+  <a href="./1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">Geoestadística con Sgeostat</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8.html" class="sidebar-item-text sidebar-link">
+  <a href="./2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">Geoestadística Univariada con GeoR </span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9.html" class="sidebar-item-text sidebar-link">
+  <a href="./3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">Kriging</span></span></a>
   </div>
 </li>
@@ -187,24 +153,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span style="color: #728387 !important;">Implementación de los Modelos </span></span></a>
+  <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Aplicación de los Modelos </span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./1.html" class="sidebar-item-text sidebar-link">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2.html" class="sidebar-item-text sidebar-link">
+  <a href="./5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Estadística Espacial Funcional</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span style="color: #728387 !important;">Paquete </span></span></a>
   </div>
 </li>
@@ -221,13 +193,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1.html" class="sidebar-item-text sidebar-link">
+  <a href="./7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">SpatFD</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+  <a href="./8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">gfdata </span></span></a>
   </div>
 </li>
@@ -235,28 +207,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text"><span style="color: #FF8000 !important;">Datasets </span></span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4.html" class="sidebar-item-text sidebar-link">
+  <a href="./9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">AirQualityBogota</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5.html" class="sidebar-item-text sidebar-link">
+  <a href="./10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">Vowels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6.html" class="sidebar-item-text sidebar-link active">
+  <a href="./11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">CokMexico</span></span></a>
   </div>
 </li>
@@ -271,21 +243,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span style="color: #FF8000 !important;">Cokriging</span></span></span>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text"><span style="color: #FF8000 !important;">Diseño Óptimo </span></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span style="color: #728387 !important;">Introducción</span></span></a>
-  </div>
-</li>
-      </ul>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Diseño Óptimo</span></span></span>
   </li>
     </ul>
     </div>
@@ -297,12 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#mex-pm10" id="toc-mex-pm10" class="nav-link active" data-scroll-target="#mex-pm10"><span style="color:#FF8000;">Mex PM10</span></a>
+  <li><a href="#spatfd" id="toc-spatfd" class="nav-link active" data-scroll-target="#spatfd"><span style="color:#FF8000;">SpatFD</span></a>
   <ul class="collapse">
-  <li><a href="#descripción" id="toc-descripción" class="nav-link" data-scroll-target="#descripción">Descripción</a></li>
-  <li><a href="#qué-es-el-pm10" id="toc-qué-es-el-pm10" class="nav-link" data-scroll-target="#qué-es-el-pm10">¿Qué es el PM10?</a></li>
-  <li><a href="#qué-es-el-no2" id="toc-qué-es-el-no2" class="nav-link" data-scroll-target="#qué-es-el-no2">¿Qué es el NO2?</a></li>
-  <li><a href="#uso" id="toc-uso" class="nav-link" data-scroll-target="#uso">Uso</a></li>
+  <li><a href="#about" id="toc-about" class="nav-link" data-scroll-target="#about">About</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">Referencias</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -310,9 +267,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html"><span style="color: #FF8000 !important;">Datasets </span></a></li><li class="breadcrumb-item"><a href="./6.html"><span style="color: #728387 !important;">CokMexico</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5.html"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></a></li><li class="breadcrumb-item"><a href="./6.html"><span style="color: #728387 !important;">Paquete </span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Mex PM10</h1>
+<h1 class="title">SpatFD</h1>
 </div>
 
 
@@ -329,99 +286,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="mex-pm10" class="level1">
-<h1><span style="color:#FF8000;">Mex PM10</span></h1>
-<section id="descripción" class="level2">
-<h2 class="anchored" data-anchor-id="descripción">Descripción</h2>
-<p>El conjunto de datos <strong>COKMexico</strong> contiene información sobre la calidad del aire en 13 ubicaciones de México. Específicamente, incluye mediciones de material particulado 10 (PM10) y N02 recolectadas en 13 estaciones de monitoreo distribuidas por el país. Al cargar los datos encontrará en el ambiente.</p>
-<ul>
-<li><p>coord_NO2: Un DataFrame con las coordenadas de cada una de las estaciones de monitoreo donde se midió el NO2.</p></li>
-<li><p>coord_PM10 Un DataFrame con las coordenadas de cada una de las estaciones de monitoreo donde se midió el PM10.</p></li>
-<li><p>map_mex: Un objeto del tipo sf que contiene el mapa de Bogotá.</p></li>
-<li><p>Mex_PM10: Contiene las observaciones de PM10 de cada estación.</p></li>
-<li><p>NO2: Contiene las observaciones de NO2 de cada estación.</p></li>
-</ul>
-</section>
-<section id="qué-es-el-pm10" class="level2">
-<h2 class="anchored" data-anchor-id="qué-es-el-pm10">¿Qué es el PM10?</h2>
-<p>El PM10 se refiere a partículas de materia en el aire con un diámetro de 10 micrómetros o menos. Estas partículas son lo suficientemente pequeñas como para ser inhaladas y pueden tener efectos negativos en la salud humana, especialmente en los sistemas respiratorio y cardiovascular.</p>
-</section>
-<section id="qué-es-el-no2" class="level2">
-<h2 class="anchored" data-anchor-id="qué-es-el-no2">¿Qué es el NO2?</h2>
-<p>El dióxido de nitrógeno NO2 es un contaminante del aire que se forma como subproducto en los procesos de combustión a altas temperaturas. Suele ser un contaminante común sobretodo en zonas urbanas.</p>
-</section>
-<section id="uso" class="level2">
-<h2 class="anchored" data-anchor-id="uso">Uso</h2>
-<p>Para cargar los datos en R, usa el siguiente comando:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Linking to GEOS <span class="dv">3</span>.<span class="fl">12.2</span>, GDAL <span class="dv">3</span>.<span class="fl">9.3</span>, PROJ <span class="dv">9</span>.<span class="fl">4.1</span>; <span class="fu">sf_use_s2</span>() is <span class="cn">TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'sf' was built under R version 4.4.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.13.0, GDAL 3.10.1, PROJ 9.5.1; sf_use_s2() is TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SpatFD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"COKMexico"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(coord_NO2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   18 obs. of  2 variables:
- $ X: num  509226 473346 482180 469366 479189 ...
- $ Y: num  2171149 2164689 2152665 2141275 2180751 ...</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(coord_PM10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   13 obs. of  2 variables:
- $ X: num  509226 479189 474444 484020 487445 ...
- $ Y: num  2171149 2180751 2154232 2146380 2147815 ...</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mex_PM10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> int [1:4344, 1:13] 84 110 140 131 151 181 147 139 118 74 ...
- - attr(*, "dimnames")=List of 2
-  ..$ : chr [1:4344] "1" "2" "3" "4" ...
-  ..$ : chr [1:13] "ACO" "CUT" "FAC" "HGM" ...</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mex_PM10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> int [1:4344, 1:13] 84 110 140 131 151 181 147 139 118 74 ...
- - attr(*, "dimnames")=List of 2
-  ..$ : chr [1:4344] "1" "2" "3" "4" ...
-  ..$ : chr [1:13] "ACO" "CUT" "FAC" "HGM" ...</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(NO2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> int [1:4292, 1:18] 21 21 21 18 16 12 12 10 9 10 ...
- - attr(*, "dimnames")=List of 2
-  ..$ : chr [1:4292] "1" "2" "3" "4" ...
-  ..$ : chr [1:18] "ACO" "ATI" "CAM" "CUA" ...</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(map_mex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
+<section id="spatfd" class="level1">
+<h1><span style="color:#FF8000;">SpatFD</span></h1>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="6_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="images/logo.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="236"></p>
 </figure>
 </div>
-</div>
-</div>
+<section id="about" class="level2">
+<h2 class="anchored" data-anchor-id="about">About</h2>
+<p>SpatFD es un paquete en R diseñado para facilitar el análisis de datos espaciales con componentes funcionales. Proporciona herramientas para manejar datos funcionales espaciales, permitiendo a investigadores y analistas explorar, modelar y visualizar de manera eficiente la variabilidad y dependencias espaciales en conjuntos de datos complejos.</p>
+<p>Nuestro paquete está pensado para soportar una amplia gama de aplicaciones, desde estudios ambientales hasta econometría, ofreciendo métodos adaptables a diversos dominios. Ya sea que estés trabajando con tendencias geoespaciales, dinámicas temporales o relaciones funcionales, SpatFD te brinda la flexibilidad y las herramientas necesarias para extraer conclusiones significativas.</p>
+<p>SpatFD ha sido desarrollado con un enfoque en la usabilidad y el rendimiento, asegurando que tanto usuarios novatos como experimentados de R puedan aprovechar sus capacidades para realizar investigaciones avanzadas en estadística espacial. Únete a nuestra creciente comunidad de usuarios y explora el potencial de los datos funcionales espaciales con SpatFD.</p>
+</section>
+<section id="referencias" class="level2">
+<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
+<ul>
+<li><p>Bohorquez, M., Giraldo, R., &amp; Mateu, J. (2016). Optimal sampling for spatial prediction of functional data. Statistical Methods &amp; Applications, 25(1), 39-54.</p></li>
+<li><p>Bohorquez, M., Giraldo, R., &amp; Mateu, J. (2016). Multivariate functional random fields: prediction and optimal sampling. Stochastic Environmental Research and Risk Assessment, 31, pages53–70 (2017).</p></li>
+<li><p>Bohorquez M., Giraldo R. and Mateu J. (2021). Spatial prediction and optimal sampling of functional data in Geostatistical Functional Data Analysis: Theory and Methods. John Wiley Sons, Chichester, UK. ISBN: 978-1-119-38784-8. https://www.wiley.com/en-us/Geostatistical+Functional+Data+Analysis-p-9781119387848.</p></li>
+</ul>
 
 
 </section>
@@ -847,13 +731,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./5.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>Vowels</span>">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span style="color: #728387 !important;">Vowels</span></span>
+      <a href="./5.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>Estadística Espacial Funcional</span>">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span style="color: #728387 !important;">Estadística Espacial Funcional</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./3.html" class="pagination-link" aria-label="<span style='color: #FF8000 !important;'>Cokriging</span>">
-        <span class="nav-page-text"><span style="color: #FF8000 !important;">Cokriging</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./7.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>SpatFD</span>">
+        <span class="nav-page-text"><span style="color: #728387 !important;">SpatFD</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

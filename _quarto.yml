@@ -16,51 +16,52 @@ book:
     - part: "<span style='color: #FF8000 !important;'>Geoestadística </span>"
       chapters:
         - text: "<span style='color: #728387 !important;'>Geoestadística con Sgeostat</span>"
-          file: 7.qmd
+          file: 1.qmd
         - text: "<span style='color: #728387 !important;'>Geoestadística Univariada con GeoR </span>"
-          file: 8.qmd
+          file: 2.qmd
         - text: "<span style='color: #728387 !important;'>Kriging</span>"
-          file: 9.qmd
+          file: 3.qmd
           
     - part: "<span style='color: #FF8000 !important;'>Modelos de Regresión Espacial</span>"
       chapters:
-        - text: "<span style='color: #728387 !important;'>Implementación de los Modelos </span>"
-          file: 10.qmd
+        - text: "<span style='color: #728387 !important;'>Aplicación de los Modelos </span>"
+          file: 4.qmd
           
-    # --- SECCIÓN MODIFICADA ---
-    - part: 1.qmd
-      text: "<span style='color: #FF8000 !important;'>Estadística Espacial Funcional</span>"
+    
+    - part: "<span style='color: #FF8000 !important;'>Estadística Espacial Funcional</span>"
       chapters: 
+        - text: "<span style='color: #728387 !important;'>Estadística Espacial Funcional</span>"
+          file: 5.qmd
         - text: "<span style='color: #728387 !important;'>Paquete </span>"
-          file: 2.qmd
-    # ---------------------------
+          file: 6.qmd
+    
           
     - part: "<span style='color: #FF8000 !important;'>Objetos </span>"
       chapters:
         - text: "<span style='color: #728387 !important;'>SpatFD</span>"
-          file: 1.qmd
+          file: 7.qmd
         - text: "<span style='color: #728387 !important;'>gfdata </span>"
-          file: intro.qmd 
+          file: 8.qmd 
    
     - part: "<span style='color: #FF8000 !important;'>Datasets </span>"
       chapters:
         - text: "<span style='color: #728387 !important;'>AirQualityBogota</span>"
-          file: 4.qmd
+          file: 9.qmd
         - text: "<span style='color: #728387 !important;'>Vowels</span>"
-          file: 5.qmd
+          file: 10.qmd
         - text: "<span style='color: #728387 !important;'>CokMexico</span>"
-          file: 6.qmd
+          file: 11.qmd
           
-    - part: 2.qmd
+    - part: 12.qmd
       text: "<span style='color: #FF8000 !important;'>Kriging</span>"
         
-    - part: 3.qmd
+    - part: 13.qmd
       text: "<span style='color: #FF8000 !important;'>Cokriging</span>"
+      
+    - part: 14.qmd
+      text: "<span style='color: #FF8000 !important;'>Diseño Óptimo</span>"
           
-    - part: "<span style='color: #FF8000 !important;'>Diseño Óptimo </span>"
-      chapters:
-        - text: "<span style='color: #728387 !important;'>Introducción</span>"
-          file: 2.qmd
+    
   
 bibliography: references.bib
 

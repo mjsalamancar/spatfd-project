@@ -1,127 +1,637 @@
-## Definición {.unnumbered}
+## Geoestadística Univariada con `geoR` {.unnumbered}
 
-# [Kriging]{style="color:#FF8000;"}
+# [Geoestadística Univariada con `geoR`]{style="color:#FF8000;"}
 
-## Definición
+## Parte descriptiva
 
-El Kriging es un método de interpolación basado en la teoría de procesos estocástocos que permite estimar los valores que toma una variable en lugares no muestreados a partir de la suposición de que las ubicaciones están correlacionadas espacialmente.
+### Librerías
 
-## Kriging Ordinario
+Lista de librerías con link a la documentación.
 
-Dado un conjunto de observaciones en diferentes localizaciones $s_1, s_2, ...,s_n$ busca predecir el valor de la variable de interés en una nueva ubicación $s_0$ como una combinación ponderada de las observaciones:
-
-$$
-\hat{Z}(s_0) = \sum_{i=1}^{n} \lambda_i Z(s_i)
-$$
-
-Donde $\lambda_i$ son los pesos asignados a cada observación, determinados en función de la covarianza espacial entre $s_0$ y $s_i$ determinado por un variograma.
-
-## Kriging Funcional
-
-En el contexto funcional, las observaciones en cada ubicación espacial no son valores discretos sino funciones completas. Supongamos que tenemos un conjunto de funciones $X(s_1, t), X(s_2, t), \cdots, X(s_n, t)$ donde cada $X(s_i, t)$ es una función que describe el comportamiento de la variable de interés a lo largo de un dominio continuo $t$ (como el tiempo).
-
-El kriging funcional extiende la idea del kriging clásico al predecir una **función** en una nueva ubicación $s_0$ utilizando una combinación ponderada de las funciones observadas en las localizaciones $s_1, \cdots, s_n$. En ese orden de ideas, podemos formular el kriging funcional de la siguiente manera:
-
-$$\hat{X}(s_0, t) = \sum_{i=1}^{n} \lambda_i(t) X(s_i, t)$$ Donde $\lambda_i$ son las funciones de peso que dependen de la localización y del dominio funcional $t$. Estas funciones de peso se determinan resolviendo un sistema de ecuaciones basado en la covariancia entre las funciones observadas y la función a predecir.
-
-Con el paquete SpatFD podemos crear un objeto SpatFD y definir los modelos de semivariogramas que vamos a emplear en el kriging. En este caso usaremos los datos AirQualityBogota y ajustaremos tres semivariogramas, uno wave, uno Mattern y por último un exponencial, la ubicación que queremos predecir se define en la variable newcoorden.
+-   `fields`
+-   `geoR`
+-   `akima` (Usado para gráficos descriptivos)
 
 ```{r}
 #| warning: false
+rm(list=ls())
+library(fields)
+```
 
+```{r}
+#| warning: false
+library(geoR)
+```
 
-library(SpatFD)
-library(gstat)
+```{r}
+#| warning: false
+library(akima)
+```
 
-data(AirQualityBogota)
+### Lectura de datos
 
-#s_0 nonsampled location. It could be data.frame or matrix and one or more locations of interest
-newcoorden <- data.frame(
-              X = seq(93000, 105000, length.out = 100),
-              Y = seq(97000, 112000, length.out = 100))
+```{r}
 
-# Building the SpatFD object
-
-coords_muestras <- coord[, -1]  
-
-SFD_PM10 <- SpatFD(
-  PM10,                     
-  coords = coords_muestras, 
-  basis = "Bsplines",
-  nbasis = 17,
-  norder = 5,
-  lambda = 0.00002,
-  nharm = 3
-)
-
-# Semivariogram models for each spatial random field of scores
-modelos <- list(  vgm(psill = 2199288.58, model = "Sph", range = 1484.57, nugget = 0),
-                  vgm(psill = 62640.74, model = "Mat", range = 1979.43, nugget = 0, kappa = 0.68),
-                  vgm(psill = 37098.25, model = "Exp", range = 6433.16, nugget = 0))
+aquifer <- read.table("data/aquifer.txt", head = TRUE, dec = ",")
 
 ```
 
-Existen dos enfoques diferentes para realizar el kriging funcional, el método de **scores** y el método **lambda.**
+Encabezado de datos `aquifer.txt`
 
-## Método de Scores
+```{r}
+head(aquifer)
+```
 
-En el **método de scores,** el análisis funcional se basa en una descomposición de las funciones observadas en un conjunto de componentes principales, generalmente a través de una descomposición en funciones base (como la descomposición en funciones ortogonales o en series de Fourier). Este método se descompone en dos etapas:
+Summary de los datos `aquifer.txt`
 
-1.  **Descomposición funcional:** Se aplica una descomposición funcional de las observaciones para representar cada función como una combinación de componentes principales (bases funcionales) y sus correspondientes coeficientes o “scores”. Si las funciones $X(s_i,t)$ observadas se pueden representar como:
+## GEO_Data
 
-    $$
-    X(s_{i}, t) = \sum_{k=1}^{K} \alpha_{ik}\phi_{k}(t)
-    $$
+### Convertir aquifer a un objeto geodata (GeoR obj)
 
-    donde $\phi_{k}(t)$ son las bases funcionales y $\alpha_{ik}$ son los scores de las componentes principales para cada localización $s_{i}$. En lugar de predecir la función completa, este método se centra en predecir los scores en la ubicación no observada $s_{0}$.
-
-2.  **Predicción de una nueva ubicación:** El kriging se aplica sobre los scores obtenidos. Se predicen los scores de la nueva ubicación $s_{0}$ para construir la función predicha $\hat{X}(s_{0}, t)$ como una combinación de las bases funcionales ponderadas por los scores predichos:
-
-    $$\hat{X}(s_{0}, t) = \sum_{k=1}^{K} \alpha_{0k}\phi_{k}(t)$$
-
-    La función KS_scores_lambdas permite realizar el kriging usando este método al usar \`\`scores'' en la opción method.
+-   Documentación `as.geodata`
 
     ```{r}
-    KS_SFD_PM10_sc <- KS_scores_lambdas(SFD_PM10, newcoorden, method = "scores", model = modelos)
+
+    aquiferg <- as.geodata(aquifer)
+    summary(aquiferg)
     ```
 
-## Método Lambda
+## Gráfico de objeto geodata
 
-Este método utiliza una combinación de las funciones observadas, ponderadas por ciertos coeficientes o pesos, para estimar la función en la nueva ubicación, es decir, el kriging se lleva a cabo directamente sobre las funciones. El predictor $\check{\chi}_{s_{0}}(t)$ está dado por:
+-   Documentación `plotgeodata`
 
-$$\check{\chi}_{s_{0}}(t) = \sum_{i=1}^{n} \lambda_{i}\chi_{s_{i}}(t)$$
-
-Deben encontrarse los pesos $\lambda_{i}$ que minimicen la diferencia entre la verdadera función en la ubicación no observada $s_{0}$ y el predictor. Eso se expresa matemáticamente como:
-
-$$min\|\chi_{s_{0}}(t) - \check{\chi}_{s_{0}}(t)\|^2$$
-
-donde $\chi_{s_{0}}(t)$ es la verdadera función en la ubicación $s_{0}$. La minimización de esta expresión se realiza en el sentido de la norma $L^{2}$.
-
-La función KS_scores_lambdas permite realizar el kriging usando este método al usar ''lambda'' en la opción method.
+Gráfico del objeto geodata
 
 ```{r}
-KS_SFD_PM10_both <- KS_scores_lambdas(SFD_PM10, newcoorden, method = "both", model = modelos)
+plot(aquiferg, qt.col = c("purple",
+                         "pink",
+                         "green",
+                         "yellow"))
 ```
 
-## Gráficamente
-
-Podemos graficar las predicciones usando la función ggplot_KS
+Gráfico con el parametro 3d
 
 ```{r}
-#| warning: false
-ggplot_KS(KS_SFD_PM10_both,show.varpred = FALSE,
-         main = "Plot 1 - Using Scores",
-          main2 = "Plot 2 - Using Lambda",
-           ylab = "PM10")
+plot(aquiferg, scatter3d = T)
 ```
 
-Así mismo, podemos graficar las predicciones suavizadas en tiempos específicos.
+Gráfico removiendo la tendencia (trend )
 
 ```{r}
-p<-ggmap_KS(KS_SFD_PM10_both,
-         map_path = map,
-         window_time = c(2108),
-         method = "lambda",
-         zmin = 50)
-print(p)
+plot(aquiferg, trend = "1st")
+```
+
+## Gráficos descriptivos interpolación
+
+-   Documentración Interpolación `inderp`
+
+-   Documentación `persp`
+
+-   Documentación `drape.plot`
+
+```{r}
+
+par(mfrow = c(2, 2),
+    mar = c(3, 3, 1, 1),
+    mgp = c(2, 1, 0))
+# Esta función agrupa los siguientes gráficos en
+# una matrix 2x2
+
+grillas <- interp(aquifer$Este,
+                  aquifer$Norte,
+                  aquifer$Profundidad)
+
+persp(grillas$x,
+      grillas$y,
+      grillas$z,
+      xlab = "Este",
+      ylab = "Norte",
+      zlab = "Nivel freatico",
+      phi = 30,
+      theta = 20,
+      col = "lightblue",
+      expand = .5,
+      ticktype = "detailed")
+
+drape.plot(grillas$x,
+           grillas$y,
+           grillas$z,
+           xlab = "Este",
+           ylab = "Norte",
+           zlab = "z",
+           theta = 45,
+           col = topo.colors(64),
+           expand = .5,
+           ticktype = "detailed")
+
+
+drape.plot(grillas$x,
+           grillas$y,
+           grillas$z,
+           xlab = "Este",
+           ylab = "Norte",
+           zlab = "z",
+           theta = -10,
+           col = topo.colors(64),
+           expand = .5,
+           ticktype = "detailed")
+
+
+drape.plot(grillas$x,
+           grillas$y,
+           grillas$z,
+           xlab = "Este",
+           ylab = "Norte",
+           zlab = "z",
+           theta = 60,
+           col = topo.colors(64),
+           expand = .5,
+           ticktype = "detailed")
+
+```
+
+## Gráficos de contorno
+
+-   Documentación [contour](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/contour)
+
+-   Documentación [filled.contour](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/filled.contour)
+
+```{r}
+par(mfrow = c(2, 1),
+    mar = c(1,1,1,1))
+
+contour(grillas, nlevels = 10, main = "Contorno")
+image(grillas$z, main =  "Grilla")
+```
+
+```{r}
+filled.contour(grillas, levels = seq(1000,
+                                     5000,
+                                     len = 10),
+               col = heat.colors(10),
+                main = "grilla niveles")
+```
+
+### **Funciones y gráficas a partir de la función outer**
+
+```{r}
+h <- seq(0, 1, len = 50)
+u <- seq(0, 1, len = 50)
+
+ejemplo1CH  <- function(h, u, sigma, a, b, c, d, delta) {
+    (sigma^2/((a^2*u^2+c)^(d/2)))*exp(-(b^2*h^2)/(a^2*u^2+c))*exp(-delta*u^2)
+    }
+h <- seq(0, 1, len = 20)
+u <- seq(1, 10, len = 20)
+f <- outer(h, u, ejemplo1CH, sigma=3, a=1, b=3, c=1, d=2, delta=0)
+
+par(mfrow = c(2, 2),
+    mar = c(3, 3, 1, 1),
+    mgp = c(2, 1, 0))
+
+drape.plot(h,
+           u,
+           f,
+           main = "Cressie-Huang; 1 (25,1,0.6)",
+           xlab = "h",
+           ylab = "u",
+           zlab = "Covarianza",
+           ltheta = 75,
+           col = terrain.colors(64))
+
+drape.plot(h,
+           u,
+           f,
+           main = "Cressie-Huang; 1 (25,1,0.6)",
+           xlab = "h",
+           ylab = "u",
+           zlab = "Covarianza",
+           theta = -150,
+           col = terrain.colors(64))
+persp(h,
+      u,
+      f,
+      main = "Cressie-Huang; 1 (25,1,0.6)",
+      xlab = "h",
+      ylab = "u",
+      zlab = "Covarianza",
+      ltheta = 75)
+
+contour(h,
+        u,
+        f,
+        col = topo.colors(10),
+        xlim = c(0,0.6))
+```
+
+## **Modelando la media con regresión polinomial**
+
+### **Primer modelo**
+
+```{r}
+reg1 <- lm(Profundidad ~ Este + Norte, data = aquifer)
+residuales1  <-  residuals(reg1)
+summary(reg1)
+```
+
+```{r}
+anova(reg1)
+```
+
+### **Segundo modelo**
+
+```{r}
+reg2 <- lm(Profundidad ~ Este + Norte +
+           I(Este^2) + I(Norte^2) +
+           I(Este * Norte),
+           data = aquifer)
+residuales2  <-  residuals(reg2)
+summary(reg2)
+```
+
+```{r}
+anova(reg2)
+```
+
+### **Tercer modelo**
+
+```{r}
+reg3 <- lm(Profundidad ~ Este * Norte,
+           data = aquifer)
+residuales3  <-  residuals(reg3)
+summary(reg3)
+```
+
+```{r}
+anova(reg3)
+```
+
+## **Estimación del semivariograma empírico**
+
+-   Documentación [`variog`](https://cran.r-project.org/web/packages/geoR/geoR.pdf#page=133)
+
+    ```{r}
+    vari2 <- variog(aquiferg, trend = "1st")
+
+
+
+    ```
+
+    ```{r}
+    vari2Cloud <- variog(aquiferg, op = "cloud", trend = "1st")
+    ```
+
+    ```{r}
+    vari2BinCloud <- variog(aquiferg,
+                           max.dist = 200,
+                           op = "cloud",
+                           bin.cloud = TRUE)
+
+    ```
+
+    ```{r}
+    vari2Sm <- variog(aquiferg,
+                      trend = "1st",
+                      op = "sm",
+                      band=11)
+    ```
+
+    ```{r}
+    par(mfrow = c(2, 2), mar = c(3, 3, 1, 1), mgp = c(2, 1, 0))
+         plot(vari2$u, vari2$v, main = "binned variogram") 
+         plot(vari2Cloud$u, vari2Cloud$v, main = "variogram cloud")
+         plot(vari2BinCloud$u, vari2BinCloud$v, main = "clouds for binned variogram")
+         plot(vari2Sm$u, vari2Sm$v, main = "smoothed variogram")
+    ```
+
+### **Explorando estimación clásica, removiendo tendencia**
+
+```{r}
+vari1 <- variog(aquiferg)
+```
+
+```{r}
+vari2 <- variog(aquiferg, trend = "1st")
+```
+
+```{r}
+vari3 <- variog(aquiferg, trend = "2nd")
+```
+
+```{r}
+plot(vari1$u,vari1$v, main = "Sin remover tendencia")
+```
+
+```{r}
+plot(vari2$u,vari2$v, main  = "Trend 1 ")
+```
+
+```{r}
+plot(vari3$u,vari3$v, main  = "Trend 2 ")
+```
+
+### **Explorando estimación resistente a datos atípicos y removiendo tendencia**
+
+```{r}
+vari1 <- variog(aquiferg, estimator.type = "modulus")
+```
+
+```{r}
+vari2 <- variog(aquiferg, trend = "1st", estimator.type = "modulus")
+```
+
+```{r}
+vari3 <- variog(aquiferg, trend = "2nd", estimator.type = "modulus")
+```
+
+```{r}
+plot(vari1$u,vari1$v, main = "Sin remover tendencia")
+```
+
+```{r}
+plot(vari2$u,vari2$v, main  = "Trend 1 ")
+```
+
+```{r}
+plot(vari3$u,vari3$v, main  = "Trend 2 ")
+```
+
+## **Explorando anisotropía**
+
+```{r}
+vari_0 <- variog(aquiferg,
+                 trend = "1st",
+                 max.dist = 200,
+                 dir = 0)
+```
+
+```{r}
+vari_45 <- variog(aquiferg,
+                  trend = "1st",
+                  max.dist = 200,
+                  dir = pi / 4)
+```
+
+```{r}
+vari_90 <- variog(aquiferg,
+                  trend = "1st",
+                  max.dist = 200,
+                  dir = pi / 2)
+```
+
+```{r}
+vari_135 <- variog(aquiferg,
+                   trend = "1st",
+                   max.dist = 200,
+                   dir = 3 * pi / 4)
+```
+
+```{r}
+par(mfrow = c(2, 2),
+    mar = c(3, 3, 1, 1),
+    mgp = c(2, 1, 0))
+
+plot(vari_0$u,vari_0$v, main = "vari 0")
+plot(vari_45$u,vari_45$v, main = "vari 45")
+plot(vari_90$u,vari_90$v, main = "vari 90")
+plot(vari_135$u,vari_135$v, main = "vari 195")
+```
+
+## **Estimación teórica del semivariograma**
+
+-   Documentación [`eyefit`](https://cran.r-project.org/web/packages/geoR/geoR.pdf#page=25)
+
+-   Documentación [`variofit`](https://cran.r-project.org/web/packages/geoR/geoR.pdf#page=129)
+
+-   Documentación [`likfit`](https://cran.r-project.org/web/packages/geoR/geoR.pdf#page=60)
+
+```{r}
+var1 <- variog(aquiferg,trend="1st",max.dist=200)
+
+```
+
+```{r}
+#ini1 <- eyefit(var1)
+#cov.model  sigmasq phi   tausq kappa kappa2   practicalRange
+#1      wave 30805.52  13 8984.94  <NA>   <NA> 38.8889336320589
+ini1 <- c(30805.52, 13)
+fitvar1 <- variofit(var1,
+                    cov.model = "wave",
+                    ini1,
+                    fix.nugget = TRUE,
+                    nugget = 8984.94,
+                    wei = "equal")
+```
+
+```{r}
+fitvar2 <- variofit(var1,
+                    cov.model = "wave",
+                    ini1,
+                    fix.nugget = TRUE,
+                    nugget = 8984.94,
+                    wei = "npairs")
+```
+
+```{r}
+fitvar3 <- variofit(var1,
+                    ini1,
+                    fix.nugget = TRUE,
+                    nugget = 8984.94,
+                    wei = "cressie")
+```
+
+```{r}
+fitvar4 <- likfit(aquiferg,
+                  coords = aquiferg$coords,
+                  data = aquiferg$data,
+                  trend = "1st",
+                  ini.cov.pars = ini1,
+                  fix.nugget = T,
+                  nugget = 8984.94,
+                  cov.model = "wave",
+                  lik.method = "ML")
+```
+
+```{r}
+fitvar5 <- likfit(aquiferg,
+                  coords = aquiferg$coords,
+                  data = aquiferg$data,
+                  trend = "1st",
+                  ini.cov.pars = ini1,
+                  fix.nugget = T,
+                  nugget = 8984.94,
+                  cov.model = "wave",
+                  lik.method = "REML")
+```
+
+```{r}
+plot(var1$u,var1$v,
+     xlab = "h",
+     ylab = "semivarianza",
+     cex.lab = 1.3,
+     cex.axis = 1.2,
+     main = "Estimación teórica del modelo de semivariograma",
+     col.main = 4, cex.main =1.3)
+lines(fitvar1, col = 1)
+lines(fitvar2, col = 2)
+lines(fitvar3, col = 3)
+lines(fitvar4, col = 4)
+lines(fitvar5, col = 5)
+legend(130, 18000,
+       c("MCO", "MCPnpairs", "MCPcressie", "ML", "REML"),
+       lwd = 2,
+       lty = 2:7,
+       col = 2:7,
+       box.col = 9,
+       text.col = 2:7)
+```
+
+## **Resultados**
+
+```{r}
+#summary(fitvar1)
+#summary(fitvar2)
+#summary(fitvar3)
+#summary(fitvar4)
+#summary(fitvar5)
+```
+
+## **Pulimiento de medianas**
+
+Esta es una alternativa al modelamiento de la media cuando los modelos de regresión polinómicos usuales no logran el objetivo de eliminar la tendencia ya sea porque el tipo de tendencia corresponde mas a unas ventanas móviles o porque hay presentes datos atípicos.
+
+### **Cargar librerias**
+
+Lista de librerías con link a la documentación.
+
+```{r}
+rm(list=ls())
+library(gstat)
+library(sp)
+library(mvtnorm)
+```
+
+-   [gstat](https://cran.r-project.org/web/packages/gstat/gstat.pdf)
+
+-   [sp](https://cran.r-project.org/web/packages/sp/sp.pdf)
+
+### **Grilla de las ubicaciones espaciales.**
+
+```{r}
+n_x <- 4
+n_y <- 6
+x <- seq(0, 1, len = n_x)
+y <- seq(0, 1, len = n_y)
+coordenadas <- as.data.frame(expand.grid(x, y))
+names(coordenadas) <- c("X", "Y")
+```
+
+### **Definición de objeto VGM**
+
+Esto define un objeto vgm que es el tipo de objeto que usa el paquete gstat para los modelos teóricos de variograma. Con este objeto se pueden definir modelos anidados.
+
+-   `vgm`
+
+```{r}
+vario <- vgm(10, # Punto de silla
+             "Exp", # Modelo, ver documentación
+             0.5)  # Rango
+print(vario)
+```
+
+### **Matriz de varianza dadas coordenadas.**
+
+-   `vgmArea`
+
+-   `coordinates`
+
+    ```{r}
+    coordinates(coordenadas) <- ~X + Y
+    #class(coordenadas) # Cambio de objedto dataframe a sp
+    ```
+
+    ```{r}
+    cov_mat <- vgmArea(coordenadas, # Matriz de ubiaciones SP
+            vgm = vario) # VGM object
+
+    print(dim(cov_mat))
+    ```
+
+### **Simulación**
+
+Simulación dada la media y la matriz de varianza
+
+```{r}
+mu  <- rep(0, n_x * n_y) # Media del proceso
+simu <- rmvnorm(1,
+                mean = mu,
+                sigma = cov_mat)
+print(simu[1:5])
+```
+
+### **Pulimiento de medianas**
+
+Unir las coordenadas con la columna de simulación
+
+```{r}
+data <- as.data.frame(cbind(coordenadas@coords,
+                            Simula = t(simu)))
+names(data) <- c("X", "Y", "Var")
+print(head(data))
+```
+
+Reshape para matriz, esto transforma la tabla de datos en matriz
+
+```{r}
+tabla <- reshape2::dcast(data,
+                         X ~ Y,
+                         value.var = "Var")
+rownames(tabla) <- tabla[, 1]
+tabla <- tabla[, c(-1)]
+print(tabla)
+```
+
+Pulimiento de medianas de la tabla
+
+```{r}
+med <- medpolish(tabla)
+```
+
+```{r}
+geo_data <- reshape2::melt(med$residuals)
+print(med)
+```
+
+Reshape de los datos, con efecto de la fila y la columna
+
+```{r}
+tabla_residuales <- as.data.frame(med$residuals)
+names(tabla_residuales) <- med$col
+rownames(tabla_residuales) <- med$row
+geo_data <- reshape2::melt(as.matrix(tabla_residuales))
+
+geo_data <- cbind(data,
+                  geo_data,
+                  med$overall)
+names(geo_data) <- c("X",
+                     "Y",
+                     "Var",
+                     "Efecto fila",
+                     "Efecto columa",
+                     "Residual",
+                     "Efecto Global")
+print(geo_data)
+```
+
+Validación de la descomposición
+
+```{r}
+valida <- cbind(geo_data$Var,
+                geo_data[["Efecto fila"]] +
+                geo_data[["Efecto columa"]] +
+                geo_data[["Residual"]] +
+                geo_data[["Efecto Global"]])
+valida <- as.data.frame(valida)
+names(valida) <- c("datos", "suma")
+print(valida)
 ```

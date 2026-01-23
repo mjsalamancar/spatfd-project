@@ -1,5 +1,4 @@
-## <span style="color: #FF8000;">Introducción</span> {.unnumbered}
- 
+## [Introducción]{style="color: #FF8000;"} {.unnumbered}
 
 En los siguientes cuadernos encontrará ejemplos con código sobre estadística espacial escalar y funcional. Para poder correr todos los ejemplos clone el repositorio de la siguiente forma. Debe tener instalado previamente git en su computador.
 

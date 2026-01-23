@@ -52,12 +52,12 @@ book:
         - text: "<span style='color: #728387 !important;'>CokMexico</span>"
           file: 11.qmd
           
-    - part: 12.qmd
-      text: "Kriging"
-    - part: 13.qmd
-      text: "Cokriging"
-    - part: 14.qmd
-      text: "Diseño Óptimo"   
+    - text: "<span style='color: #FF8000 !important;'>Kriging</span>"
+      file: 12.qmd
+    - text: "<span style='color: #FF8000 !important;'>Cokriging</span>"
+      file: 13.qmd
+    - text: "<span style='color: #FF8000 !important;'>Diseño Óptimo</span>"
+      file: 14.qmd  
     
   
 bibliography: references.bib

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>gfdata – Cuadernos de Estadística Espacial</title>
+<title>9&nbsp; Análisis de datos funcionales (ADF)- Análisis exploratorio – Cuadernos de Estadística Espacial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./9.html" rel="next">
-<link href="./7.html" rel="prev">
+<link href="./7.html" rel="next">
+<link href="./7-Análisis de datos funcionales (ADF) - Análisis gráfico.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -140,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./7.html"><span style="color: #FF8000 !important;">Objetos </span></a></li><li class="breadcrumb-item"><a href="./8.html"><span style="color: #728387 !important;">gfdata </span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5.html"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></a></li><li class="breadcrumb-item"><a href="./9-Análisis_de_datos_funcionales_(ADF) - Análisis exploratorio.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA – Análisis descriptivo</span></span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -253,13 +282,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./5.html" class="sidebar-item-text sidebar-link">
@@ -292,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9-Análisis_de_datos_funcionales_(ADF) - Análisis exploratorio.html" class="sidebar-item-text sidebar-link">
+  <a href="./9-Análisis_de_datos_funcionales_(ADF) - Análisis exploratorio.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA – Análisis descriptivo</span></span></span></a>
   </div>
 </li>
@@ -300,13 +329,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text"><span style="color: #FF8000 !important;">Objetos </span></span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./7.html" class="sidebar-item-text sidebar-link">
@@ -315,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8.html" class="sidebar-item-text sidebar-link active">
+  <a href="./8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">gfdata </span></span></a>
   </div>
 </li>
@@ -429,12 +458,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#gfdata" id="toc-gfdata" class="nav-link active" data-scroll-target="#gfdata"><span style="color:#FF8000;">gfdata</span></a>
+  <li><a href="#datos-funcionales" id="toc-datos-funcionales" class="nav-link active" data-scroll-target="#datos-funcionales">Datos funcionales</a></li>
+  <li><a href="#datos-funcionales-1" id="toc-datos-funcionales-1" class="nav-link" data-scroll-target="#datos-funcionales-1"><span class="header-section-number">9.1</span> <strong>Datos funcionales</strong></a>
   <ul class="collapse">
-  <li><a href="#descripción" id="toc-descripción" class="nav-link" data-scroll-target="#descripción">Descripción</a></li>
-  <li><a href="#argumentos" id="toc-argumentos" class="nav-link" data-scroll-target="#argumentos"><strong>Argumentos</strong></a></li>
-  <li><a href="#detalles" id="toc-detalles" class="nav-link" data-scroll-target="#detalles">Detalles</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><strong>Summary</strong></a></li>
+  <li><a href="#descripción" id="toc-descripción" class="nav-link" data-scroll-target="#descripción"><span class="header-section-number">9.1.1</span> <strong>Descripción</strong></a></li>
+  <li><a href="#suavizamiento-de-curvas" id="toc-suavizamiento-de-curvas" class="nav-link" data-scroll-target="#suavizamiento-de-curvas"><span class="header-section-number">9.1.2</span> <strong>Suavizamiento de curvas</strong></a></li>
+  <li><a href="#estadística-descriptiva" id="toc-estadística-descriptiva" class="nav-link" data-scroll-target="#estadística-descriptiva"><span class="header-section-number">9.1.3</span> <strong>Estadística descriptiva</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -442,9 +471,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./7.html"><span style="color: #FF8000 !important;">Objetos </span></a></li><li class="breadcrumb-item"><a href="./8.html"><span style="color: #728387 !important;">gfdata </span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5.html"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></a></li><li class="breadcrumb-item"><a href="./9-Análisis_de_datos_funcionales_(ADF) - Análisis exploratorio.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA – Análisis descriptivo</span></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">gfdata</h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análisis de datos funcionales (ADF)- Análisis exploratorio</span></h1>
 </div>
 
 
@@ -461,55 +490,167 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="gfdata" class="level1">
-<h1><span style="color:#FF8000;">gfdata</span></h1>
-<section id="descripción" class="level2">
-<h2 class="anchored" data-anchor-id="descripción">Descripción</h2>
-<p>Los objetos de clase&nbsp;<code>gfdata</code>&nbsp;son una extensión de los objetos SpatFD para&nbsp;<strong>mediciones repetidas</strong>, combinan coordenadas espaciales con funciones o series temporales observadas en cada ubicación espacial. Aunque el término “serie temporal” es genérico, las observaciones también pueden estar distribuidas según la frecuencia, profundidad u otra dimensión espacial, en lugar de tiempo.</p>
+<section id="datos-funcionales" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="datos-funcionales">Datos funcionales</h2>
 </section>
-<section id="argumentos" class="level2">
-<h2 class="anchored" data-anchor-id="argumentos"><strong>Argumentos</strong></h2>
-<ul>
-<li><p><strong>data</strong>: Matriz que contiene los datos, donde cada columna corresponde a un sujeto, y las filas representan una secuencia de puntos de datos (ordenados según el tiempo, frecuencia, profundidad, etc.). La última columna debe incluir las clases para clasificación.</p></li>
-<li><p><strong>p</strong>: Número de repeticiones para cada clase.</p></li>
-<li><p><strong>basis</strong>: Tipo de funciones base a utilizar. Puede ser “Fourier” o “Bsplines” (predeterminado es “Bsplines”).</p></li>
-<li><p><strong>coords</strong>: Matriz con las coordenadas espaciales (x, y).</p></li>
-<li><p><strong>nbasis</strong>: Número de funciones base.</p></li>
-<li><p><strong>names</strong>: Nombres de las clases de datos.</p></li>
-<li><p><strong>lambda</strong>: Valor del parámetro de suavizado.</p></li>
-</ul>
-</section>
-<section id="detalles" class="level2">
-<h2 class="anchored" data-anchor-id="detalles">Detalles</h2>
-<p>Los objetos de clase&nbsp;<code>gfdata</code>&nbsp;almacenan los datos funcionales, sus parámetros, los resultados del análisis de componentes principales funcionales (PCA funcional), y las coordenadas espaciales para cada variable. Cada variable tiene su propio conjunto de datos funcionales,&nbsp;<code>data.frame</code>&nbsp;o matriz, y su correspondiente archivo de coordenadas espaciales.</p>
+<section id="datos-funcionales-1" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="datos-funcionales-1"><span class="header-section-number">9.1</span> <strong>Datos funcionales</strong></h2>
+<section id="descripción" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="descripción"><span class="header-section-number">9.1.1</span> <strong>Descripción</strong></h3>
+<p>Los desarrollos tecnólogicos han hecho posible que los investigadores de muchas áreas dispongan de grandes volúmenes de información para un mismo individuo. Usualmente éstos datos pueden ser representados a través de curvas o en general de funciones.</p>
+<p>En el ADF la unidad básica de información es la función completa, más que un conjunto de valores (Ramsay and Dalzell, 1991), es decir, que un dato funcional se puede establecer como la extensión de medidas repetidas cuando la cantidad de mediciones <span class="math inline">\((M)\)</span> en un determinado individuo es muy grande.</p>
+<p>Ferraty and Vieu (2006) definen una variable aleatoria funcional <span class="math inline">\(\chi\)</span> como una variable aleatoria que toma valores en un espacio de funciones, es decir, un espacio infinito dimensional (espacio funcional). Una observación <span class="math inline">\(x\)</span> de la variable aleatoria <span class="math inline">\(\chi\)</span> se denomina dato funcional.</p>
+<p>Un conjunto de datos funcionales <span class="math inline">\(x_1,x_2,...,x_n\)</span> es la observación <span class="math inline">\(n\)</span> variables funcionales distribuidas como <span class="math inline">\(\chi\)</span>. Un dato funcional <span class="math inline">\(x_i(t), t \in T=[a,b] \subset R\)</span>, es representado usualmente como un conjunto finito de pares <span class="math inline">\((t_j, x_{ij})\)</span> con <span class="math inline">\(t_j \in T, j=1,2,...,M\)</span>, dónde <span class="math inline">\(M\)</span> representa la cantidad de puntos de los cuales es obserbada la variable de interés y <span class="math inline">\(y_{ij}= \chi_i(t_j)\)</span> (si o existe error observacional ) o <span class="math inline">\(y_{ij} = \chi_i(t_j) + \varepsilon_j\)</span> (en caso contrario).</p>
+<p>Por eje,plo, consideremos la temperatura promedio mensual de la superficie del óceano en grados Celsius registrada desde Enero 1982 a abril de 2022, disponible en: <a href="https://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices" class="uri">https://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices</a>.</p>
+<p>Realizamos la lectura de los datos:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SpatFD)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(vowels)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir parámetros y nombres para los datos</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="dv">228</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>nelec <span class="ot">=</span> <span class="dv">21</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>nvow <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>names_vowels <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span>, <span class="st">"o"</span>, <span class="st">"u"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>n.basis <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">11</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el objeto gfdata</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>s4.gfdata <span class="ot">=</span> <span class="fu">gfdata</span>(<span class="at">data =</span> vowels, <span class="at">p =</span> p, <span class="at">names =</span> names_vowels, <span class="at">coords =</span> vowels_coords, <span class="at">nbasis =</span> n.basis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fda.usc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rainbow)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xtable)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:/Users/jpari/Dropbox/FDA"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Datos <span class="ot">=</span><span class="fu">read.delim2</span>(<span class="st">"sstoi.indices1.txt"</span>,<span class="at">header=</span>T,<span class="at">dec=</span><span class="st">"."</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Datos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Reorganizamos la información para que cada año sea una curva. No tenemos en cuenta el año 2022 por no disponer de la información de todo el año.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">matrix</span>(Datos<span class="sc">$</span>NINO1<span class="fl">.2</span>[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">481</span><span class="sc">:</span><span class="dv">484</span>)], <span class="at">nrow=</span><span class="dv">12</span>, <span class="dv">40</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(temp)<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1982</span><span class="sc">:</span><span class="dv">2021</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Construimos las gráficas para cada año</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>month<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(month, temp[,<span class="dv">1</span>], <span class="at">type=</span><span class="st">"b"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">30</span>), <span class="at">xlab=</span><span class="st">"Mes"</span>, <span class="at">ylab=</span><span class="st">"temperatura"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(temp))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(month, temp[,i], <span class="at">type=</span><span class="st">"b"</span>, <span class="at">col=</span>i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary"><strong>Summary</strong></h2>
-<p>Para cada variable incluida en el objeto <code>gfdata</code>, esta función devuelve:</p>
-<ul>
-<li><p><strong>Head of data</strong>: Muestra las primeras filas de los datos funcionales.</p></li>
-<li><p><strong>Coordinates</strong>: Muestra las coordenadas espaciales asociadas a las observaciones.</p></li>
-<li><p><strong>Eigenvalues</strong>: Valores propios obtenidos del análisis de componentes principales.</p></li>
-<li><p><strong>Mean coefficients</strong>: Coeficientes medios de las funciones base.</p></li>
-<li><p><strong>Proportion of explained variance by each component</strong>: Proporción de la varianza explicada por cada componente principal.</p></li>
-</ul>
+<section id="suavizamiento-de-curvas" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="suavizamiento-de-curvas"><span class="header-section-number">9.1.2</span> <strong>Suavizamiento de curvas</strong></h3>
+<p>Una herramienta no paramétrica de mucha utilidad en el ADF es el suavizado de curvas a través de funciones. El procedimiento consiste en aproximar las funciones del espacio considerado a través de (Ramsay and Silverman, 2005):</p>
+<p><span class="math display">\[
+\chi(t) = \sum_{l=1}^K c_lB_l(t) = c'B(t)
+\]</span></p>
+<p>donde K es el número de funciones de la base.</p>
+<p>En la literatura exisste varias funciones base que permiten desarrollar la expansión. La selección del tipo de funciones de la base depende de las caracteríticas que cumpla que fenómeno de estudio. Por ejemplo, las series de Fourier se utilizan para funciones con comportamientos cíclicos o periódicos y las bases monomiales se utilizan cuando existen tendencias simples que pueden ser ajustadas mediante líneas rectas, polinomios cuadráticos, polinomios de orden superior, etc. Las bases más usuales son aquellas basadas en splines debido a que son más flexibles y se ajustan de mejor manera a diferentes comportamientos. Dentro de estas se encuentran B-splines, M-splines, I-splines, y fucniones de potencia truncadas.</p>
+<section id="bases-monomiales" class="level4" data-number="9.1.2.1">
+<h4 data-number="9.1.2.1" class="anchored" data-anchor-id="bases-monomiales"><span class="header-section-number">9.1.2.1</span> <strong>Bases monomiales</strong></h4>
+<p>Las bases monomiales requieren el dominio y el número de base. Por ejemplo, la base monomial con K=6 funciones de base definidas en el intervalo [0,1] se puede construir con:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#summary.gfdata(s4.gfdata)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fda)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>bbasis_obj <span class="ot">=</span> <span class="fu">create.monomial.basis</span>(<span class="at">rangeval=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">nbasis =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esto devolverá una salida de “funciones”. Para evaluar las bases en una cuadrícula de puntos <span class="math inline">\(s\)</span>, debemos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fda)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">length.out=</span><span class="dv">100</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>bbasisevals <span class="ot">&lt;-</span> <span class="fu">eval.basis</span>(x, bbasis_obj)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(basisevals)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(x, bbasisevals, <span class="at">type=</span><span class="st">'l'</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="fu">rainbow</span>(<span class="dv">6</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="st">"bases"</span>, </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"base monomial con k = 6"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="bases-de-fourier" class="level4" data-number="9.1.2.2">
+<h4 data-number="9.1.2.2" class="anchored" data-anchor-id="bases-de-fourier"><span class="header-section-number">9.1.2.2</span> <strong>Bases de Fourier</strong></h4>
+<p>Para utilizarlas bases de Fourier se requiere que se defina el dominio, el período de oscilación y el número de funciones de base.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fbasis_obj <span class="ot">&lt;-</span> <span class="fu">create.fourier.basis</span>(<span class="at">rangeval=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">nbasis=</span><span class="dv">65</span>, <span class="at">period =</span> <span class="dv">1</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>fbasisevals <span class="ot">&lt;-</span> <span class="fu">eval.basis</span>(x, fbasis_obj)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(x, fbasisevals[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">type=</span><span class="st">'l'</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="fu">rainbow</span>(<span class="dv">3</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="st">"bases"</span>, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Primeras tres bases de Fourier"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="b-splines" class="level4" data-number="9.1.2.3">
+<h4 data-number="9.1.2.3" class="anchored" data-anchor-id="b-splines"><span class="header-section-number">9.1.2.3</span> <strong>B-splines</strong></h4>
+<p>Las bases B-spline requieren el dominio, el número de funciones de la base y el orden.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bsbasis_obj <span class="ot">&lt;-</span> <span class="fu">create.bspline.basis</span>(<span class="at">rangeval=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">nbasis=</span><span class="dv">10</span>, <span class="at">norder=</span><span class="dv">4</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>bsbasisevals <span class="ot">&lt;-</span> <span class="fu">eval.basis</span>(x, bsbasis_obj)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(x, bsbasisevals, <span class="at">type=</span><span class="st">'l'</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="fu">rainbow</span>(<span class="dv">15</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="st">"bases"</span>, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"B-spline cubica con K = 10"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="otras-bases" class="level4" data-number="9.1.2.4">
+<h4 data-number="9.1.2.4" class="anchored" data-anchor-id="otras-bases"><span class="header-section-number">9.1.2.4</span> <strong>Otras bases</strong></h4>
+<p>El paquete también se puede usar para construir otros tipos de bases. Para revisar la lista de bases disponibles se puede utilizar $ ?create. + tab$</p>
+</section>
+<section id="suavizamiento-de-la-temperatura" class="level4" data-number="9.1.2.5">
+<h4 data-number="9.1.2.5" class="anchored" data-anchor-id="suavizamiento-de-la-temperatura"><span class="header-section-number">9.1.2.5</span> <strong>Suavizamiento de la temperatura</strong></h4>
+<p>La temperatura es una variable que se puede tomar en intervalos más pequeños (diaria, cada hora, etc). Es decir, al realizar la gráfica anterior estamos suponiendo que podemos discretizar la variable de temperatura a través de la medición mensual.La primera tarea es convertir estos valores discretos en una función que puede tomar valores en cualquier valor de argumento deseado <span class="math inline">\(x_i(t)\)</span> Si se supone que estas observaciones no presentan un término de error asociado, el proceso de generación de la función (curva) será un proceso de interpolación, pero si tienen algún error observacional que necesita modelarse, entonces la conversión de datos (finitos) a funciones (que teóricamente se pueden evaluar en un número infinito de puntos) se enmarca en los procesos de suavizamiento.</p>
+<p>En consecuencia, requerimos una estrategia para construir funciones con parámetros que sean fáciles de estimar y que puedan ajustarse casi a cualquier característica de la curva. Por otro lado, no queremos usar más parámetros de los que necesitamos, ya que hacerlo aumentaría en gran medida el tiempo de cálculo y complicar los análisis. Para el caso de la temperatura se utiliza una B-spline de orden 4.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>BSpl <span class="ot">&lt;-</span> <span class="fu">create.bspline.basis</span>(<span class="at">norder=</span><span class="dv">4</span>, <span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">12</span>,<span class="at">length=</span><span class="dv">5</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(BSpl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Ftemp <span class="ot">&lt;-</span> <span class="fu">Data2fd</span>(temp, <span class="at">basisobj=</span>BSpl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ftemp, <span class="at">main=</span><span class="st">"Datos suavizados de la Temperatura"</span>, <span class="at">xlab =</span> <span class="st">"Mes"</span>, <span class="at">ylab =</span> <span class="st">"Temperatura oC"</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">18</span>,<span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En el proceso de suavizamiento es necesario tener en cuenta la rugosidad como un aspecto fundamental. El método utilizado para aproximar funciones mediante una base de funciones B-splines se basa en minimizar el sistema:</p>
+<p><span class="math display">\[
+GCV = \min_{c} \sum_{j=1}^{M} (y_{j} - S(t_{j}))^{2} + \lambda \int_{t} (S''(t)dt)
+\]</span></p>
+<p>con <span class="math inline">\(\lambda\)</span> un parámetro de penalización para disminuir la variabilidad del ajuste. El número de funciones base (K) y el coeficiente <span class="math inline">\(\lambda\)</span> son estimados a través de procedimientos de validación cruzada (Ramsay and Silverman, 2005). Con el siguiente programa se puede establecer la estimación del parámetro de suavizamiento óptimo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>loglam <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="fl">0.05</span>,<span class="fl">0.001</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>nlam <span class="ot">=</span> <span class="fu">length</span>(loglam)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dfsave <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>,nlam)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>gcvsave <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>,nlam)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (ilam <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nlam) {</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">=</span> loglam[ilam]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>fdParobj <span class="ot">=</span> <span class="fu">fdPar</span>(BSpl, <span class="at">Lfdobj=</span><span class="cn">NULL</span>, <span class="at">lambda=</span> lambda)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>smoothlist <span class="ot">=</span> <span class="fu">smooth.basis</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, temp, fdParobj)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>dfsave[ilam] <span class="ot">=</span> smoothlist<span class="sc">$</span>df</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>gcvsave[ilam] <span class="ot">=</span> <span class="fu">sum</span>(smoothlist<span class="sc">$</span>gcv)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(loglam,gcvsave,<span class="at">xlab=</span><span class="fu">expression</span>(lambda),<span class="at">ylab=</span><span class="fu">expression</span>(<span class="fu">GCV</span>(lambda)),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="at">main=</span><span class="st">"Parámetros de suavizamiento versus GCV"</span>,<span class="at">type=</span><span class="st">"b"</span>,<span class="at">cex=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Tomando como referencia los 40 añoos reportados (de 1982 a 2021) en la base de datos de interés, se evidencia que el punto que minimiza la estadística GCV se encuentra alrededor de <span class="math inline">\(\nu=0.017\)</span> con valores muy superiores antes de 0.01 y después de 0.04. Se destaca que dicho parámetro minimiza la suma del criterio GCV de todas las 40 curvas que se encuentran dentro de la muestra, es decir, el valor de dicho parámetro resulta ser el óptimo en relación con el proceso de suavizamiento de todas las curvas dentro de la muestra.</p>
+</section>
+</section>
+<section id="estadística-descriptiva" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="estadística-descriptiva"><span class="header-section-number">9.1.3</span> <strong>Estadística descriptiva</strong></h3>
+<p>Dado un conjunto de datos funcionales <span class="math inline">\(x_1,x_2,...,x_n\)</span> definicos en <span class="math inline">\(t \subset T \in R\)</span>, las correspondientes funciones descriptivas están dadas por las expresiones (Ramsay and silverman, 2005):</p>
+<p><span class="math display">\[
+Media: \quad  \bar{\chi}(t) = \frac{\sum_{i=1}^{n} \chi_{i}(t)}{n}
+\]</span></p>
+<p><span class="math display">\[
+Varianza: \quad \bar{\chi}(t) = \frac{\sum_{i=1}^{n} \chi_{i}(t)}{n}
+\]</span></p>
+<p><span class="math display">\[
+Desviación \ estándar : \quad \sigma(\chi(t)) = \sqrt{var(\chi(t))}
+\]</span></p>
+<p>Así, se puede concluir que las estadísticas descriptivas univariadas clásicas se aplican igualmente cuando se tienen datos funcionales. Sin embargo se resalta que en este caso, los objetos calculados corresponden a curvas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>meanfdh <span class="ot">&lt;-</span> <span class="fu">mean.fd</span>(Ftemp)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>varfdh <span class="ot">&lt;-</span><span class="fu">var.fd</span>(Ftemp)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>stdvfdh <span class="ot">&lt;-</span> <span class="fu">stddev.fd</span>(Ftemp)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ftemp,<span class="at">col=</span><span class="dv">8</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"Mes"</span>, <span class="at">ylab =</span> <span class="st">"Temperatura oC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(meanfdh,<span class="at">col=</span><span class="dv">2</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(varfdh, <span class="at">main=</span><span class="st">" Superficie de varianza"</span>, <span class="at">xlab =</span> <span class="st">"t"</span>, <span class="at">ylab =</span> <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(varfdh, <span class="at">main=</span><span class="st">" Superficie de varianza"</span>, <span class="at">xlab =</span> <span class="st">"t"</span>, <span class="at">ylab =</span> <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -936,13 +1077,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./7.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>SpatFD</span>">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span style="color: #728387 !important;">SpatFD</span></span>
+      <a href="./7-Análisis de datos funcionales (ADF) - Análisis gráfico.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>FDA-Regresión escalar</span>">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA-Regresión escalar</span></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./9.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>AirQualityBogota</span>">
-        <span class="nav-page-text"><span style="color: #728387 !important;">AirQualityBogota</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./7.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>SpatFD</span>">
+        <span class="nav-page-text"><span style="color: #728387 !important;">SpatFD</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

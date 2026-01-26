@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jeimy Paola Aristizabal R.">
+<meta name="author" content="Martha Patricia Bohorquez C.">
+<meta name="dcterms.date" content="2026-01-26">
 
-<title>gfdata – Cuadernos de Estadística Espacial</title>
+<title>6&nbsp; Análisis de datos funcionales (ADF) - Modelos de regresión – Cuadernos de Estadística Espacial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -64,8 +33,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./9.html" rel="next">
-<link href="./7.html" rel="prev">
+<link href="./6-Análisis_de_datos_funcionales (ADF) - Modelos de regresión (Parte 2).html" rel="next">
+<link href="./6.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,6 +72,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -140,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./7.html"><span style="color: #FF8000 !important;">Objetos </span></a></li><li class="breadcrumb-item"><a href="./8.html"><span style="color: #728387 !important;">gfdata </span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5.html"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></a></li><li class="breadcrumb-item"><a href="./5-Análisis_de_datos_funcionales (ADF) - Modelos de regresión.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA-Regresión funcional</span></span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -253,13 +251,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./5.html" class="sidebar-item-text sidebar-link">
@@ -274,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5-Análisis_de_datos_funcionales (ADF) - Modelos de regresión.html" class="sidebar-item-text sidebar-link">
+  <a href="./5-Análisis_de_datos_funcionales (ADF) - Modelos de regresión.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA-Regresión funcional</span></span></span></a>
   </div>
 </li>
@@ -300,13 +298,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text"><span style="color: #FF8000 !important;">Objetos </span></span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./7.html" class="sidebar-item-text sidebar-link">
@@ -315,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8.html" class="sidebar-item-text sidebar-link active">
+  <a href="./8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">gfdata </span></span></a>
   </div>
 </li>
@@ -429,12 +427,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#gfdata" id="toc-gfdata" class="nav-link active" data-scroll-target="#gfdata"><span style="color:#FF8000;">gfdata</span></a>
+  <li><a href="#modelos-lineales-funcionales-regresión-funcional" id="toc-modelos-lineales-funcionales-regresión-funcional" class="nav-link active" data-scroll-target="#modelos-lineales-funcionales-regresión-funcional">Modelos lineales funcionales (Regresión Funcional)</a>
   <ul class="collapse">
-  <li><a href="#descripción" id="toc-descripción" class="nav-link" data-scroll-target="#descripción">Descripción</a></li>
-  <li><a href="#argumentos" id="toc-argumentos" class="nav-link" data-scroll-target="#argumentos"><strong>Argumentos</strong></a></li>
-  <li><a href="#detalles" id="toc-detalles" class="nav-link" data-scroll-target="#detalles">Detalles</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><strong>Summary</strong></a></li>
+  <li><a href="#regresión-lineal-funcional-con-respuesta-funcional-anova-funcional" id="toc-regresión-lineal-funcional-con-respuesta-funcional-anova-funcional" class="nav-link" data-scroll-target="#regresión-lineal-funcional-con-respuesta-funcional-anova-funcional"><span class="header-section-number">6.1</span> Regresión lineal funcional con respuesta funcional (ANOVA Funcional)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -442,16 +437,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./7.html"><span style="color: #FF8000 !important;">Objetos </span></a></li><li class="breadcrumb-item"><a href="./8.html"><span style="color: #728387 !important;">gfdata </span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5.html"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></a></li><li class="breadcrumb-item"><a href="./5-Análisis_de_datos_funcionales (ADF) - Modelos de regresión.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA-Regresión funcional</span></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">gfdata</h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análisis de datos funcionales (ADF) - Modelos de regresión</span></h1>
+<p class="subtitle lead">Curso de Estadística Espacial</p>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Jeimy Paola Aristizabal R. </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Universidad Nacional de Colombia - Sede Bogotá
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Martha Patricia Bohorquez C. </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 26, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -461,56 +481,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="gfdata" class="level1">
-<h1><span style="color:#FF8000;">gfdata</span></h1>
-<section id="descripción" class="level2">
-<h2 class="anchored" data-anchor-id="descripción">Descripción</h2>
-<p>Los objetos de clase&nbsp;<code>gfdata</code>&nbsp;son una extensión de los objetos SpatFD para&nbsp;<strong>mediciones repetidas</strong>, combinan coordenadas espaciales con funciones o series temporales observadas en cada ubicación espacial. Aunque el término “serie temporal” es genérico, las observaciones también pueden estar distribuidas según la frecuencia, profundidad u otra dimensión espacial, en lugar de tiempo.</p>
-</section>
-<section id="argumentos" class="level2">
-<h2 class="anchored" data-anchor-id="argumentos"><strong>Argumentos</strong></h2>
-<ul>
-<li><p><strong>data</strong>: Matriz que contiene los datos, donde cada columna corresponde a un sujeto, y las filas representan una secuencia de puntos de datos (ordenados según el tiempo, frecuencia, profundidad, etc.). La última columna debe incluir las clases para clasificación.</p></li>
-<li><p><strong>p</strong>: Número de repeticiones para cada clase.</p></li>
-<li><p><strong>basis</strong>: Tipo de funciones base a utilizar. Puede ser “Fourier” o “Bsplines” (predeterminado es “Bsplines”).</p></li>
-<li><p><strong>coords</strong>: Matriz con las coordenadas espaciales (x, y).</p></li>
-<li><p><strong>nbasis</strong>: Número de funciones base.</p></li>
-<li><p><strong>names</strong>: Nombres de las clases de datos.</p></li>
-<li><p><strong>lambda</strong>: Valor del parámetro de suavizado.</p></li>
-</ul>
-</section>
-<section id="detalles" class="level2">
-<h2 class="anchored" data-anchor-id="detalles">Detalles</h2>
-<p>Los objetos de clase&nbsp;<code>gfdata</code>&nbsp;almacenan los datos funcionales, sus parámetros, los resultados del análisis de componentes principales funcionales (PCA funcional), y las coordenadas espaciales para cada variable. Cada variable tiene su propio conjunto de datos funcionales,&nbsp;<code>data.frame</code>&nbsp;o matriz, y su correspondiente archivo de coordenadas espaciales.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SpatFD)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(vowels)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir parámetros y nombres para los datos</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="dv">228</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>nelec <span class="ot">=</span> <span class="dv">21</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>nvow <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>names_vowels <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span>, <span class="st">"o"</span>, <span class="st">"u"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>n.basis <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">11</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el objeto gfdata</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>s4.gfdata <span class="ot">=</span> <span class="fu">gfdata</span>(<span class="at">data =</span> vowels, <span class="at">p =</span> p, <span class="at">names =</span> names_vowels, <span class="at">coords =</span> vowels_coords, <span class="at">nbasis =</span> n.basis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary"><strong>Summary</strong></h2>
-<p>Para cada variable incluida en el objeto <code>gfdata</code>, esta función devuelve:</p>
-<ul>
-<li><p><strong>Head of data</strong>: Muestra las primeras filas de los datos funcionales.</p></li>
-<li><p><strong>Coordinates</strong>: Muestra las coordenadas espaciales asociadas a las observaciones.</p></li>
-<li><p><strong>Eigenvalues</strong>: Valores propios obtenidos del análisis de componentes principales.</p></li>
-<li><p><strong>Mean coefficients</strong>: Coeficientes medios de las funciones base.</p></li>
-<li><p><strong>Proportion of explained variance by each component</strong>: Proporción de la varianza explicada por cada componente principal.</p></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#summary.gfdata(s4.gfdata)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="modelos-lineales-funcionales-regresión-funcional" class="level1 unnumbered">
+<h1 class="unnumbered">Modelos lineales funcionales (Regresión Funcional)</h1>
+<p>Para explicar la variabilidad de una determinada variable con respecto a otras explicativas, consideradas como covariables, el análisis de varianza y la regresión lineal son los procedimientos que generalmente se utilizan. En este sentido el modelo de regresión funcional es la extensión natural del modelo de regresión usual al caso en el cual se cuenta con una variable respuesta funcional o con covariables funcionales (Aristizabal, 2011).</p>
+<section id="regresión-lineal-funcional-con-respuesta-funcional-anova-funcional" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="regresión-lineal-funcional-con-respuesta-funcional-anova-funcional"><span class="header-section-number">6.1</span> Regresión lineal funcional con respuesta funcional (ANOVA Funcional)</h2>
+<p>En términos formales (Ramsay &amp; Silverman, 2005) se asume que se cuenta con <span class="math inline">\(\mathbf{G}\)</span> “tratamientos” cada uno con un número <span class="math inline">\(\mathbf{N_g}\)</span> de sujetos.<br>
+El modelo para la <span class="math inline">\(m\)</span> -ésima función (curva) en el g-ésimo grupo (<span class="math inline">\((y_{mg}(t))\)</span>, esta dada por:</p>
+<p><span class="math display">\[
+y_{mg} = \mu(t) + \alpha_g(t) + \varepsilon_{mg}(t)
+\]</span></p>
+<p>dónde la función <span class="math inline">\(\mu\)</span> es la media general, <span class="math inline">\(\alpha_g\)</span> representa la función media para cada “tratamiento” y <span class="math inline">\(\varepsilon_{mg}\)</span> es la función de error en cada caso.</p>
+<p>La tarea entonces, es establecer la matriz de diseño para lograr estimar los parámetros funcionales <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\alpha_g\)</span>, bajo la condición de que <span class="math inline">\(\sum_g \alpha_g(t)=0\)</span> para todo <span class="math inline">\(t\)</span> con el fin de <mark style="background-color:#bbff00; color: #856404; padding: 0 4px;">garantizar la estimabilidad</mark> de los mismos.</p>
+<p>En términos matriciales el modelo queda determinado como:</p>
+<p>$$</p>
+<p>y_{mg}(t) =</p>
 
 
 </section>
@@ -936,13 +921,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./7.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>SpatFD</span>">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span style="color: #728387 !important;">SpatFD</span></span>
+      <a href="./6.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>Paquete </span>">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span style="color: #728387 !important;">Paquete </span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./9.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>AirQualityBogota</span>">
-        <span class="nav-page-text"><span style="color: #728387 !important;">AirQualityBogota</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./6-Análisis_de_datos_funcionales (ADF) - Modelos de regresión (Parte 2).html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>FDA-Regresión escalar</span>">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA-Regresión escalar</span></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

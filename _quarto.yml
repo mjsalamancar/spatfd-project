@@ -25,7 +25,7 @@ book:
         - text: "<span style='color: #728387 !important;'>Estadística descriptiva y Exploratoria</span>"
           file: 1.qmd
         - text: "<span style='color: #728387 !important;'>Pruebas de bondad de ajuste</span>"
-          file: 2-Pruebas de Bondad de ajuste.qmd
+          file: 2-Pruebas_de_Bondad_de_ajuste.qmd
        
     - part: "<span style='color: #FF8000 !important;'>Geoestadística </span>"
       chapters:
@@ -36,9 +36,9 @@ book:
         - text: "<span style='color: #728387 !important;'>Kriging</span>"
           file: 3.qmd
         - text: "<span style='color: #728387 !important;'>Proceso espacial gaussiano bivariado</span>"
-          file: 8-Introduccion proceso espacial bivariado.qmd 
+          file: 8-Introduccion_proceso_espacial_bivariado.qmd 
         - text: "<span style='color: #728387 !important;'>Ozono México</span>"
-          file: 13-Gstats datos de méxico.qmd           
+          file: 13-Gstats_datos_de_méxico.qmd           
           
           
           
@@ -49,7 +49,7 @@ book:
         - text: "<span style='color: #728387 !important;'>Redes </span>"
           file: 3-redes.qmd
         - text: "<span style='color: #728387 !important;'>Encuesta Bogotá Multipropósito </span>"
-          file: 14-Encuesta Multipropoosito.qmd          
+          file: 14-Encuesta_Multipropoosito.qmd          
           
     
     - part: "<span style='color: #FF8000 !important;'>Estadística Espacial Funcional</span>"
@@ -59,13 +59,13 @@ book:
         - text: "<span style='color: #728387 !important;'>Paquete </span>"
           file: 6.qmd
         - text: "<span style='color: #728387 !important;'>FDA-Regresión funcional</span>"
-          file: 5-Análisis de datos funcionales (ADF) - Modelos de regresión.qmd
+          file: 5-Análisis_de_datos_funcionales (ADF) - Modelos de regresión.qmd
         - text: "<span style='color: #728387 !important;'>FDA-Regresión escalar</span>"
-          file: 6-Análisis de datos funcionales (ADF) - Modelos de regresión (Parte 2).qmd   
+          file: 6-Análisis_de_datos_funcionales (ADF) - Modelos de regresión (Parte 2).qmd   
         - text: "<span style='color: #728387 !important;'>FDA-Regresión escalar</span>"
           file: 7-Análisis de datos funcionales (ADF) - Análisis gráfico.qmd   
         - text: "<span style='color: #728387 !important;'>FDA – Análisis descriptivo</span>"
-          file: 9-Análisis de datos funcionales (ADF) - Análisis exploratorio.qmd        
+          file: 9-Análisis_de_datos_funcionales_(ADF) - Análisis exploratorio.qmd        
             
           
     
@@ -94,7 +94,7 @@ book:
         - text: "Teoría de Kriging"
           file: 12.qmd
         - text: "Ilustración del Kriging Simple"
-          file: 10-Ilustración del kriging simple espacio tiempo.qmd      
+          file: 10-Ilustración_del_kriging_simple_espacio_tiempo.qmd      
       
       
     - part: "<span style='color: #FF8000 !important;'>Cokriging</span>"
@@ -109,7 +109,7 @@ book:
         - text: "Diseño Óptimo"
           file: 14.qmd
         - text: "Pulimiento de Medianas"
-          file: 12-Pulimiento de medianas.qmd
+          file: 12-Pulimiento_de_medianas.qmd
     
   
 bibliography: references.bib

@@ -1,0 +1,198 @@
+---
+title: "Análisis de datos funcionales (ADF) - Modelos de regresión"
+subtitle: "Curso de Estadística Espacial"
+author: 
+  - "Jeimy Paola Aristizabal R."
+  - "Martha Patricia Bohorquez C."
+institute: "Universidad Nacional de Colombia - Sede Bogotá"
+date: last-modified
+---
+## Modelos lineales{.unnumbered}
+
+
+# Modelos lineales
+
+Un modelo lineal permite establecer la relación entre una variable respuesta y unao o varias covariables. La extensión al caso funcional se presenta cuando existe por lo menos una variable (respuesta o explicativa) funcional en dicho modelo. Así el modelo de regresión funcional es la extensión natural del modelo de regresión usual al caso en el cual se cuentra con una variable respuesta funcional y/o con covariables funcionales (Aristizabal 2011)
+
+## Regresión Lineal funcional con respuesta escalar
+
+La función `fRegress` realiza un análisis de regresión funcional, donde la variable dependiente o una o más variables independientes son funcionales. Las variables no funcionales se pueden utilizar en cualquier lado de la ecuación. En un problema simple donde hay una sola covariable escalar independiente con valores $z_i$ con $i=1,2,...n$ y una sola covariable funcional con valores $x_i(t)$, el modelo establecido es:
+
+$$
+y_i = \beta_1z_i + \int x_i(t)\beta_2(t)dt + e_i
+$$ A través de esta función también es posible llevar a cabo la estimación de los parámetros del modelo concurrente con la variable dependiente funcional dado por:
+
+$$
+y_i = \beta_1 z_i + \beta_2(t)x_i(t) +e_i(t)
+$$ Los parámetos $e_i$ y $e_i(t)$son los residuales modelo (falta de ajuste o término error). Observe que, en el modelo lineal funcional concurrente para una variable dependiente funcional, todas las variables funcionales se evalúan en un tiempo común o valor de argumento $t$. Es decir, el ajuste se define en términos del comportamiento de todas las variables en un momento fijo, o en términos del comportamiento del “ahora”.
+
+Todas las funciones de coeficientes $\beta_j(t)$ son consideradas objetos funcionales. En el caso de una variable dependiente escalar, el coeficiente de regresión para una covariable escalar es convertido a una variable funcional con una base de constantes. Todas las funciones de coeficientes de regresión se pueden forzar para que sean uniformes mediante el uso de penalizaciones por aspereza o rugosidad y, en consecuencia, se especifican en la lista de argumentos como objetos de los parámetros funcionales.
+
+En esta sección vamos a predecir el logaritmo de la precipitación anual para 35 estaciones meteorológicas canadienses a partir de sus perfiles de temperatura. Se utiliza como variable predictora el perfil de temperatura completo y un intercepto constante. Estas dos covariables se pueden almacenar en una lista de longitud 2. Así, configuramos un objeto de datos funcional para la temperatura con 35 perfiles en un objeto llamado tempfd. Asmismo, utilizamos 65 funciones de una base de Fourier sin penalización. Este número de funciones de base es adecuado para la mayoría de los propósitos y puede, por ejemplo, capturar la ondulaciones observadas a principios de la primavera en muchas estaciones meteorológicas (Ramsay & Silverman, 2005).
+
+```{r}
+#| warning: false
+library(fda)
+library(fda.usc)
+library(rainbow)
+library(MASS)
+library(xtable)
+annualprec = log10(apply(daily$precav,2,sum))
+tempbasis =create.fourier.basis(c(0,365),65)
+tempSmooth=smooth.basis(day.5,daily$tempav,tempbasis)
+tempfd =tempSmooth$fd
+templist = vector("list",2)
+templist[[1]] = rep(1,35)
+templist[[2]] = tempfd
+```
+
+La estrategia más simple para estimar los parámetros funionales es mantener una dimensionalidad en el proceso de suavizamiento relativamente pequeño. Para este caso, trabajaremos con cinco funciones de una base de Fourier para la estimación del coeficiente de regresión (pendiente) y una función constante para el intercepto.
+
+```{r}
+conbasis = create.constant.basis(c(0,365))
+betabasis = create.fourier.basis(c(0,365),5)
+betalist = vector("list",2)
+betalist[[1]] = conbasis
+betalist[[2]] = betabasis
+```
+
+Una vez definidas las funciones base para los parámetros de regresión, procedemos a realizar el proceso de regresión:
+
+```{r}
+fRegressList = fRegress(annualprec,templist,betalist)
+betaestlist = fRegressList$betaestlist
+tempbetafd = betaestlist[[2]]$fd
+plot(tempbetafd, xlab="Día",
+ylab="Coeficiente Beta para temperatura")
+```
+
+La Figura anterior muestra el resultado. El intercepto se puede obtener de coef(betaestlist\[\[1\]\]).Su valor en este caso es 3.464844.
+
+Para evaluar la calidad de este ajuste, se extraen los valores ajustados definido por este modelo y se calculan los residuos. De manera análoga que en el caso escalar, se calculan las sumas de cuadrados de los residuales con el modelo completo y utilizando solo el parámetro de intercepto y se comparan a través de la estadística $F$.
+
+```{r}
+annualprechat1 = fRegressList$yhatfdobj
+annualprecres1 = annualprec - annualprechat1
+SSE1 = sum(annualprecres1^2)
+SSE0 = sum((annualprec - mean(annualprec))^2)
+RSQ1 = (SSE0-SSE1)/SSE0
+RSQ1
+```
+
+```{r}
+Fratio1 = ((SSE0-SSE1)/5)/(SSE1/29)
+Fratio1
+```
+
+```{r}
+Fratio1 = ((SSE0-SSE1)/5)/(SSE1/29)
+Fratio1
+```
+
+El coeficiente de correlación al cuadrado presenta un valor de 0.7955 y la estadística F un valor de 22.57, que tiene asociado un valor p menor al 1%
+
+## Estimación de los coeficientes β con regularización
+
+Hay dos maneras de obtener un ajuste suave de las curvas de parámetros $\beta(t)$. La más sencilla es la revisada anteriomente en la cual se utiliza un modelo de baja dimensión. Sin embargo, podemos tener un control más directo sobre la “suavidad” de la curva mediante el uso de una penalización por rugosidad como se vió en la guía 1 (Ramsay & Silverman, 2005).
+
+Aplicando este enfoque para predecir las precipitaciones logarítmicas anuales se debe configurar un operador de aceleración armónica:
+
+```{r}
+Lcoef = c(0,(2*pi/365)^2,0)
+harmaccelLfd = vec2Lfd(Lcoef, c(0,365))
+```
+
+Ahora creamos el objeto funcional incorporando la penalización por rugosidad:
+
+```{r}
+betabasis = create.fourier.basis(c(0, 365), 35)
+lambda = 10^12.5
+betafdPar = fdPar(betabasis, harmaccelLfd, lambda)
+betalist[[2]] = betafdPar
+```
+
+Y estimamos los parámetros funcionales con el uso de la función `fRegress:`
+
+```{r}
+annPrecTemp = fRegress(annualprec, templist,
+betalist)
+betaestlist2 = annPrecTemp$betaestlist
+annualprechat2 = annPrecTemp$yhatfdobj
+```
+
+Finalmente, calculamos las estadísticas habituales de $R^2$y la razón $F$para evaluar el ajuste del modelo:
+
+```{r}
+SSE2 = sum((annualprec-annualprechat2)^2)
+RSQ2 = (SSE0 - SSE2)/SSE0
+RSQ2
+```
+
+```{r}
+Fratio2 = ((SSE0-SSE2)/3.7)/(SSE1/30.3)
+Fratio2
+
+```
+
+Para completar el análisis, se utiliza una base constante para la estimación del intercepto y se compara con el modelo completo. Los grados de libertad de este modelo reducido son ahora 2.
+
+```{r}
+betafdPar = fdPar(betabasis, harmaccelLfd, lambda)
+betalist[[2]] = betafdPar
+fRegressList = fRegress(annualprec, templist,
+betalist)
+betaestlist = fRegressList$betaestlist
+annualprechat = fRegressList$yhatfdobj
+SSE1 = sum((annualprec-annualprechat)^2)
+RSQ = (SSE0 - SSE1)/SSE0
+RSQ 
+```
+
+```{r}
+Fratio = ((SSE0-SSE1)/1)/(SSE1/33)
+Fratio
+```
+
+Asimismo, es posible estimar intervalos de confianza:
+
+```{r}
+#| eval: false
+#| include: false
+
+resid = annualprec - annualprechat
+SigmaE.= sum(resid^2)/(35-fRegressList$df)
+SigmaE = SigmaE.*diag(rep(1,35))
+y2cMap = tempSmooth$y2cMap
+stderrList = fRegress.stderr(fRegressList, y2cMap,
+SigmaE)
+betafdPar = betaestlist[[2]]
+betafd = betafdPar$fd
+betastderrList = stderrList$betastderrlist
+betastderrfd = betastderrList[[2]]
+plot(betafd, xlab="Día",
+ylab="Coeficientes de regresión - Temperatura.",
+ylim=c(-6e-4,1.2e-03), lwd=2)
+```
+
+```{r}
+#| eval: false
+#| include: false
+lines(betafd+2*betastderrfd, lty=2, lwd=1)
+lines(betafd-2*betastderrfd, lty=2, lwd=1)
+```
+
+### **Prueba** F para ajuste del modelo a través de permutaciones
+
+Debido a la naturaleza de las estadísticas funcionales, es difícil intentar derivar una distribución nula teórica para cualquier estadística de prueba, ya que se tendría que tener en cuenta el parámetro de suavizamiento. Ramsay & Silverman (2005) proponen utilizar una metodología de prueba basada en permutaciones. El supuesto utilizado es que si no hay relación entre la respuesta y las covariables, no debería darse ninguna diferencia si se reorganiza al azar la forma en que están emparejados. La función para realizar la respectiva prueba de hipótesis es `Fperm.fd`
+
+```{r}
+#| eval: false
+#| include: false
+F.res = Fperm.fd(annualprec, templist, betalist)
+```
+
+```{r}
+#| eval: false
+#| include: false
+F.res$pval
+```

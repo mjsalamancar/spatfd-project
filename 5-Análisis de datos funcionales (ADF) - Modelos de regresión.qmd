@@ -1,0 +1,32 @@
+---
+title: "Análisis de datos funcionales (ADF) - Modelos de regresión"
+subtitle: "Curso de Estadística Espacial"
+author: 
+  - "Jeimy Paola Aristizabal R."
+  - "Martha Patricia Bohorquez C."
+institute: "Universidad Nacional de Colombia - Sede Bogotá"
+date: last-modified
+---
+
+# Modelos lineales funcionales (Regresión Funcional) {.unnumbered}
+
+Para explicar la variabilidad de una determinada variable con respecto a otras explicativas, consideradas como covariables, el análisis de varianza y la regresión lineal son los procedimientos que generalmente se utilizan. En este sentido el modelo de regresión funcional es la extensión natural del modelo de regresión usual al caso en el cual se cuenta con una variable respuesta funcional o con covariables funcionales (Aristizabal, 2011).
+
+## Regresión lineal funcional con respuesta funcional (ANOVA Funcional)
+
+En términos formales (Ramsay & Silverman, 2005) se asume que se cuenta con $\mathbf{G}$ "tratamientos" cada uno con un número $\mathbf{N_g}$ de sujetos.\
+El modelo para la $m$ -ésima función (curva) en el g-ésimo grupo ($(y_{mg}(t))$, esta dada por:
+
+$$
+y_{mg} = \mu(t) + \alpha_g(t) + \varepsilon_{mg}(t)
+$$
+
+dónde la función $\mu$ es la media general, $\alpha_g$ representa la función media para cada "tratamiento" y $\varepsilon_{mg}$ es la función de error en cada caso.
+
+La tarea entonces, es establecer la matriz de diseño para lograr estimar los parámetros funcionales $\mu$ y $\alpha_g$, bajo la condición de que $\sum_g \alpha_g(t)=0$ para todo $t$ con el fin de <mark style="background-color:#bbff00; color: #856404; padding: 0 4px;">garantizar la estimabilidad</mark> de los mismos.
+
+En términos matriciales el modelo queda determinado como:
+
+\$\$
+
+y\_{mg}(t) =

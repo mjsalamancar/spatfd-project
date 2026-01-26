@@ -1,0 +1,174 @@
+---
+title: "Análisis de datos funcionales (ADF) - Modelos de regresión"
+subtitle: "Curso de Estadística Espacial"
+author: 
+  - "Jeimy Paola Aristizabal R."
+  - "Martha Patricia Bohorquez C."
+institute: "Universidad Nacional de Colombia - Sede Bogotá"
+date: last-modified
+
+execute:
+  eval: false
+  echo: true
+---
+## ADF {.unnumbered}
+
+
+## **Análisis gráfico**
+
+Por ejemplo, consideremos la temperatura promedio mensual de la superficie del océano en grados Celsius, registrada desde Enero de 1982 a Abril de 2022, disponible en:<https://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices>.
+
+Realizamos la lectura de los datos:
+
+```{r}
+library(fda)
+library(fda.usc)
+library(rainbow)
+library(MASS)
+library(xtable)
+setwd("C:/Users/jpari/Dropbox/FDA")
+Datos =read.delim2("sstoi.indices1.txt",header=T,dec=".", sep = "\t")
+summary(Datos)
+```
+
+Reorganizamos la información para que cada año sea una curva. No tenemos en cuenta el año 2022 por no disponer de la información de todo el año.\
+
+```{r}
+temp <- matrix(Datos$NINO1.2[-c(481:484)], nrow=12, 40)
+colnames(temp)=c(1982:2021)
+```
+
+Construimos las gráficas para cada año
+
+```{r}
+month<-1:12
+plot(month, temp[,1], type="b", ylim=c(18, 30), xlab="Mes", ylab="temperatura")
+for(i in 2:ncol(temp))
+lines(month, temp[,i], type="b", col=i)
+```
+
+### **Deteccción de curvas atípicas**
+
+Es posible realizar detección de datos atípicos (outliers) a través de las herramientas: bagplot, HDR y boxplot para datos funcionales.
+
+Con respecto a la base de datos de la temperatura, utilizando las profundidades dadas a través del criterio de bagplot, se muestran nueves curvas atípicas. La identicación de las curvas se encuentra en la parte superior del panel izquierdo de la siguiente figura. Se destaca, que el factor de inflación utilizado en este caso toma el valor de 1.96 que es el establecido por defecto en la función tipo bag.
+
+```{r}
+TempTs = sfts(ts(as.numeric(temp), start = c(1982,1),frequency = 12), xname = "Mes",
+yname = "Temperatura oC")
+par(mfrow=c(1,2))
+fboxplot(data= TempTs, plot.type = "functional", type = "bag", projmethod = "PCAproj")
+fboxplot(data= TempTs, plot.type = "bivariate", type = "bag", projmethod = "PCAproj",
+ylim = c(-6,6), xlim = c(-15,6))
+```
+
+Análogamente, teniendo en cuenta la profundidad a través del criterio de HDR plot, se evidencian dos curvas atípicas identificadas con los años 1997 y 2015. Para este caso los porcentajes de cobertura de los datos atípicos y de la región central tenidos en cuenta fueron los establecidos por defecto en la respectiva función (0.05, 0.5).
+
+```{r}
+par(mfrow=c(1,2))
+fboxplot(data= TempTs, plot.type = "functional", type = "hdr", projmethod = "PCAproj")
+fboxplot(data= TempTs, plot.type = "bivariate", type = "hdr", projmethod = "PCAproj",
+ylim = c(-6,6), xlim = c(-15,6))
+```
+
+Finalmente, al utilizar la herramienta del boxplot funcional, teniendo en cuenta la profundidad dada por la versión modificada de Band-depth, existe una curva atípica (1990). La probabilidad de la región central utilizada para realizar el gráfico fue de 0.5.
+
+```{r}
+par(mfrow=c(1,1))
+fbplot(fit= temp, method = "BD2", xlab = "Mes", ylab = "Temperatura oC")
+```
+
+Al comparar la detección de datos atípicos utilizando las tres herramientas mencionadas (bagplot, hdr plot y fbplot) en la muestra de las 40 curvas de temperatura, se evidencia que el bagplot resulta ser la herramienta más estricta o exigente en cuanto a que detecta nueve curvas como atípicas, mientras que las otras dos detectaron dos y una, respectivamente. Es importante destacar que, lo que permite comparar las diferentes herramientas en términos de exigencia es utilizar las opciones de probabilidades de cobertura y factor de infación establecidas por defecto.
+
+### **Otras medidas de resumen**
+
+Con datos funcionales también es posible calcular otras etadísticas de resumen como la moda, medias recortadas y la mediana.
+
+```{r}
+#*********************************************************
+#Parámetros estimados - Media recortada al 10%
+#*********************************************************
+par(mfrow=c(1,1))
+###Calcula la profundidad de Fraiman and Muniz (2001)
+MedFM = fdepth(data = TempTs, type = "FM", trim = 0.1)
+plot(MedFM)
+```
+
+```{r}
+###Calcula la profundidad a través de proyecciones aletorias de Cuevas et al. (2007)
+MedRP = fdepth(data = TempTs, type = "RP", trim = 0.1)
+plot(MedRP)
+```
+
+```{r}
+MedRPD = fdepth(data = TempTs, type = "RPD", trim = 0.1)
+plot(MedRPD)
+```
+
+```{r}
+#***********************************************************
+#Parametros estimados - Moda
+#***********************************************************
+MODA = fdepth(data = TempTs, type = "mode", trim = 0.1)
+plot(MODA)
+```
+
+Finalmemnte, a través de procedimientos bootstrap es posible estimar intervalos de confianza para las medidas de resumen.
+
+```{r}
+#***********************************************************
+#Boostrap Funcional
+#***********************************************************
+
+
+BSpl <- create.bspline.basis(norder=4, breaks=seq(0,12,length=5))
+Ftemp <- Data2fd(temp, basisobj=BSpl)
+```
+
+```{r}
+plot(Ftemp, main="Datos suavizados de la Temperatura", xlab = "Mes", ylab = "Temperatura oC",
+ylim=c(18,30))
+```
+
+```{r}
+out.boot1=fdata.bootstrap(Ftemp,statistic=func.mean,nb=200,draw=TRUE)
+```
+
+```{r}
+out.boot2=fdata.bootstrap(Ftemp,statistic=func.trim.FM,nb=100,draw=TRUE)
+```
+
+```{r}
+out.boot2=fdata.bootstrap(Ftemp,statistic=func.trim.mode,nb=100,draw=TRUE, trim = 0.1)
+```
+
+```{r}
+out.boot2=fdata.bootstrap(Ftemp,statistic=func.trim.RP,nb=100,draw=TRUE, trim = 0.1)
+```
+
+### **Análisis en Componentes Principales (ACPF)**
+
+El análisis de componentes principales funcionales (ACPF) es una extensión del ACP clásico en el que las componentes principales están representadas por funciones y no por vectores (Ramsay & Sylverman, 2005). La idea fundamental del análisis de componentes principales es reducir la dimensión del conjunto de datos conservando tanto como sea posible la variación presente en los mismos.
+
+![](spatfd-book-quarto/images/5.png){fig-align="center"}
+
+Fuente: Chávez-Chong,Sánchez-García y DelaCerda-Gastélum (2015), disponile en <https://rio.upo.es/xmlui/bitstream/handle/10433/2768/1694-5314-1-SM.pdf?sequence=1&isAllowed=y#:~:text=AN%C3%81LISIS%20DE%20COMPONENTES%20PRINCIPALES%20(ACP)&text=Es%20decir%3A%20reducir%20la%20dimensi%C3%B3n,la%20biometr%C3%ADa%20de%20la%20%C3%A9poca>.
+
+Si se aplica el método a las curvas de temperturas trabajadas hasta el momento, reteniendo en el análisis 4 componentes, la primera función retiene el 70.1% de la variabilidad total de las curvas, la segunda función, el 20.9%, la tercera, el 4.8% y la cuarta, el 2.7%. Las funciones de componentes principales se muestran como perturbaciones de la curva media, que es la línea continua. Los + muestran lo que sucede cuando una pequeña cantidad de un componente principal se suma a la media, y los - muestran el efecto de restar este componente.
+
+```{r}
+#***********************************************************
+#ACPF
+#***********************************************************
+PCA = pca.fd(Ftemp, 4)
+plot(PCA
+```
+
+```{r}
+plot.pca.fd(PCA)
+```
+
+```{r}
+plot(x = PCA$scores[,1], y = PCA$scores[,2], cex = 0.001)
+text(x = PCA$scores[,1], y = PCA$scores[,2] , seq(1982,2021,1), cex = 0.5 )
+```

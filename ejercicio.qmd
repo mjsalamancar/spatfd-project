@@ -1,0 +1,301 @@
+## [Ejercicio]{style="color:#FF8000;"} {.unnumbered}
+
+<br>
+
+El conjunto de datos TAD corresponde a información clinica básica de un grupo de individuos, recolectada con el objetivo de analizar variables asociadas a la salud cardiovascular.
+
+Incluye carácterísticas demógraficas, antropométricas y biomédicas, tales como la edad, el nivel de colesterol, el índice de masa corporal y la tensión arterial.
+
+Para la lectura y manipulación del conjunto de datos se utiliza la librería readxl, la cual permite importar archivos en formato Excel directamente en R.
+
+Posteriormente, mediante la función read_excel(), se carga el archivo `TAD.xlsx`, ubicado en la carpeta data. En este paso se especifica el tipo de cada columna, indicando cuáles corresponden a variables numéricas y cuáles a variables de tipo texto, con el fin de garantizar un tratamiento adecuado de la información durante el análisis estadístico.
+
+##### [Paso 1 : Leer la tabla de datos que provienen de Excel]{.underline}
+
+```{r}
+library(readxl)
+TAD <- read_excel("data/TAD.xlsx", col_types = c("numeric", 
+                                        "numeric", "numeric", "numeric", "text", 
+                                          "text"))
+colnames(TAD)=c("Edad","Colesterol","IMC","TADias","GEN","EST")
+head(TAD) 
+```
+
+De esta manera, mediante las funciones `head(TAD)` y `tail(TAD)`, es posible visualizar los seis primeros y los seis últimos registros del conjunto de datos, respectivamente. Esto permite obtener una visión general de la información disponible y comprender, a grandes rasgos, la estructura y el tipo de datos con los que se trabajará.
+
+```{r}
+str(TAD)
+```
+
+`str()` muestra un resumen de los valores contenidos en cada variable, lo que facilita la verificación de que los datos hayan sido importados correctamente y que cada variable tenga el formato adecuado para el análisis estadístico.
+
+## Medidas de resumen univariadas
+
+### Tendencia central y su variabilidad
+
+En este análisis, se han seleccionado medidas de tendencia central, como el promedio y la mediana, para identificar el centro de la distribución del colesterol, y medidas de variabilidad (o dispersión), como la varianza, la desviación estándar y el MAD, para entender qué tan dispersos o agrupados se encuentran los datos respecto a ese centro. Estas métricas son fundamentales para diagnosticar la homogeneidad del grupo de estudio y detectar posibles valores atípicos.
+
+```{r}
+# 1. Cálculos base
+media_col    <- mean(TAD$Colesterol)
+sd_col       <- sd(TAD$Colesterol)
+mediana_col  <- median(TAD$Colesterol)
+mad_col      <- mad(TAD$Colesterol)
+
+# 2. Creación del Data Frame de resumen
+resumen <- data.frame(
+  Valor = c(
+    media_col,
+    var(TAD$Colesterol),
+    sd_col,
+    (sd_col / media_col) * 100,
+    mediana_col,
+    mad_col,
+    (mad_col / mediana_col) * 100
+  )
+)
+
+# 3. Asignación de nombres
+rownames(resumen) <- c("Promedio", "Varianza", "Desv. Estándar", "CV (Media) %", 
+                       "Mediana", "MAD", "CV (Mediana) %")
+
+# Mostrar resultado
+print(resumen)
+```
+
+Complementando este análisis detallado, se utiliza la función summary(TAD\$Colesterol) con el objetivo de obtener una visión integral y rápida del comportamiento de la variable. Mientras que los cálculos anteriores nos dan precisión sobre la dispersión, esta función nos devuelve los cinco números resumen (mínimo, primer cuartil, mediana, tercer cuartil y máximo) junto con el promedio. Esto permite identificar de un vistazo el rango total de los datos y la simetría de la distribución mediante la comparación de los cuartiles, sirviendo como una herramienta de validación para los estadísticos calculados previamente.
+
+```{r}
+summary(TAD$Colesterol)
+```
+
+Con el fin de identificar los valores mínimo y máximo de la variable tensión arterial diastólica (TADias), se utilizan las funciones min() y max(), respectivamente. Estas permiten determinar los límites inferior y superior observados en el conjunto de datos, lo cual resulta útil para comprender el rango de variación de la variable y evaluar, de manera preliminar, su comportamiento general dentro del análisis exploratorio.
+
+```{r}
+min_TAD <- min(TAD$TADias)
+min_TAD
+```
+
+```{r}
+max_TAD <- max(TAD$TADias)
+max_TAD
+```
+
+Luego se usa la función range(), la cual permite identificar simultáneamente ambos extremos de la variable tensión arterial diastólica (TADias). Esto facilita la determinación del intervalo en el que se encuentran los datos y contribuye a una mejor comprensión de la variabilidad presente en la variable durante el análisis exploratorio.
+
+```{r}
+range(TAD$TADias)
+```
+
+Con el fin de analizar la dispersión y la distribución de la variable tensión arterial diastólica (TADias), se calcula el rango, definido como la diferencia entre el valor máximo y el valor mínimo observados. Esta medida permite cuantificar la amplitud total de los datos.
+
+Adicionalmente, se obtienen los cuartiles mediante la función quantile(), los cuales dividen el conjunto de datos en cuatro partes iguales. El análisis de los cuartiles facilita la identificación de la posición de los valores dentro de la distribución, así como la evaluación de la concentración y variabilidad de la información en distintos intervalos.
+
+```{r}
+rango_TAD=max(TAD$TADias)-min(TAD$TADias)
+
+
+cuartiles_TAD <- quantile(TAD$TADias,probs = seq(0,1,by=0.25))
+cuartiles_TAD
+```
+
+Con el objetivo de analizar la dispersión central de la variable tensión arterial diastólica (TADias), se calcula el rango intercuartílico (IQR) mediante la función IQR(). Esta medida corresponde a la diferencia entre el tercer cuartil (Q3) y el primer cuartil (Q1), y representa el intervalo donde se concentra el 50 % central de los datos.
+
+El rango intercuartílico es especialmente útil en el análisis exploratorio, ya que permite evaluar la variabilidad de la variable sin verse afectado por valores extremos, proporcionando una medida más robusta de dispersión.
+
+```{r}
+#Cuartil 3 - Cuartil !
+rango_intercuartil_TAD<- IQR(TAD$TADias)
+rango_intercuartil_TAD
+```
+
+```{r}
+# Medidas de posición de la TAD diastólica
+
+min_TAD  <- min(TAD$TADias)
+max_TAD  <- max(TAD$TADias)
+rango_TAD <- max_TAD - min_TAD
+
+cuartiles_TAD <- quantile(TAD$TADias, probs = seq(0, 1, by = 0.25))
+iqr_TAD <- IQR(TAD$TADias)
+
+Medidas_Posic <- data.frame(
+  "Medidas de posición" = c(
+    min_TAD,
+    max_TAD,
+    rango_TAD,
+    cuartiles_TAD,
+    iqr_TAD
+  )
+)
+
+rownames(Medidas_Posic) <- c(
+  "Mínimo",
+  "Máximo",
+  "Rango",
+  "Cuartil 0 (mínimo)",
+  "Cuartil 1",
+  "Cuartil 2 (mediana)",
+  "Cuartil 3",
+  "Cuartil 4 (máximo)",
+  "Rango intercuartílico (IQR)"
+)
+
+Medidas_Posic
+
+
+```
+
+Con el fin de sintetizar la información obtenida previamente, se agrupan las principales medidas de posición de la variable tensión arterial diastólica (TADias) en una sola tabla. Esta incluye el valor mínimo, máximo, rango, cuartiles y rango intercuartílico, permitiendo una visión integral de la distribución de los datos.
+
+## Diagrama Circular Sencillo
+
+Complementando el análisis descriptivo, se procede a realizar un análisis de frecuencias para las variables cualitativas, en este caso, el estado civil o estrato de los individuos (EST). El uso de la función table() permite tabular el conteo exacto de sujetos en cada categoría, mientras que la función pie() genera un gráfico de sectores (o de torta).
+
+El objetivo de esta visualización es representar de forma gráfica la proporción y composición del conjunto de datos, permitiendo identificar rápidamente si existe una categoría dominante o si la muestra se encuentra distribuida de manera equitativa entre los diferentes grupos.
+
+```{r}
+conteoEST=table(TAD$EST)
+pie(conteoEST,col="#D02090")
+```
+
+Asimismo, se aplica el mismo procedimiento para la variable GEN, con el propósito de determinar la distribución por género dentro del grupo de estudio. Al generar el conteo con table() y representarlo mediante un gráfico de sectores, se busca evaluar el balance de la muestra. Esta exploración es crucial en estudios cardiovasculares, ya que permite verificar si existe una representación equitativa entre hombres y mujeres o si, por el contrario, los resultados del análisis podrían estar influenciados por una mayoría de algún género en particular.
+
+```{r}
+conteoGEN=table(TAD$GEN)
+pie(conteoGEN,col="#FFC1C1")
+```
+
+### Diagrama circular 3d y diagrama de barras
+
+```{r}
+library(plotrix)
+
+
+pie3D(table(TAD$GEN), radius=0.9,main="Numero de personas de cada género",labels=c("Mujeres","Hombres"),explode=0.1,col = topo.colors(length(table(TAD$GEN))), border = "white")
+```
+
+## Diagrama de barras y diagrama circular con leyenda
+
+```{r}
+#r_color <- colors()
+#head(r_color, 50)
+barplot(table(TAD$GEN),col="thistle3")
+```
+
+```{r}
+barplot(table(TAD$EST),col="#D02090",main="Frecuencias de la variable estrato socioeconómico")
+```
+
+```{r}
+#vcreacion del grafico, título, leyenda
+leyenda <-c("Mujeres","Hombres")
+pie(table(TAD$GEN), main="Numero de personas de cada género", col = heat.colors(length(table(TAD$GEN))))
+legend("topright", leyenda, cex = 0.8, fill = heat.colors(length(leyenda)))
+```
+
+```{r}
+pie(table(TAD$EST), main="Numero de personas de cada género", col = terrain.colors(length(table(TAD$EST))))
+leyenda <-c("1","2","3","4","5","6")
+legend("topright", leyenda, cex = 0.8, fill = terrain.colors(length(leyenda)))
+```
+
+## Diagrama de tallo y hojas
+
+```{r}
+stem(TAD$Colesterol, scale = 1)
+```
+
+## Histograma frecuencias absolutas sin y con titulo
+
+```{r}
+hist(TAD$Colesterol,col="purple",freq=F)
+```
+
+```{r}
+hist(TAD$Colesterol,col="#98F5FF",freq=F,main="Distribución de frecuencias de los niveles de colesterol",xlab="Colesterol",ylab="Frecuencias")
+```
+
+```{r}
+hist(TAD$Colesterol,col="#98F5FF",freq=F,main="Distribución de frecuencias de los niveles de colesterol",xlab="Colesterol",ylab="Frecuencias",plot=F)
+```
+
+## Diagrama de Caja General, por grupos y puntos superpuestos.
+
+```{r}
+boxplot(TAD$Colesterol,col="green")
+```
+
+```{r}
+boxplot(TAD$Colesterol,col="#66CDAA",ylab="Colesterol",main="Diagrama de caja de Colesterol")
+```
+
+```{r}
+boxplot(TAD$Colesterol,col="burlywood1",ylab="Colesterol",main="Diagrama de caja de Colesterol")
+```
+
+```{r}
+boxplot(TAD$IMC,col="#F0FFFF",ylab="Colesterol",main="Diagrama de caja de Colesterol")
+stripchart(TAD$IMC, method = "jitter", pch = 19, add = TRUE, col = "red", vertical = TRUE)
+```
+
+```{r}
+boxplot(TAD$Colesterol~ TAD$GEN,col="#FFE4E1",ylab="Colesterol",main="Diagrama de caja de Colesterol")
+stripchart(TAD$Colesterol~ TAD$GEN, method = "jitter", pch = 19, add = TRUE, col = "#CD8162", vertical = TRUE)
+```
+
+```{r}
+boxplot(TAD$TADias~ TAD$GEN,col="#FFE4E1",ylab="Colesterol",main="Diagrama de caja de Colesterol")
+stripchart(TAD$TADias~ TAD$EST, method = "jitter", pch = 19, add = TRUE, col = "#6A5ACD", vertical = TRUE)
+```
+
+## Tablas de contingencia, conteos, proporción, porcentajes con respecto al total, porcentajes por fila y porcentajes por columna, diagramas de barras bivariados
+
+```{r}
+TablaCruzada <- table(TAD$GEN,TAD$EST)
+TablaCruzada
+```
+
+```{r}
+TablaCruzada_propFilas=prop.table(TablaCruzada, margin = 1)
+TablaCruzada_propColumnas=prop.table(TablaCruzada, margin = 2)
+TablaCruzada100 <- addmargins(TablaCruzada * 100)
+par(mfrow = c(1, 2))
+colores2 <- c("#A020F0", "#FFBBFF")
+barplot(TablaCruzada, col = colores2)
+par(mfrow = c(1, 2))
+```
+
+```{r}
+barplot(TablaCruzada_propFilas, col = colores2, beside = TRUE)
+legend("topleft", legend = c("Femenino", "Masculino"), fill = colores2)
+colores6 <- c("salmon", "salmon1","salmon2","salmon3","salmon4","tan1")
+barplot(TablaCruzada_propColumnas, col = colores6, beside = TRUE)
+```
+
+```{r}
+par(mfrow = c(1, 1))
+par(mfrow = c(1, 2))
+mosaicplot(TablaCruzada, cex = 1.1, col = colores6)
+mosaicplot(TablaCruzada_propFilas, col = colores2)
+par(mfrow = c(1, 1))
+legend("topleft", legend = c("No", "Si"), fill = colores6)
+```
+
+```{r}
+barplot(TablaCruzada_propColumnas, col = colores6)
+```
+
+## Diagramas de dispersión generales y por grupos
+
+```{r}
+plot(TAD$Colesterol,TAD$IMC,main="Diagrama de dispersión, Colesterol Vs. Índice de masa corporal",xlab="Colesterol",ylab="Índice de masa corporal")
+```
+
+```{r}
+plot(TAD$Colesterol,TAD$IMC,col=rainbow(length(levels(factor(TAD$GEN)))),main="Diagrama de dispersión, Colesterol Vs. Índice de masa corporal por género",xlab="Colesterol",ylab="Índice de masa corporal")
+leyenda=c("Mujeres","Hombres")
+legend("topright", leyenda, cex = 0.8, fill = rainbow(length(leyenda)))
+```
+
+## Matrices de diagramas de dispersión generales y por grupos. Diferentes gráficos en la diagonal, diagramas de caja, histogramas, densidades.

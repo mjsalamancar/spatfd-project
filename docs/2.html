@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./3.html" rel="next">
-<link href="./1.html" rel="prev">
+<link href="./2-Pruebas de Bondad de ajuste.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,11 +76,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -107,10 +107,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="custom.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Cuadernos de Estadística Espacial</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mpbohorquezc/SpatFD-Functional-Geostatistics.git"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -119,43 +143,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1.html"><span style="color: #FF8000 !important;">Geoestadística </span></a></li><li class="breadcrumb-item"><a href="./2.html"><span style="color: #728387 !important;">Geoestadística Univariada con GeoR </span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Cuadernos de Estadística Espacial</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span style="color: #FF8000 !important;">Introducción</span></span></a>
+ <span class="menu-text"><span style="color: #FF8000;">Introducción</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><span style="color: #FF8000 !important;">Geoestadística </span></span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Análisis Exploratorio de Datos</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Estadística descriptiva y Exploratoria</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-Pruebas de Bondad de ajuste.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">Pruebas de bondad de ajuste</span></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Geoestadística </span></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./1.html" class="sidebar-item-text sidebar-link">
@@ -174,21 +208,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span style="color: #728387 !important;">Kriging</span></span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text"><span style="color: #FF8000 !important;">Modelos de Regresión Espacial</span></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span style="color: #728387 !important;">Aplicación de los Modelos </span></span></a>
+  <a href="./8-Introduccion proceso espacial bivariado.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">Proceso espacial gaussiano bivariado</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Gstats datos de méxico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">Ozono México</span></span></span></a>
   </div>
 </li>
       </ul>
@@ -196,12 +225,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></a>
+ <span class="menu-text"><span style="color: #FF8000 !important;">Modelos de Regresión Espacial</span></span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #728387 !important;">Aplicación de los Modelos </span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-redes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">Redes </span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-Encuesta Multipropoosito.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">Encuesta Bogotá Multipropósito </span></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./5.html" class="sidebar-item-text sidebar-link">
@@ -214,17 +272,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span style="color: #728387 !important;">Paquete </span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5-Análisis de datos funcionales (ADF) - Modelos de regresión.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA-Regresión funcional</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6-Análisis de datos funcionales (ADF) - Modelos de regresión (Parte 2).html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA-Regresión escalar</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7-Análisis de datos funcionales (ADF) - Análisis gráfico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA-Regresión escalar</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-Análisis de datos funcionales (ADF) - Análisis exploratorio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">FDA – Análisis descriptivo</span></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text"><span style="color: #FF8000 !important;">Objetos </span></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./7.html" class="sidebar-item-text sidebar-link">
@@ -241,13 +323,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text"><span style="color: #FF8000 !important;">Datasets </span></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./9.html" class="sidebar-item-text sidebar-link">
@@ -268,24 +350,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Kriging</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span style="color: #FF8000 !important;">Kriging</span></span></a>
+ <span class="menu-text">Teoría de Kriging</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Ilustración del kriging simple espacio tiempo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ilustración del Kriging Simple</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Cokriging</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span style="color: #FF8000 !important;">Cokriging</span></span></a>
+ <span class="menu-text">Modelo de Cokriging</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-Cokriging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ilustración del Cokriging</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Diseño Óptimo</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span style="color: #FF8000 !important;">Diseño Óptimo</span></span></a>
+ <span class="menu-text">Diseño Óptimo</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Pulimiento de medianas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pulimiento de Medianas</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -1236,7 +1369,7 @@ Adjuntando el paquete: 'mvtnorm'</code></pre>
 <span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">sigma =</span> cov_mat)</span>
 <span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(simu[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.5973483  0.1344345  3.8649637  2.2476099 -4.1090021</code></pre>
+<pre><code>[1]  2.0458170 -0.6274872 -2.4896577  3.2193408  2.3656975</code></pre>
 </div>
 </div>
 </section>
@@ -1250,12 +1383,12 @@ Adjuntando el paquete: 'mvtnorm'</code></pre>
 <span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          X   Y        Var
-1 0.0000000 0.0 -2.5973483
-2 0.3333333 0.0  0.1344345
-3 0.6666667 0.0  3.8649637
-4 1.0000000 0.0  2.2476099
-5 0.0000000 0.2 -4.1090021
-6 0.3333333 0.2 -3.7526126</code></pre>
+1 0.0000000 0.0  2.0458170
+2 0.3333333 0.0 -0.6274872
+3 0.6666667 0.0 -2.4896577
+4 1.0000000 0.0  3.2193408
+5 0.0000000 0.2  2.3656975
+6 0.3333333 0.2 -0.5046425</code></pre>
 </div>
 </div>
 <p>Reshape para matriz, esto transforma la tabla de datos en matriz</p>
@@ -1267,20 +1400,25 @@ Adjuntando el paquete: 'mvtnorm'</code></pre>
 <span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> tabla[, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>)]</span>
 <span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tabla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                           0       0.2        0.4       0.6       0.8         1
-0                 -2.5973483 -4.109002 -3.7486104  1.978745 -1.670199 -1.745326
-0.333333333333333  0.1344345 -3.752613 -3.1361905 -2.023704 -2.646340 -1.613051
-0.666666666666667  3.8649637  2.027354 -0.1362109 -4.201565 -5.099919 -4.588205
-1                  2.2476099 -2.702960  3.4962988 -1.464955 -4.016233 -3.350136</code></pre>
+<pre><code>                           0        0.2        0.4        0.6       0.8
+0                  2.0458170  2.3656975 -1.1570590 -4.3808964 -5.346270
+0.333333333333333 -0.6274872 -0.5046425  0.8606803 -3.4003607 -3.508599
+0.666666666666667 -2.4896577 -4.1422861 -1.0957624  0.6751768 -1.726573
+1                  3.2193408  5.9865500 -1.2553804  1.5686523  2.562755
+                             1
+0                 -2.493578248
+0.333333333333333 -0.262891229
+0.666666666666667 -0.001568523
+1                  0.854627996</code></pre>
 </div>
 </div>
 <p>Pulimiento de medianas de la tabla</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>med <span class="ot">&lt;-</span> <span class="fu">medpolish</span>(tabla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1: 41.62289
-2: 41.00752
-Final: 41.00752</code></pre>
+<pre><code>1: 39.26333
+2: 36.83322
+Final: 36.83322</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1290,22 +1428,22 @@ Final: 41.00752</code></pre>
 <pre><code>
 Median Polish Results (Dataset: "tabla")
 
-Overall: -2.353052
+Overall: -0.9558284
 
 Row Effects:
                 0 0.333333333333333 0.666666666666667                 1 
-        0.1676166        -0.2959822        -0.1676166         0.5082183 
+       -0.8694902        -0.3437029         0.3437029         4.0642176 
 
 Column Effects:
-         0        0.2        0.4        0.6        0.8          1 
- 3.4379562 -0.9808524  0.9486508  0.5026047 -1.0843526 -0.5325961 
+          0         0.2         0.4         0.6         0.8           1 
+ 0.39149781  1.83652473  0.09231138 -1.82028315 -1.66175744 -0.02885134 
 
 Residuals:
-                         0      0.2     0.4      0.6     0.8        1
-0                 -3.84987 -0.94271 -2.5118  3.66158  1.5996  0.97271
-0.333333333333333 -0.65449 -0.12273 -1.4358  0.12273  1.0870  1.56858
-0.666666666666667  2.94768  5.52888  1.4358 -2.18350 -1.4949 -1.53494
-1                  0.65449  0.12273  4.3925 -0.12273 -1.0870 -0.97271</code></pre>
+                         0     0.2      0.4      0.6      0.8        1
+0                  3.47964  2.3545  0.57595 -0.73529 -1.85919 -0.63941
+0.333333333333333  0.28055 -1.0416  2.06790 -0.28055 -0.54731  1.06549
+0.666666666666667 -2.26903 -5.3667 -0.57595  3.10759  0.54731  0.63941
+1                 -0.28055  1.0416 -4.45608  0.28055  1.11612 -2.22491</code></pre>
 </div>
 </div>
 <p>Reshape de los datos, con efecto de la fila y la columna</p>
@@ -1327,31 +1465,56 @@ Residuals:
 <span id="cb102-15"><a href="#cb102-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"Efecto Global"</span>)</span>
 <span id="cb102-16"><a href="#cb102-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geo_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           X   Y        Var Efecto fila Efecto columa   Residual Efecto Global
-1  0.0000000 0.0 -2.5973483   0.1676166     3.4379562 -3.8498691     -2.353052
-2  0.3333333 0.0  0.1344345  -0.2959822     3.4379562 -0.6544875     -2.353052
-3  0.6666667 0.0  3.8649637  -0.1676166     3.4379562  2.9476761     -2.353052
-4  1.0000000 0.0  2.2476099   0.5082183     3.4379562  0.6544875     -2.353052
-5  0.0000000 0.2 -4.1090021   0.1676166    -0.9808524 -0.9427142     -2.353052
-6  0.3333333 0.2 -3.7526126  -0.2959822    -0.9808524 -0.1227259     -2.353052
-7  0.6666667 0.2  2.0273542  -0.1676166    -0.9808524  5.5288753     -2.353052
-8  1.0000000 0.2 -2.7029604   0.5082183    -0.9808524  0.1227259     -2.353052
-9  0.0000000 0.4 -3.7486104   0.1676166     0.9486508 -2.5118257     -2.353052
-10 0.3333333 0.4 -3.1361905  -0.2959822     0.9486508 -1.4358070     -2.353052
-11 0.6666667 0.4 -0.1362109  -0.1676166     0.9486508  1.4358070     -2.353052
-12 1.0000000 0.4  3.4962988   0.5082183     0.9486508  4.3924818     -2.353052
-13 0.0000000 0.6  1.9787447   0.1676166     0.5026047  3.6615755     -2.353052
-14 0.3333333 0.6 -2.0237037  -0.2959822     0.5026047  0.1227259     -2.353052
-15 0.6666667 0.6 -4.2015653  -0.1676166     0.5026047 -2.1835013     -2.353052
-16 1.0000000 0.6 -1.4649550   0.5082183     0.5026047 -0.1227259     -2.353052
-17 0.0000000 0.8 -1.6701994   0.1676166    -1.0843526  1.5995887     -2.353052
-18 0.3333333 0.8 -2.6463401  -0.2959822    -1.0843526  1.0870468     -2.353052
-19 0.6666667 0.8 -5.0999187  -0.1676166    -1.0843526 -1.4948975     -2.353052
-20 1.0000000 0.8 -4.0162332   0.5082183    -1.0843526 -1.0870468     -2.353052
-21 0.0000000 1.0 -1.7453260   0.1676166    -0.5325961  0.9727056     -2.353052
-22 0.3333333 1.0 -1.6130512  -0.2959822    -0.5325961  1.5685791     -2.353052
-23 0.6666667 1.0 -4.5882053  -0.1676166    -0.5325961 -1.5349405     -2.353052
-24 1.0000000 1.0 -3.3501355   0.5082183    -0.5325961 -0.9727056     -2.353052</code></pre>
+<pre><code>           X   Y          Var Efecto fila Efecto columa   Residual
+1  0.0000000 0.0  2.045817045  -0.8694902    0.39149781  3.4796378
+2  0.3333333 0.0 -0.627487203  -0.3437029    0.39149781  0.2805462
+3  0.6666667 0.0 -2.489657705   0.3437029    0.39149781 -2.2690300
+4  1.0000000 0.0  3.219340765   4.0642176    0.39149781 -0.2805462
+5  0.0000000 0.2  2.365697530  -0.8694902    1.83652473  2.3544914
+6  0.3333333 0.2 -0.504642539  -0.3437029    1.83652473 -1.0416360
+7  0.6666667 0.2 -4.142286102   0.3437029    1.83652473 -5.3666853
+8  1.0000000 0.2  5.986549953   4.0642176    1.83652473  1.0416360
+9  0.0000000 0.4 -1.157058970  -0.8694902    0.09231138  0.5759483
+10 0.3333333 0.4  0.860680288  -0.3437029    0.09231138  2.0679002
+11 0.6666667 0.4 -1.095762368   0.3437029    0.09231138 -0.5759483
+12 1.0000000 0.4 -1.255380373   4.0642176    0.09231138 -4.4560810
+13 0.0000000 0.6 -4.380896439  -0.8694902   -1.82028315 -0.7352947
+14 0.3333333 0.6 -3.400360657  -0.3437029   -1.82028315 -0.2805462
+15 0.6666667 0.6  0.675176833   0.3437029   -1.82028315  3.1075855
+16 1.0000000 0.6  1.568652305   4.0642176   -1.82028315  0.2805462
+17 0.0000000 0.8 -5.346270181  -0.8694902   -1.66175744 -1.8591941
+18 0.3333333 0.8 -3.508599088  -0.3437029   -1.66175744 -0.5473104
+19 0.6666667 0.8 -1.726572544   0.3437029   -1.66175744  0.5473104
+20 1.0000000 0.8  2.562755192   4.0642176   -1.66175744  1.1161234
+21 0.0000000 1.0 -2.493578248  -0.8694902   -0.02885134 -0.6394083
+22 0.3333333 1.0 -0.262891229  -0.3437029   -0.02885134  1.0654914
+23 0.6666667 1.0 -0.001568523   0.3437029   -0.02885134  0.6394083
+24 1.0000000 1.0  0.854627996   4.0642176   -0.02885134 -2.2249099
+   Efecto Global
+1     -0.9558284
+2     -0.9558284
+3     -0.9558284
+4     -0.9558284
+5     -0.9558284
+6     -0.9558284
+7     -0.9558284
+8     -0.9558284
+9     -0.9558284
+10    -0.9558284
+11    -0.9558284
+12    -0.9558284
+13    -0.9558284
+14    -0.9558284
+15    -0.9558284
+16    -0.9558284
+17    -0.9558284
+18    -0.9558284
+19    -0.9558284
+20    -0.9558284
+21    -0.9558284
+22    -0.9558284
+23    -0.9558284
+24    -0.9558284</code></pre>
 </div>
 </div>
 <p>Validación de la descomposición</p>
@@ -1365,31 +1528,31 @@ Residuals:
 <span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(valida) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"datos"</span>, <span class="st">"suma"</span>)</span>
 <span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(valida)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        datos       suma
-1  -2.5973483 -2.5973483
-2   0.1344345  0.1344345
-3   3.8649637  3.8649637
-4   2.2476099  2.2476099
-5  -4.1090021 -4.1090021
-6  -3.7526126 -3.7526126
-7   2.0273542  2.0273542
-8  -2.7029604 -2.7029604
-9  -3.7486104 -3.7486104
-10 -3.1361905 -3.1361905
-11 -0.1362109 -0.1362109
-12  3.4962988  3.4962988
-13  1.9787447  1.9787447
-14 -2.0237037 -2.0237037
-15 -4.2015653 -4.2015653
-16 -1.4649550 -1.4649550
-17 -1.6701994 -1.6701994
-18 -2.6463401 -2.6463401
-19 -5.0999187 -5.0999187
-20 -4.0162332 -4.0162332
-21 -1.7453260 -1.7453260
-22 -1.6130512 -1.6130512
-23 -4.5882053 -4.5882053
-24 -3.3501355 -3.3501355</code></pre>
+<pre><code>          datos         suma
+1   2.045817045  2.045817045
+2  -0.627487203 -0.627487203
+3  -2.489657705 -2.489657705
+4   3.219340765  3.219340765
+5   2.365697530  2.365697530
+6  -0.504642539 -0.504642539
+7  -4.142286102 -4.142286102
+8   5.986549953  5.986549953
+9  -1.157058970 -1.157058970
+10  0.860680288  0.860680288
+11 -1.095762368 -1.095762368
+12 -1.255380373 -1.255380373
+13 -4.380896439 -4.380896439
+14 -3.400360657 -3.400360657
+15  0.675176833  0.675176833
+16  1.568652305  1.568652305
+17 -5.346270181 -5.346270181
+18 -3.508599088 -3.508599088
+19 -1.726572544 -1.726572544
+20  2.562755192  2.562755192
+21 -2.493578248 -2.493578248
+22 -0.262891229 -0.262891229
+23 -0.001568523 -0.001568523
+24  0.854627996  0.854627996</code></pre>
 </div>
 </div>
 
@@ -1818,8 +1981,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./1.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>Geoestadística con Sgeostat</span>">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span style="color: #728387 !important;">Geoestadística con Sgeostat</span></span>
+      <a href="./2-Pruebas de Bondad de ajuste.html" class="pagination-link" aria-label="<span style='color: #728387 !important;'>Pruebas de bondad de ajuste</span>">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><span style="color: #728387 !important;">Pruebas de bondad de ajuste</span></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

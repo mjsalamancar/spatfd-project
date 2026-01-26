@@ -1,0 +1,82 @@
+---
+title: "Pruebas de bondad de ajuste"
+execute:
+  eval: false
+  echo: true
+---
+
+
+## Palmira {.unnumbered}
+
+# [Palmira]{style="color:#FF8000;"}
+
+## Descriptivo Palmira
+
+```{r}
+Palmira=read.table("Palmira_Urbano_planas.txt",head=T,sep = ",")
+Palmira$INTERVALOS_HORA_t=as.POSIXct(as.character(Palmira$INTERVALOS_HORA), format="%R")
+```
+
+#### Mapas por uso de suelo, recortado dejando solo la zona urbana, con todos los puntos de los robos
+
+```{r}
+Palmira1_covar=filter(Palmira,GENERO %in% c("FEMENINO","MASCULINO"))
+Palmira1_covar$EDAD_Cat=cut(Palmira1_covar$EDAD, breaks=c(0,18,45,65,100), labels = c("Menor de 18","18-45","45-65","Mayor de 65"))
+Palmira1_covar$Armas_indicator=ifelse(Palmira1_covar$ARMAS=="SINEMPLEODEARMAS","Sin","Con")
+Palmira1_covar$SEMESTRE=dplyr::recode(Palmira1_covar$MES, "ene"="SEM_1", "feb"="SEM_1", "mar"="SEM_1", "abr"="SEM_1", "may"="SEM_1","jun"="SEM_1","jul"="SEM_2","ago"="SEM_2","sep"="SEM_2","oct"="SEM_2","nov"="SEM_2","dic"="SEM_2")
+Palmira1_covar <- subset(Palmira1_covar, select = c("X_plain","Y_plain","YEAR","BARRIOS","GENERO","DIA_SEMANA","INTERVALOS_HORA","MODALIDAD","EDAD_Cat",
+"Armas_indicator","MES","SEMESTRE","LONGITUD","LATITUD"))
+table(Palmira1_covar$YEAR,Palmira1_covar$SEMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$GENERO)
+```
+
+```{r}
+table(Palmira1_covar$YEAR,Palmira1_covar$SEMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$EDAD_Cat)
+```
+
+```{r}
+table(Palmira1_covar$YEAR,Palmira1_covar$SEMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$Armas_indicator)
+```
+
+```{r}
+Palmira1_covar$TRIMESTRE=dplyr::recode(Palmira1_covar$MES, "ene"="Trim_1", "feb"="Trim_1", "mar"="Trim_1", "abr"="Trim_2", "may"="Trim_2","jun"="Trim_2","jul"="Trim_3","ago"="Trim_3","sep"="Trim_3","oct"="Trim_4","nov"="Trim_4","dic"="Trim_4")
+Palmira1_covar <- subset(Palmira1_covar, select = c("X_plain","Y_plain","YEAR","BARRIOS","GENERO","DIA_SEMANA","INTERVALOS_HORA","MODALIDAD","EDAD_Cat",
+"Armas_indicator","MES","TRIMESTRE","LONGITUD","LATITUD"))
+table(Palmira1_covar$YEAR,Palmira1_covar$TRIMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$GENERO)
+```
+
+```{r}
+table(Palmira1_covar$YEAR,Palmira1_covar$TRIMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$EDAD_Cat)
+```
+
+```{r}
+table(Palmira1_covar$YEAR,Palmira1_covar$TRIMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$Armas_indicator)
+```
+
+```{r}
+Palmira1_covar$BIMESTRE=dplyr::recode(Palmira1_covar$MES, "ene"="Bim_1", "feb"="Bim_1", "mar"="Bim_2", "abr"="Bim_2", "may"="Bim_3","jun"="Bim_3","jul"="Bim_4","ago"="Bim_4","sep"="Bim_5","oct"="Bim_5","nov"="Bim_6","dic"="Bim_6")
+Palmira1_covar <- subset(Palmira1_covar, select = c("X_plain","Y_plain","YEAR","BARRIOS","GENERO","DIA_SEMANA","INTERVALOS_HORA","MODALIDAD","EDAD_Cat",
+"Armas_indicator","MES","BIMESTRE","LONGITUD","LATITUD"))
+table(Palmira1_covar$YEAR,Palmira1_covar$BIMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$GENERO)
+```
+
+```{r}
+table(Palmira1_covar$YEAR,Palmira1_covar$BIMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$EDAD_Cat)
+```
+
+```{r}
+table(Palmira1_covar$YEAR,Palmira1_covar$BIMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$Armas_indicator)
+```
+
+```{r}
+Palmira1_covar$CUATRIMESTRE=dplyr::recode(Palmira1_covar$MES, "ene"="CUATrim_1", "feb"="CUATrim_1", "mar"="CUATrim_1", "abr"="CUATrim_1", "may"="CUATrim_2","jun"="CUATrim_2","jul"="CUATrim_2","ago"="CUATrim_2","sep"="CUATrim_3","oct"="CUATrim_3","nov"="CUATrim_3","dic"="CUATrim_3")
+Palmira1_covar <- subset(Palmira1_covar, select = c("X_plain","Y_plain","YEAR","BARRIOS","GENERO","DIA_SEMANA","INTERVALOS_HORA","MODALIDAD","EDAD_Cat","Armas_indicator","MES","CUATRIMESTRE","LONGITUD","LATITUD"))
+table(Palmira1_covar$YEAR,Palmira1_covar$CUATRIMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$GENERO)
+```
+
+```{r}
+table(Palmira1_covar$YEAR,Palmira1_covar$CUATRIMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$EDAD_Cat)
+```
+
+```{r}
+table(Palmira1_covar$YEAR,Palmira1_covar$CUATRIMESTRE,Palmira1_covar$INTERVALOS_HORA,Palmira1_covar$Armas_indicator)
+```

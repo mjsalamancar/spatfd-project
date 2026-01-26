@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jeimy Paola Aristizabal R.">
+<meta name="author" content="Martha Patricia Bohorquez C.">
+<meta name="dcterms.date" content="2026-01-26">
+
+<title>Análisis de datos funcionales (ADF) - Modelos de regresión</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/quarto-html/quarto.js"></script>
+<script src="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/quarto-html/popper.min.js"></script>
+<script src="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Análisis de datos funcionales (ADF) - Modelos de regresión_files/libs/bootstrap/bootstrap-8a79a254b8e706d3c925cde0a310d4f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Análisis de datos funcionales (ADF) - Modelos de regresión</h1>
+<p class="subtitle lead">Curso de Estadística Espacial</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Jeimy Paola Aristizabal R. </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Universidad Nacional de Colombia - Sede Bogotá
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Martha Patricia Bohorquez C. </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 26, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="modelos-lineales-funcionales-regresión-funcional" class="level1 unnumbered">
+<h1 class="unnumbered">Modelos lineales funcionales (Regresión Funcional)</h1>
+<p>Para explicar la variabilidad de una determinada variable con respecto a otras explicativas, consideradas como covariables, el análisis de varianza y la regresión lineal son los procedimientos que generalmente se utilizan. En este sentido el modelo de regresión funcional es la extensión natural del modelo de regresión usual al caso en el cual se cuenta con una variable respuesta funcional o con covariables funcionales (Aristizabal, 2011).</p>
+<section id="regresión-lineal-funcional-con-respuesta-funcional-anova-funcional" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-lineal-funcional-con-respuesta-funcional-anova-funcional">Regresión lineal funcional con respuesta funcional (ANOVA Funcional)</h2>
+<p>En términos formales (Ramsay &amp; Silverman, 2005) se asume que se cuenta con <span class="math inline">\(\mathbf{G}\)</span> “tratamientos” cada uno con un número <span class="math inline">\(\mathbf{N_g}\)</span> de sujetos.<br>
+El modelo para la <span class="math inline">\(m\)</span> -ésima función (curva) en el g-ésimo grupo (<span class="math inline">\((y_{mg}(t))\)</span>, esta dada por:</p>
+<p><span class="math display">\[
+y_{mg} = \mu(t) + \alpha_g(t) + \varepsilon_{mg}(t)
+\]</span></p>
+<p>dónde la función <span class="math inline">\(\mu\)</span> es la media general, <span class="math inline">\(\alpha_g\)</span> representa la función media para cada “tratamiento” y <span class="math inline">\(\varepsilon_{mg}\)</span> es la función de error en cada caso.</p>
+<p>La tarea entonces, es establecer la matriz de diseño para lograr estimar los parámetros funcionales <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\alpha_g\)</span>, bajo la condición de que <span class="math inline">\(\sum_g \alpha_g(t)=0\)</span> para todo <span class="math inline">\(t\)</span> con el fin de <mark style="background-color:#bbff00; color: #856404; padding: 0 4px;">garantizar la estimabilidad</mark> de los mismos.</p>
+<p>En términos matriciales el modelo queda determinado como:</p>
+<p><span class="math display">\[
+y_{mg}(t) = \sum_{j=1}^{G+1} x_{(mg)j}\beta_j(t) + \varepsilon_{(mg)}(t)
+\]</span></p>
+<p><span class="math display">\[
+y(t)= X(t)\beta(t) + \varepsilon(t)
+\]</span></p>
+<p>Cabe destacar que la matriz diseño X tiene la misma estructura que en el caso multivariado o univariado, la diferencia obedece a que el vector de parámetros <span class="math inline">\(\beta(t)\)</span> y las predicciones <span class="math inline">\(X\beta(t)\)</span>, son vectores de funciones en vez de vectores de números.</p>
+</section>
+<section id="estimación---mínimos-cuadrados-ordinarios" class="level2">
+<h2 class="anchored" data-anchor-id="estimación---mínimos-cuadrados-ordinarios">Estimación - Mínimos cuadrados ordinarios</h2>
+<p>Para realizar el ajuste a través del criterio de minimos cuadrados ordinarios, se debe escoger <span class="math inline">\(\beta(t)\)</span> que minimize la suma de cuadrados residual, así, para extender el principio de mínimos cuadrados al caso funcional, se reinterpreta la suma de cuadrados, así para extender el principio de mínimos cuadrados al caso funcional, se interpreta la suma de cuadrados residual (<span class="math inline">\(y_i(t)-X_i\beta(t)\)</span>) como una nueva función, y entonces por el criterio de mínimos cuadrados ordinarios se debe minimizar :</p>
+<p><span class="math display">\[
+SSE(\beta) = \sum_g^G \sum_m^{N_g} \int \left[y_{mg}(t)-\sum_j^q x_{(mg)j}\beta_j(t)\right]^2 dt = \sum_i^n ||y_i(t)-x_i^t \beta(t)||^2
+\]</span></p>
+<p>Minimizando <span class="math inline">\(SSE(\beta)\)</span> sujeto a la condición de <span class="math inline">\(\sum_{j=2}^{G+1} \beta_j(t)=0\)</span> se obtiene la estimación de los parámetro funcionales <span class="math inline">\(\hat{\beta}(t)\)</span>.</p>
+<p>Al igual que en el modelo lineal multivariado, la fuente primaria de información para investigar la importancia de los “tratamientos”, es la función de suma de cuadrados:</p>
+<p><span class="math display">\[
+SSE(t) = \sum_{mg} \left[ y_{mg}(t) - X_{mg}\hat{\beta}(t) \right]^2
+\]</span></p>
+<p>Esta función es comparada con la función de suma de cuadrados de los errores obtenida al utilizar solo la media general <span class="math inline">\(\hat{\mu}\)</span> en el modelo:</p>
+<p><span class="math display">\[
+SSY(t) = \sum_{mg}\left[y_{mg}(t) - X_{mg}\hat{\beta}(t)\right]^2
+\]</span></p>
+<p>Así un camino para realizar la comparación, se establece utilizando la función del cuadrado de correlación multiple:</p>
+<p><span class="math display">\[
+RSQ(t) = \frac{SSY(t)-SSE(t)}{SSY(t)}
+\]</span></p>
+<p>O calcular las funciones análogas a las que de una tabla ANOVE en el caso univariado.<br>
+Por ejemplo, la función de cuadrado medio del error:</p>
+<p><span class="math display">\[
+MSE = \frac{SSE}{df(error)}=\frac{SSE}{N-G}
+\]</span></p>
+<p>Análogamente, la función de cuadrado medio de la regresión es la diferencia entre la suma de cuadrados total <span class="math inline">\((SSY)\)</span> y la suma de cuadrados del error <span class="math inline">\((SSE)\)</span>, dividida por la diferencia entre los grados de libertad del error para los dos modelos (grados de libertad de la regresión):</p>
+<p><span class="math display">\[
+MSR(t)= \frac{SSY(t)-SSE(t)}{df(regresion)}
+\]</span></p>
+<p>Finalmente se puede construir la función <span class="math inline">\(\mathbf{F}\)</span> como:</p>
+<p><span class="math display">\[
+F = \frac{MSR}{MSE}
+\]</span></p>
+<p>Básicamente, la mayoría de los estadísticos del análisis de varianza univariado son aplicables al problema funcional, esencialmente, porque el problema de análisis de varianza funcional, se puede se puede considerar como un análisis de varianza univariado (ANOVA) para cada valor específico <span class="math inline">\(t\)</span> del dominio de la función. Sin embargo, bajo este enfoque la prueba <span class="math inline">\(F\)</span> pierde algunas de sus propiedades, debido a que realizar una prueba <span class="math inline">\(F\)</span> en cada tiempo <span class="math inline">\(t\)</span> con un nivel de significancia determinado no implica el mismo nivel de significancia en una prueba conjunta.</p>
+</section>
+<section id="prueba-de-hipótesis---prueba-de-shen-faraway" class="level2">
+<h2 class="anchored" data-anchor-id="prueba-de-hipótesis---prueba-de-shen-faraway">Prueba de hipótesis - Prueba de Shen &amp; Faraway</h2>
+<p>En el 2004 Shen y Faraway (Shen &amp; Faraway, 2004), propusieron una prueba tipo <span class="math inline">\(\mathbf{F}\)</span> para modelos lineales con respuesta funcional.<br>
+Esta es una extensión de la prueba <span class="math inline">\(\mathbf{F}\)</span> multivariada al caso que la cantidad de mediciones crece rápidamente y puede ser utilizada para la comparación de dos modelos anidados cualesquiera.</p>
+<p>Sin perdida de generalidad, se considera la comparación de dos modelos lineales <span class="math inline">\(\omega\)</span> y <span class="math inline">\(\Omega\)</span> , dónde <span class="math inline">\(dim(\Omega)=p\)</span> y <span class="math inline">\(dim(w)=q\)</span> , <span class="math inline">\(p &gt; q\)</span>.</p>
+<p>El modelo <span class="math inline">\(\omega\)</span> resulta de una restricción lineal de los parámetros de <span class="math inline">\(\Omega\)</span>.<br>
+Así:</p>
+<p><span class="math display">\[
+H_0 : Y(t) = X_1\alpha_1 +\varepsilon(t) \quad
+\]</span></p>
+<p><span class="math display">\[
+Versus
+\]</span></p>
+<p><span class="math display">\[
+Ha: Y(t) = X_1\alpha_1(t) +X_2\alpha_2(t) +\varepsilon(t)
+\]</span></p>
+<p>Sea</p>
+<p><span class="math display">\[
+\mathbf{F} = \frac{(rss_w - rss_w)/(p-q)}{rss_{\Omega}/(n-p)} ≈  \frac{traza(∑^ω−∑^Ω)/(p−q)}{traza(∑^Ω)/(n−p)}
+\]</span></p>
+<p>con <span class="math inline">\(rss = \sum_{i=1}^n \int_t (y_i - \hat{y_i}(t))^2 dt\)</span></p>
+<p>Asumiendo que el proceso de ruido <span class="math inline">\(\varepsilon_i(t)\)</span> es gaussiao e independiente y con función de covarianza continua <span class="math inline">\(r(s,t)\)</span> sobre unintervalo cerrado <span class="math inline">\(\tau\)</span>, entonces bajo el sistema de hipótesisi descrito, la estadística se distribuye como:</p>
+<p><span class="math display">\[
+\frac{\sum_{i=1}^\infty r_i \chi_{p-q}^2 /(p-q)}{\sum_{i=1}^\infty r_i \chi_{n-p}^2/(n-p)}
+\]</span></p>
+<p>donde <span class="math inline">\(r_i\)</span> es el i-ésimo valor propio ordenado de la función de covarianza <span class="math inline">\(r(s,t)\)</span> y las variables <span class="math inline">\(\chi^2\)</span> son independientes.</p>
+<p>En su artículo los autores demuestran que la estadística tiene una distribución denominada distribución funcional con coeficientes&nbsp;<span class="math inline">\(r_i. i=1,2, ...,\infty\)</span>&nbsp;y grados de libertad (<span class="math inline">\(p-q,n-p\)</span>) . Así mismo, realizan la aproximación de esta distribución a la distribución <span class="math inline">\(\mathbf{F}\)</span> de Fisher con grados de libertad <span class="math inline">\(f_1\)</span> y <span class="math inline">\(f_2\)</span>:</p>
+<p><span class="math display">\[
+f_1 = \frac{(\sum_{i=1}^\infty r_i)^2}{(\sum_{i=1}^\infty r_i^2)}(p-q);  \quad f_2=\frac{(\sum_{i=1}^\infty r_i)^2}{(\sum_{i=1}^\infty r_i^2)}(n-p)
+\]</span></p>
+<p>En la práctica se observa <span class="math inline">\(y_i(t)\)</span> sobre una grilla de puntos <span class="math inline">\(t_j, j=1,2,...M\)</span>, así, el factor de ajuste <span class="math inline">\(\frac{(\sum_{i=1}^\infty r_i)^2}{\sum_{i=1}^\infty r_i^2}(n-p)\)</span> puede ser estimado por <span class="math inline">\(\frac{traza(E)^2}{traza(E^2)}\)</span> , donde <span class="math inline">\(E= \hat{\Sigma}^{\Omega}\)</span> es la matriz de covarianza empírica del ruido calculada con el modelo completo <span class="math inline">\(\Omega\)</span>.</p>
+</section>
+<section id="ejemplo" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo">Ejemplo</h2>
+<section id="experimento" class="level3">
+<h3 class="anchored" data-anchor-id="experimento">Experimento</h3>
+<p>La situación experimental llevada a cabo y que dió origen a la base de datos con la cual se realizan las aplicaciones, parte de que a un paciente se le mostraba un conjunto de palabras con carga emocional positiva (abrazo, paz, regalo), negativa (guerra, enfermedad, muerte), o neutra (número, roca), y también una serie de no palabras. Su tarea consistía en responder mediante un botón adyacente cuando aparecía únicamente una palabra. El número de pacientes total en el experimento fue de 48, de los cuales 30 son hombres y los restantes 18 mujeres.</p>
+<p>La presentación de los estímulos y la realización de la tarea se hace en sincronía con el registro del electroencefalograma (EEG) con lo cual se obtiene la medición de la actividad del cerebro medida como la diferencia entre el voltaje máximo y la línea base preestimular (electrodo determinado) para cada condición experimental determinada, cada 4 milisegundos, obteniendo un total de 350 mediciones por paciente en cada uno de los 19 electrodos muestreados (dispuestos en ubicaciones establecidas por el sistema 10-20).</p>
+<section id="sistema-de-referencia-10-20" class="level4">
+<h4 class="anchored" data-anchor-id="sistema-de-referencia-10-20"><strong>Sistema de referencia 10-20</strong></h4>
+<p>El registro del EEG se realiza con distintos tipos de electrodos distribuidos según un mapa normalizado por la Federación de Electroencefalografia y Neurofisiologia Clinica, en base al sistema de coordenadas 10-20, que determina las coordenadas de cada punto de registro mediante porcentajes (10-20) de la distancia existente entre puntos del cráneo bien definidos. Esto permite el estudio de la misma región independientemente de las dimensiones y de la forma del cráneo</p>
+<p>En el primer Congreso Internacional de EEG, que se celebró en Londres en 1947, se reconoció que era necesario un método estándar de la colocación de los electrodos utilizados en el electroencefalograma (EEG). Varias discusiones entorno al tema dieron lugar a la definición del sistema de electrodos 10-20 (Hasper, 1958). Desde entonces, este sistema de electrodos se ha convertido en el estándar para los clínicos y para el estudio de potenciales relacionados con eventos (potenciales evocados) en entornos no clínicos.</p>
+<p>Con el fin de determinar bajo este sistema las coordenadas de los 19 electrodos utilizados en el experimento anteriormente descrito, se utilizaron las coordenadas de todos los lugares del electrodo en una superficie de la cabeza <span class="math inline">\(real\)</span>, sobre la base de las distancias a lo largo de la superficie (triangular) de la cabeza. La superficie de la cabeza utilizada fue construida a partir de la resonancia magnética canónica que se incluye en el paquete <span class="math inline">\(SPM2\)</span> y las ubicaciones se expresan en coordenadas <span class="math inline">\(MNI\)</span> (standard Montreal Neurological Institute) (Oostenveld &amp; Praamstra, 2001)</p>
+<p>En la figura se presenta la gráfica de las coordenadas de los electrodos bajo el sistema 10-20:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="323"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/4-01.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

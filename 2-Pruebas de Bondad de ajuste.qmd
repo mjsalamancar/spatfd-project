@@ -1,0 +1,209 @@
+---
+title: "Pruebas de bondad de ajuste"
+execute:
+  eval: false
+  echo: true
+---
+
+## Pruebas de bondad de ajuste {.unnumbered}
+
+# [Pruebas de bondad de ajuste]{style="color:#FF8000;"}
+
+## Cargar Paquetes y Leer datos
+
+```{r}
+#install.packages("moments")
+#install.packages("ecostats")
+library(moments)
+library(ecostats)
+```
+
+```{r}
+library(nortest)
+library(vcd)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+#install.packages("Rgof")
+library(Rgof)
+datos=read.table("Datos1.txt")
+```
+
+## **Gráficos exploratorios, mirar simetría, apuntamiento, datos atípicos**
+
+```{r}
+#| eval: false
+#| echo: true
+hist(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+boxplot(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+stem(datos$x)
+```
+
+## **Medidas de resumen**
+
+```{r}
+#| eval: false
+#| echo: true
+summary(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+mean(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+median(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+#skewness(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+kurtosis(datos$x)
+```
+
+## **Histogramas de frecuencia relativa, densidad, ajuste a la distribución de probabilidad teórica**
+
+```{r}
+#| eval: false
+#| echo: true
+hist(datos$x,freq=F,ylab="Densidad",col="whitesmoke",ylim=c(0,0.045),main="Distribución de frecuencias de X",xlab="X")
+lines(density(datos$x),col="#BF3EFF",lwd=3)
+curve(dnorm(x, mean = 87.80697, sd = 9.780568),60,130,col="midnightblue",add=T,lwd=3)
+curve(dgamma(x, shape = 71.444, scale=1.212),60,130,col="chocolate",add=T,lwd=3)
+legend("topright",col=c("#BF3EFF","midnightblue","chocolate"),c("Densidad","Normal teórica","Gamma teórica"),lty=1,lwd=3)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+hist(datos$x,freq=F,ylab="Densidad",col="whitesmoke",ylim=c(0,0.045))
+lines(density(datos$x),col="midnightblue",lwd=3)
+curve(dgamma(x, shape = 71.444, scale=1.212),60,130,col="chocolate",add=T,lwd=3)
+```
+
+## **Verificación de porcentajes a k desviaciones estándar de la media para la distribución normal**
+
+```{r}
+#| eval: false
+#| echo: true
+Intervalos=c(mean(datos$x)-4*sd(datos$x),mean(datos$x)-3*sd(datos$x),mean(datos$x)-2*sd(datos$x),mean(datos$x)-sd(datos$x),                 mean(datos$x),mean(datos$x)+sd(datos$x),mean(datos$x)+2*sd(datos$x),mean(datos$x)+3*sd(datos$x),mean(datos$x)+4*sd(datos$x))
+hist(datos$x,freq=F,ylab="Densidad",breaks=Intervalos,col="whitesmoke",ylim=c(0,0.045))
+```
+
+```{r}
+#| eval: false
+#| echo: true
+hist(datos$x,breaks=Intervalos,plot=F)
+```
+
+## Gráfico de cuantiles teóricos vs cuantiles muestrales, envolvente
+
+```{r}
+#| eval: false
+#| echo: true
+qqnorm(datos$x)
+```
+
+```{r}
+qqenvelope(datos$x)
+```
+
+## Comparación de los datos de la muestra, con una muestra simulada de la distribución normal teórica propuesta
+
+```{r}
+#| eval: false
+#| echo: true
+mu=mean(datos$x)
+desvest=sd(datos$x)
+yy=rnorm(276,mu,desvest)
+qqplot(datos$x,yy)
+```
+
+#### Comparación de los datos de la muestra, con una muestra simulada de la distribución teórica Gamma propuesta
+
+```{r}
+#| eval: false
+#| echo: true
+yygam=rgamma(276,shape=72,scale=1.2)
+qqplot(datos$x,yygam,col=2)
+```
+
+## Prueba de hipótesis de Kolmogorov Smirnov
+
+```{r}
+#| eval: false
+#| echo: true
+ks.test(datos$x, "pnorm", mean=86, sd=10)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+ks.test(datos$x, "pgamma",shape=71.444, scale=10)
+```
+
+## Pruebas de hipótesis de normalidad del paquete nortest. Ejercicio consultar los estadísticos de todas las pruebas ejecutadas a continuación
+
+```{r}
+#| eval: false
+#| echo: true
+ks.test(datos$x, "pnorm", mean=86, sd=10)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+shapiro.test(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+ad.test(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+cvm.test(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+lillie.test(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+pearson.test(datos$x)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+sf.test(datos$x)
+```

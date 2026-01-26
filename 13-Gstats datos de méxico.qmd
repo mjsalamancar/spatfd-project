@@ -1,0 +1,78 @@
+---
+title: "Gstats datos de méxico"
+format: html
+editor: visual
+---
+
+# **Ejemplo gstats**
+
+Datos del aire de méxico del O3 del día 2020-02-10 a las 18 horas.
+
+```{r}
+#| eval: false
+#| warning: false
+#| include: false
+
+library(gstat)
+library(sf)
+```
+
+```{r}
+#| eval: false
+#| include: false
+library(sp)
+library(rgdal)
+```
+
+```{r}
+#| eval: false
+#| include: false
+library(ggplot2)  # Gráficas
+library(plotly)
+```
+
+```{r}
+#| eval: false
+#| include: false
+geo_data <-  read.table("Geo_data.txt",
+                        head=T,
+                        dec=",")
+shp_map <- read_sf("mpiosutm.shp")
+
+pander::pander(head(geo_data))
+```
+
+## **Gráficas descriptivas**
+
+```{r}
+#| eval: false
+#| include: false
+map_variable_mexico <- function(datos, variable, map) {
+
+   plot1 <- ggplot() +
+            geom_sf(data = map, size = 0.3) +
+            geom_point(data = datos, aes_string(x = "X", y = "Y",
+                                                color = variable)) +
+            scale_color_viridis_c(direction = -1) +
+            labs(
+                x = "",
+                y = "",
+                title = paste(variable, "map CDMX")
+            ) +
+            theme_void() +
+            theme(
+                plot.title = element_text(size = 14,
+                                         face = "bold",
+                                         colour = "black"),
+                plot.margin = unit(c(1, 1, 1.5, 1.2), "cm"))
+
+    return(plot1)
+
+}
+
+pl1 <- map_variable_mexico(geo_data,
+                           "O3",
+                           shp_map)
+
+ggplotly(pl1)
+```

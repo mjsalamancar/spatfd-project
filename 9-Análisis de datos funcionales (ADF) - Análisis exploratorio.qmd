@@ -1,0 +1,210 @@
+---
+title: "Análisis de datos funcionales (ADF)- Análisis exploratorio"
+format: html
+editor: visual
+
+execute:
+  eval: false
+  echo: true
+---
+
+## Datos funcionales {.unnumbered}
+
+## **Datos funcionales**
+
+### **Descripción**
+
+Los desarrollos tecnólogicos han hecho posible que los investigadores de muchas áreas dispongan de grandes volúmenes de información para un mismo individuo. Usualmente éstos datos pueden ser representados a través de curvas o en general de funciones.
+
+En el ADF la unidad básica de información es la función completa, más que un conjunto de valores (Ramsay and Dalzell, 1991), es decir, que un dato funcional se puede establecer como la extensión de medidas repetidas cuando la cantidad de mediciones $(M)$ en un determinado individuo es muy grande.
+
+Ferraty and Vieu (2006) definen una variable aleatoria funcional $\chi$ como una variable aleatoria que toma valores en un espacio de funciones, es decir, un espacio infinito dimensional (espacio funcional). Una observación $x$ de la variable aleatoria $\chi$ se denomina dato funcional.
+
+Un conjunto de datos funcionales $x_1,x_2,...,x_n$ es la observación $n$ variables funcionales distribuidas como $\chi$. Un dato funcional $x_i(t), t \in T=[a,b] \subset R$, es representado usualmente como un conjunto finito de pares $(t_j, x_{ij})$ con $t_j \in T, j=1,2,...,M$, dónde $M$ representa la cantidad de puntos de los cuales es obserbada la variable de interés y $y_{ij}= \chi_i(t_j)$ (si o existe error observacional ) o $y_{ij} = \chi_i(t_j) + \varepsilon_j$ (en caso contrario).
+
+Por eje,plo, consideremos la temperatura promedio mensual de la superficie del óceano en grados Celsius registrada desde Enero 1982 a abril de 2022, disponible en: <https://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices>.
+
+Realizamos la lectura de los datos:
+
+```{r}
+#| warning: false
+library(fda)
+```
+
+```{r}
+#| warning: false
+library(fda.usc)
+```
+
+```{r}
+library(rainbow)
+library(MASS)
+library(xtable)
+setwd("C:/Users/jpari/Dropbox/FDA")
+Datos =read.delim2("sstoi.indices1.txt",header=T,dec=".", sep = "\t")
+summary(Datos)
+```
+
+Reorganizamos la información para que cada año sea una curva. No tenemos en cuenta el año 2022 por no disponer de la información de todo el año.
+
+```{r}
+temp <- matrix(Datos$NINO1.2[-c(481:484)], nrow=12, 40)
+colnames(temp)=c(1982:2021)
+```
+
+Construimos las gráficas para cada año
+
+```{r}
+month<-1:12
+plot(month, temp[,1], type="b", ylim=c(18, 30), xlab="Mes", ylab="temperatura")
+for(i in 2:ncol(temp))
+lines(month, temp[,i], type="b", col=i
+```
+
+### **Suavizamiento de curvas**
+
+Una herramienta no paramétrica de mucha utilidad en el ADF es el suavizado de curvas a través de funciones. El procedimiento consiste en aproximar las funciones del espacio considerado a través de (Ramsay and Silverman, 2005):
+
+$$
+\chi(t) = \sum_{l=1}^K c_lB_l(t) = c'B(t)
+$$
+
+donde K es el número de funciones de la base.
+
+En la literatura exisste varias funciones base que permiten desarrollar la expansión. La selección del tipo de funciones de la base depende de las caracteríticas que cumpla que fenómeno de estudio. Por ejemplo, las series de Fourier se utilizan para funciones con comportamientos cíclicos o periódicos y las bases monomiales se utilizan cuando existen tendencias simples que pueden ser ajustadas mediante líneas rectas, polinomios cuadráticos, polinomios de orden superior, etc. Las bases más usuales son aquellas basadas en splines debido a que son más flexibles y se ajustan de mejor manera a diferentes comportamientos. Dentro de estas se encuentran B-splines, M-splines, I-splines, y fucniones de potencia truncadas.
+
+#### **Bases monomiales**
+
+Las bases monomiales requieren el dominio y el número de base. Por ejemplo, la base monomial con K=6 funciones de base definidas en el intervalo \[0,1\] se puede construir con:
+
+```{r}
+library(fda)
+bbasis_obj = create.monomial.basis(rangeval=c(0,1), nbasis = 6)
+```
+
+Esto devolverá una salida de “funciones”. Para evaluar las bases en una cuadrícula de puntos $s$, debemos:
+
+```{r}
+library(fda)
+x <- seq(0,1,length.out=100)
+bbasisevals <- eval.basis(x, bbasis_obj)
+# dim(basisevals)
+matplot(x, bbasisevals, type='l', lty=1, col=rainbow(6),
+        xlab="x", ylab="bases", 
+        main="base monomial con k = 6")
+```
+
+#### **Bases de Fourier**
+
+Para utilizarlas bases de Fourier se requiere que se defina el dominio, el período de oscilación y el número de funciones de base.
+
+```{r}
+fbasis_obj <- create.fourier.basis(rangeval=c(0,1), 
+                                   nbasis=65, period = 1)
+fbasisevals <- eval.basis(x, fbasis_obj)
+matplot(x, fbasisevals[, 1:3], type='l', lty=1, col=rainbow(3),
+        xlab="x", ylab="bases", 
+        main="Primeras tres bases de Fourier")
+```
+
+#### **B-splines**
+
+Las bases B-spline requieren el dominio, el número de funciones de la base y el orden.
+
+```{r}
+bsbasis_obj <- create.bspline.basis(rangeval=c(0,1),
+                                    nbasis=10, norder=4)
+bsbasisevals <- eval.basis(x, bsbasis_obj)
+matplot(x, bsbasisevals, type='l', lty=1, col=rainbow(15),
+        xlab="x", ylab="bases", 
+        main="B-spline cubica con K = 10")
+```
+
+#### **Otras bases**
+
+El paquete también se puede usar para construir otros tipos de bases. Para revisar la lista de bases disponibles se puede utilizar \$ ?create. + tab\$
+
+#### **Suavizamiento de la temperatura**
+
+La temperatura es una variable que se puede tomar en intervalos más pequeños (diaria, cada hora, etc). Es decir, al realizar la gráfica anterior estamos suponiendo que podemos discretizar la variable de temperatura a través de la medición mensual.La primera tarea es convertir estos valores discretos en una función que puede tomar valores en cualquier valor de argumento deseado $x_i(t)$ Si se supone que estas observaciones no presentan un término de error asociado, el proceso de generación de la función (curva) será un proceso de interpolación, pero si tienen algún error observacional que necesita modelarse, entonces la conversión de datos (finitos) a funciones (que teóricamente se pueden evaluar en un número infinito de puntos) se enmarca en los procesos de suavizamiento.
+
+En consecuencia, requerimos una estrategia para construir funciones con parámetros que sean fáciles de estimar y que puedan ajustarse casi a cualquier característica de la curva. Por otro lado, no queremos usar más parámetros de los que necesitamos, ya que hacerlo aumentaría en gran medida el tiempo de cálculo y complicar los análisis. Para el caso de la temperatura se utiliza una B-spline de orden 4.
+
+```{r}
+BSpl <- create.bspline.basis(norder=4, breaks=seq(0,12,length=5))
+plot(BSpl)
+```
+
+```{r}
+Ftemp <- Data2fd(temp, basisobj=BSpl)
+```
+
+```{r}
+plot(Ftemp, main="Datos suavizados de la Temperatura", xlab = "Mes", ylab = "Temperatura oC",
+ylim=c(18,30))
+```
+
+En el proceso de suavizamiento es necesario tener en cuenta la rugosidad como un aspecto fundamental. El método utilizado para aproximar funciones mediante una base de funciones B-splines se basa en minimizar el sistema:
+
+$$
+GCV = \min_{c} \sum_{j=1}^{M} (y_{j} - S(t_{j}))^{2} + \lambda \int_{t} (S''(t)dt) 
+$$
+
+con $\lambda$ un parámetro de penalización para disminuir la variabilidad del ajuste. El número de funciones base (K) y el coeficiente $\lambda$ son estimados a través de procedimientos de validación cruzada (Ramsay and Silverman, 2005). Con el siguiente programa se puede establecer la estimación del parámetro de suavizamiento óptimo.
+
+```{r}
+loglam = seq(0,0.05,0.001)
+nlam = length(loglam)
+dfsave = rep(NA,nlam)
+gcvsave = rep(NA,nlam)
+for (ilam in 1:nlam) {
+lambda = loglam[ilam]
+fdParobj = fdPar(BSpl, Lfdobj=NULL, lambda= lambda)
+smoothlist = smooth.basis(1:12, temp, fdParobj)
+dfsave[ilam] = smoothlist$df
+gcvsave[ilam] = sum(smoothlist$gcv)
+}
+plot(loglam,gcvsave,xlab=expression(lambda),ylab=expression(GCV(lambda)),
+main="Parámetros de suavizamiento versus GCV",type="b",cex=0.7)
+```
+
+Tomando como referencia los 40 añoos reportados (de 1982 a 2021) en la base de datos de interés, se evidencia que el punto que minimiza la estadística GCV se encuentra alrededor de $\nu=0.017$ con valores muy superiores antes de 0.01 y después de 0.04. Se destaca que dicho parámetro minimiza la suma del criterio GCV de todas las 40 curvas que se encuentran dentro de la muestra, es decir, el valor de dicho parámetro resulta ser el óptimo en relación con el proceso de suavizamiento de todas las curvas dentro de la muestra.
+
+### **Estadística descriptiva**
+
+Dado un conjunto de datos funcionales $x_1,x_2,...,x_n$ definicos en $t \subset T \in R$, las correspondientes funciones descriptivas están dadas por las expresiones (Ramsay and silverman, 2005):
+
+$$
+Media: \quad  \bar{\chi}(t) = \frac{\sum_{i=1}^{n} \chi_{i}(t)}{n}
+$$
+
+$$
+Varianza: \quad \bar{\chi}(t) = \frac{\sum_{i=1}^{n} \chi_{i}(t)}{n}
+$$
+
+$$
+Desviación \ estándar : \quad \sigma(\chi(t)) = \sqrt{var(\chi(t))}
+$$
+
+Así, se puede concluir que las estadísticas descriptivas univariadas clásicas se aplican igualmente cuando se tienen datos funcionales. Sin embargo se resalta que en este caso, los objetos calculados corresponden a curvas.
+
+```{r}
+meanfdh <- mean.fd(Ftemp)
+varfdh <-var.fd(Ftemp)
+stdvfdh <- stddev.fd(Ftemp)
+plot(Ftemp,col=8, lty=1, xlab = "Mes", ylab = "Temperatura oC")
+```
+
+```{r}
+lines(meanfdh,col=2,lwd=2)
+```
+
+```{r}
+par(mfrow=c(1,2))
+plot(varfdh, main=" Superficie de varianza", xlab = "t", ylab = "s")
+```
+
+```{r}
+par(mfrow=c(1,2))
+plot(varfdh, main=" Superficie de varianza", xlab = "t", ylab = "s")
+```

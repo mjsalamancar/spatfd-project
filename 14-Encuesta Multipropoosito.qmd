@@ -1,0 +1,75 @@
+---
+title: "Encuesta multiproposito"
+format: html
+editor: visual
+---
+
+## **R Markdown**
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see [http://rmarkdown.rstudio.com](http://rmarkdown.rstudio.com/).
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+#| echo: true
+#| eval: false
+
+require(spatialreg) #test.W, scores.listw
+require(ade4)
+require(maptools) #readShapeSpatial
+require(spdep) #poly2nb, tri2nb, graphneigh, knn2nb, knearneigh, nb2listw
+require(RANN)
+require(sp) #coordinates, spplot
+require(rgdal)
+require(tripack) #neighbours
+require(RColorBrewer)
+require(epitools) #pois.conf.int
+require(DCluster)
+require(MASS)
+require(R2WinBUGS)
+require(dispmod)
+require(SpatialPack)
+require(nlme)
+require(mgcv)
+require(CARBayes)
+library(tidyr)
+library(dplyr)
+library(gridExtra)
+library(colorspace)
+library(cowplot)
+library(poissonreg)
+library(VGAM)
+library(pscl)
+library(adespatial)
+library(spdplyr)
+library(ggplot2)
+library(sf)
+library(stringr)
+#install.packages("countreg", repos="http://R-Forge.R-project.org")
+library(poissonreg)
+#library(countreg)
+library(devtools)
+#library(sppois)
+```
+
+**Reading the shapefile of 1124 Colombian municipalities, defining the Coordinate Reference System and centroid and building some variables**
+
+```{r}
+#| echo: true
+#| eval: false
+
+
+setwd("D:/RedesOlga/Multiproposito Bogota")
+localibog<-st_read("geovar.shp")
+
+```
+
+```{r}
+#| echo: true
+#| eval: false
+#| 
+localibog<- st_as_sf(localibog)
+
+##estud
+ggplot() + geom_sf(data=localibog, aes(fill=estud), color="grey85") + theme(text = element_text(size=12))
+```

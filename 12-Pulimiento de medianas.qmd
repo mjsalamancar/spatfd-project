@@ -17,6 +17,7 @@ Lista de librerías con link a la documentación.
 -   [sp](https://cran.r-project.org/web/packages/sp/sp.pdf)
 
 Lista de librerías con link a la documentación.
+Lista de librerías con link a la documentación.
 
 ## **Grilla de las ubicaciones espaciales.**
 

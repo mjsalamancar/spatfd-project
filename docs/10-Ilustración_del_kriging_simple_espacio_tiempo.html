@@ -184,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Geoestadística</span></a>
+ <span class="menu-text"><span style="color: #FF8000 !important;">Geoestadística</span></span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -254,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Estadística Espacial Funcional</span></a>
+ <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -603,30 +603,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>datos1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     x y t  z((x,y),t)
-1  0.0 1 1  0.13995251
-2  1.5 1 1 -0.12719570
-3  3.0 1 1 -0.01485337
-4  0.0 6 1 -0.33652946
-5  1.5 6 1  0.17876116
-6  3.0 6 1  0.10483187
-7  0.0 1 2  0.02044166
-8  1.5 1 2 -0.03494578
-9  3.0 1 2 -0.12263262
-10 0.0 6 2 -0.14669872
-11 1.5 6 2  0.03826051
-12 3.0 6 2  0.31398725
-13 0.0 1 3 -0.01781788
-14 1.5 1 3  0.02463931
-15 3.0 1 3 -0.09817899
-16 0.0 6 3 -0.08899766
-17 1.5 6 3 -0.07597076
-18 3.0 6 3  0.41183485
-19 0.0 1 4 -0.27484784
-20 1.5 1 4  0.07746038
-21 3.0 1 4 -0.02658407
-22 0.0 6 4 -0.05509503
-23 1.5 6 4 -0.07215252
-24 3.0 6 4  0.15719347</code></pre>
+1  0.0 1 1  0.03559238
+2  1.5 1 1  0.15412076
+3  3.0 1 1  0.06299807
+4  0.0 6 1  0.09082268
+5  1.5 6 1  0.21025208
+6  3.0 6 1 -0.08878222
+7  0.0 1 2  0.04128364
+8  1.5 1 2  0.19472414
+9  3.0 1 2 -0.16783973
+10 0.0 6 2 -0.01193785
+11 1.5 6 2 -0.02347434
+12 3.0 6 2 -0.26173061
+13 0.0 1 3  0.36437297
+14 1.5 1 3  0.06057969
+15 3.0 1 3  0.01772417
+16 0.0 6 3 -0.11954534
+17 1.5 6 3 -0.10694327
+18 3.0 6 3 -0.24952849
+19 0.0 1 4 -0.17861062
+20 1.5 1 4 -0.20507631
+21 3.0 1 4 -0.30692457
+22 0.0 6 4 -0.03612890
+23 1.5 6 4  0.05568877
+24 3.0 6 4 -0.14029394</code></pre>
 </div>
 </div>
 <p>Se requiere predecir predecir en el tiempo t=2.3 y en el lugar s0=(1.5,2.7).Nótese que tanto el dominio espacial como el dominio temporal con continuos y fijos. A continuación se presenta el procedimiento para llevar a cabo Kriging simple con su respectiva varianza de error de predicción estimada</p>
@@ -805,8 +805,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>z_pred0<span class="ot">=</span><span class="fu">t</span>(lambda)<span class="sc">%*%</span>datos1[,<span class="dv">4</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>z_pred0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             [,1]
-[1,] -0.003648436</code></pre>
+<pre><code>            [,1]
+[1,] -0.01353017</code></pre>
 </div>
 </div>
 <div class="cell">

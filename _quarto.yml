@@ -22,49 +22,49 @@ book:
     - index.qmd
     - part: "<span style='color: #FF8000 !important;'>Análisis Exploratorio de Datos</span>"
       chapters: 
-        - text: "<span style='color: #728387 !important;'>Estadística descriptiva y Exploratoria</span>"
+        - text: "Estadística descriptiva y Exploratoria"
           file: 1.qmd
-        - text: "<span style='color: #728387 !important;'>Pruebas de bondad de ajuste</span>"
+        - text: "Pruebas de bondad de ajuste"
           file: 2-Pruebas_de_Bondad_de_ajuste.qmd
        
-    - part: "<span style='color: #FF8000 !important;'>Geoestadística </span>"
+    - part: "<span style='color: #FF8000 !important;'>Geoestadística</span>"
       chapters:
-        - text: "<span style='color: #728387 !important;'>Geoestadística con Sgeostat</span>"
+        - text: "Geoestadística con Sgeostat"
           file: 1.qmd
-        - text: "<span style='color: #728387 !important;'>Geoestadística Univariada con GeoR </span>"
+        - text: "Geoestadística Univariada con GeoR"
           file: 2.qmd
-        - text: "<span style='color: #728387 !important;'>Kriging</span>"
+        - text: "Kriging"
           file: 3.qmd
-        - text: "<span style='color: #728387 !important;'>Proceso espacial gaussiano bivariado</span>"
+        - text: "Proceso espacial gaussiano bivariado"
           file: 8-Introduccion_proceso_espacial_bivariado.qmd 
-        - text: "<span style='color: #728387 !important;'>Ozono México</span>"
+        - text: "Ozono México"
           file: 13-Gstats_datos_de_méxico.qmd           
           
           
           
     - part: "<span style='color: #FF8000 !important;'>Modelos de Regresión Espacial</span>"
       chapters:
-        - text: "<span style='color: #728387 !important;'>Aplicación de los Modelos </span>"
+        - text: "Aplicación de los Modelos"
           file: 4.qmd
-        - text: "<span style='color: #728387 !important;'>Redes </span>"
+        - text: "Redes"
           file: 3-redes.qmd
-        - text: "<span style='color: #728387 !important;'>Encuesta Bogotá Multipropósito </span>"
+        - text: "Encuesta Bogotá Multipropósito"
           file: 14-Encuesta_Multipropoosito.qmd          
           
     
     - part: "<span style='color: #FF8000 !important;'>Estadística Espacial Funcional</span>"
       chapters: 
-        - text: "<span style='color: #728387 !important;'>Estadística Espacial Funcional</span>"
+        - text: "Estadística Espacial Funcional"
           file: 5.qmd
-        - text: "<span style='color: #728387 !important;'>Paquete </span>"
+        - text: "Paquete"
           file: 6.qmd
-        - text: "<span style='color: #728387 !important;'>FDA-Regresión funcional</span>"
+        - text: "FDA-Regresión funcional"
           file: 5-Análisis_de_datos_funcionales (ADF) - Modelos de regresión.qmd
-        - text: "<span style='color: #728387 !important;'>FDA-Regresión escalar</span>"
+        - text: "FDA-Regresión escalar"
           file: 6-Análisis_de_datos_funcionales (ADF) - Modelos de regresión (Parte 2).qmd   
-        - text: "<span style='color: #728387 !important;'>FDA-Regresión escalar</span>"
+        - text: "FDA-Regresión escalar"
           file: 7-Análisis de datos funcionales (ADF) - Análisis gráfico.qmd   
-        - text: "<span style='color: #728387 !important;'>FDA – Análisis descriptivo</span>"
+        - text: "FDA – Análisis descriptivo"
           file: 9-Análisis_de_datos_funcionales_(ADF) - Análisis exploratorio.qmd        
             
           
@@ -72,18 +72,18 @@ book:
           
     - part: "<span style='color: #FF8000 !important;'>Objetos </span>"
       chapters:
-        - text: "<span style='color: #728387 !important;'>SpatFD</span>"
+        - text: "SpatFD"
           file: 7.qmd
-        - text: "<span style='color: #728387 !important;'>gfdata </span>"
+        - text: "gfdata"
           file: 8.qmd 
    
     - part: "<span style='color: #FF8000 !important;'>Datasets </span>"
       chapters:
-        - text: "<span style='color: #728387 !important;'>AirQualityBogota</span>"
+        - text: "AirQualityBogota"
           file: 9.qmd
-        - text: "<span style='color: #728387 !important;'>Vowels</span>"
+        - text: "Vowels"
           file: 10.qmd
-        - text: "<span style='color: #728387 !important;'>CokMexico</span>"
+        - text: "CokMexico"
           file: 11.qmd
           
           

@@ -1,8 +1,12 @@
 ---
-title: "Encuesta multiproposito"
-format: html
-editor: visual
+execute:
+  eval: false
+  echo: true
 ---
+
+## Encuesta Multiproposito {.unnumbered}
+
+# [Encuesta Multiproposito]{style="color:#FF8000;"}
 
 ## **R Markdown**
 

@@ -1,9 +1,6 @@
----
-title: "Introducción proceso espacial Bivariado"
-author: "Martha Bohotquez"
-format: html
-editor: visual
----
+## Introducción proceso espacial Bivariado {.unnumbered}
+
+# [Introducción proceso espacial Bivariado]{style="color:#FF8000;"}
 
 ```{r}
 #| warning: false

@@ -1,16 +1,15 @@
 ---
-title: "Análisis de datos funcionales (ADF)- Análisis exploratorio"
-format: html
-editor: visual
-
 execute:
   eval: false
   echo: true
 ---
 
-## Datos funcionales {.unnumbered}
+## FDA - Análisis Descriptivo {.unnumbered}
 
-## **Datos funcionales**
+## [FDA - Análisis  Descriptivo]{style="color:#FF8000;"}
+
+
+# **Datos funcionales**
 
 ### **Descripción**
 

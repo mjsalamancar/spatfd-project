@@ -1,18 +1,18 @@
 ---
-title: "Pruebas de bondad de ajuste"
 execute:
   eval: false
   echo: true
 ---
 
-
 ## Palmira {.unnumbered}
 
 # [Palmira]{style="color:#FF8000;"}
 
-## Descriptivo Palmira
+
 
 ```{r}
+#| eval: false
+#| echo: true
 Palmira=read.table("Palmira_Urbano_planas.txt",head=T,sep = ",")
 Palmira$INTERVALOS_HORA_t=as.POSIXct(as.character(Palmira$INTERVALOS_HORA), format="%R")
 ```

@@ -1,8 +1,7 @@
----
-title: "Gstats datos de méxico"
-format: html
-editor: visual
----
+
+## Gstats datos de méxico {.unnumbered}
+
+# [Gstats datos de méxico]{style="color:#FF8000;"}
 
 # **Ejemplo gstats**
 

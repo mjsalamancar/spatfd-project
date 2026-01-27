@@ -1,5 +1,4 @@
 ---
-title: "Pruebas de bondad de ajuste"
 execute:
   eval: false
   echo: true

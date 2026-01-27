@@ -1,12 +1,6 @@
----
-title: "Análisis de datos funcionales (ADF) - Modelos de regresión"
-subtitle: "Curso de Estadística Espacial"
-author: 
-  - "Jeimy Paola Aristizabal R."
-  - "Martha Patricia Bohorquez C."
-institute: "Universidad Nacional de Colombia - Sede Bogotá"
-date: last-modified
----
+## FDA - Regresión con respuesta funcional {.unnumbered}
+
+## [FDA - Regresión con respuesta funcional]{style="color:#FF8000;"}
 
 # Modelos lineales funcionales (Regresión Funcional) {.unnumbered}
 

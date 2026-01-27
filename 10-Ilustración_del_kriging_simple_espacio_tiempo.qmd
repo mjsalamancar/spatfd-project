@@ -1,5 +1,7 @@
 ## Ilustración del Kriging {.unnumbered}
 
+## [Ilustración del Kriging]{style="color:#FF8000;"}
+
 ## **Simulación no condicional de una realización de un campo aleatorio espacio temporal no separable usando el modelo de covarianza cressie1**
 
 En primer lugar, se generar la grilla espacio temporal. Aquí suponemos n=6 ubicaciones espaciales y T=4 momentos en el tiempo, así en total son 24 ubicaciones espacio-tiempo. Se llevará a cabo la simulación y posteriormente se usará el predictor kriging con su respectiva estimación de varianza del error de predicción, en un punto no “observado”. Se asume conocida la función de covarianza. En la práctica esta matriz se puede estimar por métodos como maxima veorsimilitud, pseudoverosimilitud y métodos basados en mínimos cuadrados.

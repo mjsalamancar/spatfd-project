@@ -4,15 +4,32 @@
   display: none;
 }
 
-/* Estilo base del contenedor del botón */
+/* Estilo base del contenedor del botón (mantenemos el tuyo) */
 .nav-page {
-  background-color: #1a2b3c;    /* Azul profundo */
+  background-color: #4A7EB5;    /* Azul profundo */
   border-radius: 30px;
   padding: 14px 28px;
-  border: 1px solid #111d29;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(26, 43, 60, 0.2);
+  border: 1px solid #212911;
+  transition: all 0.4s ease;    /* Transición suave para la "luz" */
+  box-shadow: 0 4px 12px rgb(1, 120, 255); /* Sombra base discreta */
   text-decoration: none;
+}
+
+/* El efecto de "Lucesita Anaranjada" (Glow Effect) */
+.nav-page:hover {
+  background-color: #f89705;    /* Se mantiene el azul profundo */
+  border: 1px solid #FF8000;    /* El borde se enciende en naranja */
+  
+  /* Aquí está la magia de la luz: */
+  /* El primer valor es la sombra interna, el segundo es el resplandor exterior */
+  box-shadow: 0 0 8px #FF8000, 0 0 20px rgba(255, 128, 0, 0.6);
+  
+  transform: translateY(-1px);  /* Un movimiento casi imperceptible */
+}
+
+/* Opcional: Que el texto también brille un poquito al pasar el mouse */
+.nav-page:hover .nav-page-text {
+  text-shadow: 0 0 5px rgba(255, 128, 0, 0.925);
 }
 
 /* FORZAR COLOR NARANJA EN TODO EL CONTENIDO */
@@ -64,5 +81,81 @@ body {
 
 /* Esto pintará de naranja los enlaces de la barra lateral */
 .sidebar-navigation .sidebar-item-text {
+  color: #FF8000 !important;
+}
+
+/* Color gris para los enlaces internos por defecto */
+.sidebar-item-container a.sidebar-link {
+  color: #70879E !important; /* Un gris profesional */
+  transition: color 0.3s ease; /* Para que el cambio de color sea suave */
+}
+
+/* El "efecto mágico": cuando pasas el cursor (hover) */
+.sidebar-item-container a.sidebar-link:hover {
+  color: #20374F !important; /* Tu naranja vibrante */
+  background-color: transparent; /* Mantiene el fondo limpio */
+  text-decoration: none;
+  font-weight: bold
+}
+
+/* Mantener el naranja vibrante cuando la página esté activa */
+.sidebar-item-container a.sidebar-link.active {
+  color: #0d55a1 !important;
+  font-weight: bold;
+}
+
+/* Títulos principales y secundarios dentro del contenido */
+h1,  
+.title, 
+.quarto-section-identifier {
+  color: #FF8000 !important;
+  font-weight: bold;
+}
+
+/* Ajuste para que el título del documento (el que sale arriba de todo) sea naranja */
+header#title-block-header.quarto-title-block.default .quarto-title .title {
+  color: #FF8000 !important;
+  display: block !important; /* Lo volvemos a mostrar si lo habías ocultado, pero en naranja */
+}
+
+/* Cambiar el color del título del sitio en la barra de navegación */
+.navbar-title, 
+.navbar-brand-container .navbar-brand {
+  color: #0d55a1 !important; /* Tu naranja vibrante */
+  font-weight: bold !important;
+  transition: all 0.3s ease;
+}
+
+/* Opcional: Que brille un poquito al pasar el mouse */
+.navbar-title:hover {
+  color: #f4f7f3 !important;
+  text-shadow: 0 0 8px rgba(255, 128, 0, 0.4);
+}
+
+/* Selecciona el icono de GitHub y otros iconos de la barra superior */
+.navbar-nav .nav-link:hover i, 
+.navbar-brand-container .nav-link:hover i,
+.quarto-navigation-tool:hover i {
+  color: #f4f7f3 !important;
+  transition: color 0.3s ease;
+  /* Opcional: un pequeño brillo para que combine con el título */
+  filter: drop-shadow(0 0 5px rgba(244, 247, 243, 0.6));
+}
+
+
+
+/* Cambiar el fondo de la barra superior */
+.navbar {
+  background-color: #4A7EB5 !important; /* Azul profundo */
+  border-bottom: 2px solid #f8f6f3 !important; /* Línea delgada naranja abajo */
+}
+
+/* Si pones el fondo oscuro, el título debe ser naranja vivo para que resalte */
+.navbar-title, .navbar-brand {
+  color: #FF8000 !important;
+}
+
+/* Y los iconos (GitHub, Lupa) también en naranja */
+.navbar-nav .nav-link, .quarto-search-toggle {
   color: #FF8000 !important;
 }

@@ -1,18 +1,14 @@
 ---
-title: "Análisis de datos funcionales (ADF) - Modelos de regresión"
-subtitle: "Curso de Estadística Espacial"
-author: 
-  - "Jeimy Paola Aristizabal R."
-  - "Martha Patricia Bohorquez C."
-institute: "Universidad Nacional de Colombia - Sede Bogotá"
-date: last-modified
-
 execute:
   eval: false
   echo: true
 ---
-## ADF {.unnumbered}
 
+## FDA - Análisis gráfico {.unnumbered}
+
+## [FDA - Análisis gráfico]{style="color:#FF8000;"}
+
+## ADF {.unnumbered}
 
 ## **Análisis gráfico**
 

@@ -2,7 +2,11 @@
 
 # [Geoestadística con sgeostat]{style="color:#FF8000;"}
 
-El análisis inicia con la etapa fundamental de preparación y carga de los datos en el entorno estadístico R, haciendo uso del paquete especializado `sgeostat`. En esta fase se limpia el espacio de trabajo y se importa el conjunto de datos denominado *aquifer*, el cual contiene información geoespacial relevante, específicamente las coordenadas Este y Norte, junto con la variable de interés, la Profundidad. Esta base de datos constituye el insumo principal para los análisis posteriores, como el estudio de la autocorrelación espacial y el modelado de superficies, mediante técnicas de estimación espacial como el kriging.
+El análisis inicia con la etapa fundamental de preparación y carga de los datos en el entorno estadístico R, haciendo uso del paquete especializado `sgeostat`.
+
+En esta fase se limpia el espacio de trabajo y se importa el conjunto de datos denominado *aquifer*, el cual contiene información geoespacial relevante, específicamente las coordenadas Este y Norte, junto con la variable de interés, la Profundidad.
+
+Esta base de datos constituye el insumo principal para los análisis posteriores, como el estudio de la autocorrelación espacial y el modelado de superficies, mediante técnicas de estimación espacial como el kriging.
 
 ```{r}
 library(sgeostat)
